@@ -15,6 +15,12 @@
 - [ ] As a user, I would like to be able to have a shuffle drink view  
 - [ ] As a user, I would like to be able to keep inventory of my drinks (if time allows)
 
+## Mockups
+
+![alt tag](https://raw.githubusercontent.com/FoodForThought4/Bartender/master/mockups/full_wireframe.JPG "Mockup Image 1") 
+
+![alt tag](https://raw.githubusercontent.com/FoodForThought4/Bartender/master/mockups/single_drink.JPG "Mockup Image 2") 
+
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
