@@ -13,6 +13,9 @@
 		BD206E2A1C863BBC001A409A /* Bartendr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BD206E281C863BBC001A409A /* Bartendr.xcdatamodeld */; };
 		BD206E2C1C863BBD001A409A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD206E2B1C863BBD001A409A /* Assets.xcassets */; };
 		BD206E2F1C863BBD001A409A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD206E2D1C863BBD001A409A /* LaunchScreen.storyboard */; };
+		BD206E3A1C8649DD001A409A /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E391C8649DD001A409A /* Drink.swift */; };
+		BD206E3C1C864B81001A409A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E3B1C864B81001A409A /* Ingredient.swift */; };
+		BD206E3E1C864C00001A409A /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E3D1C864C00001A409A /* ApiClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		BD206E2B1C863BBD001A409A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD206E2E1C863BBD001A409A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD206E301C863BBD001A409A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD206E391C8649DD001A409A /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
+		BD206E3B1C864B81001A409A /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		BD206E3D1C864C00001A409A /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,42 @@
 		BD206E201C863BBC001A409A /* Bartendr */ = {
 			isa = PBXGroup;
 			children = (
+				BD206E381C8649B3001A409A /* Controllers */,
+				BD206E371C8649AC001A409A /* Views */,
+				BD206E361C86499F001A409A /* Models */,
 				BD206E211C863BBC001A409A /* AppDelegate.swift */,
-				BD206E231C863BBC001A409A /* ViewController.swift */,
-				BD206E251C863BBC001A409A /* Main.storyboard */,
 				BD206E2B1C863BBD001A409A /* Assets.xcassets */,
 				BD206E2D1C863BBD001A409A /* LaunchScreen.storyboard */,
 				BD206E301C863BBD001A409A /* Info.plist */,
 				BD206E281C863BBC001A409A /* Bartendr.xcdatamodeld */,
 			);
 			path = Bartendr;
+			sourceTree = "<group>";
+		};
+		BD206E361C86499F001A409A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BD206E391C8649DD001A409A /* Drink.swift */,
+				BD206E3B1C864B81001A409A /* Ingredient.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		BD206E371C8649AC001A409A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BD206E251C863BBC001A409A /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		BD206E381C8649B3001A409A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BD206E231C863BBC001A409A /* ViewController.swift */,
+				BD206E3D1C864C00001A409A /* ApiClient.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +173,10 @@
 			files = (
 				BD206E241C863BBC001A409A /* ViewController.swift in Sources */,
 				BD206E2A1C863BBC001A409A /* Bartendr.xcdatamodeld in Sources */,
+				BD206E3C1C864B81001A409A /* Ingredient.swift in Sources */,
+				BD206E3A1C8649DD001A409A /* Drink.swift in Sources */,
 				BD206E221C863BBC001A409A /* AppDelegate.swift in Sources */,
+				BD206E3E1C864C00001A409A /* ApiClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
