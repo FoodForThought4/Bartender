@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		581EA9D3020CFA5B230F18A2 /* Pods_Bartendr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB5F929BA0DEFA6140B442BE /* Pods_Bartendr.framework */; };
 		75ACD1FD1C8E097300068E74 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75ACD1FC1C8E097300068E74 /* Keys.plist */; };
 		BD206E221C863BBC001A409A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E211C863BBC001A409A /* AppDelegate.swift */; };
 		BD206E241C863BBC001A409A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E231C863BBC001A409A /* ViewController.swift */; };
@@ -32,6 +33,9 @@
 		BD206E391C8649DD001A409A /* Drink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		BD206E3B1C864B81001A409A /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		BD206E3D1C864C00001A409A /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		CB5F929BA0DEFA6140B442BE /* Pods_Bartendr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bartendr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC989D379955EB429FBC15DA /* Pods-Bartendr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartendr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bartendr/Pods-Bartendr.debug.xcconfig"; sourceTree = "<group>"; };
+		F4D4099DDDD81E5BB3871FE1 /* Pods-Bartendr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartendr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bartendr/Pods-Bartendr.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				581EA9D3020CFA5B230F18A2 /* Pods_Bartendr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		47C03737BAEF136749261C49 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DC989D379955EB429FBC15DA /* Pods-Bartendr.debug.xcconfig */,
+				F4D4099DDDD81E5BB3871FE1 /* Pods-Bartendr.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BAFDB002500D09DCE28698B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB5F929BA0DEFA6140B442BE /* Pods_Bartendr.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BD206E151C863BBC001A409A = {
 			isa = PBXGroup;
 			children = (
 				BD206E201C863BBC001A409A /* Bartendr */,
 				BD206E1F1C863BBC001A409A /* Products */,
+				47C03737BAEF136749261C49 /* Pods */,
+				BAFDB002500D09DCE28698B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,9 +134,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BD206E331C863BBD001A409A /* Build configuration list for PBXNativeTarget "Bartendr" */;
 			buildPhases = (
+				E7F2CE6E705E13508A582FE2 /* Check Pods Manifest.lock */,
 				BD206E1A1C863BBC001A409A /* Sources */,
 				BD206E1B1C863BBC001A409A /* Frameworks */,
 				BD206E1C1C863BBC001A409A /* Resources */,
+				AA47FCD6FB3847B5AA4A4CFD /* Embed Pods Frameworks */,
+				D5D6CE9CC48442E525FDC2C7 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -169,6 +196,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AA47FCD6FB3847B5AA4A4CFD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bartendr/Pods-Bartendr-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5D6CE9CC48442E525FDC2C7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bartendr/Pods-Bartendr-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7F2CE6E705E13508A582FE2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BD206E1A1C863BBC001A409A /* Sources */ = {
@@ -289,6 +364,7 @@
 		};
 		BD206E341C863BBD001A409A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC989D379955EB429FBC15DA /* Pods-Bartendr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Bartendr/Info.plist;
@@ -300,6 +376,7 @@
 		};
 		BD206E351C863BBD001A409A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4D4099DDDD81E5BB3871FE1 /* Pods-Bartendr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Bartendr/Info.plist;

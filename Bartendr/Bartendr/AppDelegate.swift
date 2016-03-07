@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        var keys: NSDictionary?
+        if let path = NSBundle.mainBundle().pathForResource("Keys", ofType: "plist") {
+            keys = NSDictionary(contentsOfFile: path)
+        }
+        if let keys = keys {
+            
+            Parse.initializeWithConfiguration(
+                ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
+                    configuration.applicationId = keys["API_ID"] as? String
+                    configuration.clientKey = keys["MASTER_KEY"] as? String
+                    configuration.server = "http://yourappname.herokuapp.com/parse"
+                })
+            )
+        }
         return true
     }
 
