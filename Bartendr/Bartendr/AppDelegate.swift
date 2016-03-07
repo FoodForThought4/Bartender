@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             keys = NSDictionary(contentsOfFile: path)
         }
         if let keys = keys {
-            
             Parse.initializeWithConfiguration(
                 ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
                     configuration.applicationId = keys["API_ID"] as? String
