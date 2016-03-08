@@ -10,6 +10,15 @@ import Foundation
 
 
 class Ingredient {
-    var name: String?
-    var amount: Double?
+    var type: String?
+    var id: String?
+    var text: String?
+    var textPlain: String?
+    
+    init(ingredientData: NSDictionary) {
+        type = ingredientData["type"] as? String
+        id = ingredientData["id"] as? String
+        text = ingredientData["text"] as? String
+        textPlain = ingredientData["textPlain"] as? String
+    }
 }

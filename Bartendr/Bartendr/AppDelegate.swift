@@ -18,10 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // grab api keys
         var keys: NSDictionary?
         if let path = NSBundle.mainBundle().pathForResource("Keys", ofType: "plist") {
             keys = NSDictionary(contentsOfFile: path)
         }
+        
+        
+        // found keys.plist setup api and server info
         if let keys = keys {
             Parse.initializeWithConfiguration(
                 ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
@@ -30,7 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     configuration.server = "http://yourappname.herokuapp.com/parse"
                 })
             )
+            
+            ApiClient.addbApiKey = keys["ADDB_API_Key"] as! String
         }
+
+        
         return true
     }
 
