@@ -1,6 +1,0 @@
-framework module Pods_Bartendr {
-  umbrella header "Pods-Bartendr-umbrella.h"
-
-  export *
-  module * { export * }
-}
