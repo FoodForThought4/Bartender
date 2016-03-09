@@ -37,23 +37,18 @@ class ApiClient {
         }
     }
     
-    class func getDrinksParse(params: [String: String], completion: (drinkData: NSDictionary?, error: NSError?) -> ()) {
+    class func getDrinksParse(params: [String: String]?, completion: (drinkData: NSDictionary?, error: NSError?) -> ()) {
         let query = PFQuery(className: "Drink")
         
-        for param in params {
-            query.whereKey(param.0, containsString: param.1)
+        if let params = params {
+            for param in params {
+                query.whereKey(param.0, containsString: param.1)
+            }
         }
         
-        
-//        query.getFirstObjectInBackgroundWithBlock { (var drink: PFObject?, error: NSError?) -> Void in
-//            if error != nil {
-//                
-//                drink = Drink.convertDrinkToPFObject(updatedDrink)
-//                drink?.saveInBackground()
-//            } else {
-//                print("error getting drink to update it")
-//            }
-//        }
+        query.findObjectsInBackgroundWithBlock { (drinks: [PFObject]?, error: NSError?) -> Void in
+            print("Drinks = \(drinks)")
+        }
         
     }
     

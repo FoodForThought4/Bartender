@@ -16,15 +16,16 @@ class Drink {
     var id: String?
     var name: String?
     var description: String?
+    var imgURL: String?
+    var customImg: UIImage?
+    
     var ingredients = [Ingredient]()
-    
-    
-    var img: UIImage?
     
     init(drinkDetails: NSDictionary) {
         id = drinkDetails["id"] as? String
         name = drinkDetails["name"] as? String
         description = drinkDetails["descriptionPlain"] as? String
+        imgURL = "http://assets.absolutdrinks.com/drinks/100x100/\(id!).png"
         
         for ingredient in (drinkDetails["ingredients"] as? [NSDictionary])! {
             ingredients.append(Ingredient(ingredientData: ingredient))
@@ -35,7 +36,7 @@ class Drink {
         let drink = PFObject(className: "Drink")
         
         // add details
-        drink["photo"] = ApiClient.getPFFileFromImage(newDrink.img) // PFFile column type
+        drink["photo"] = ApiClient.getPFFileFromImage(newDrink.customImg) // PFFile column type
         drink["author"] = PFUser.currentUser()
         drink["likes"] = 0
         drink["commentsCount"] = 0
