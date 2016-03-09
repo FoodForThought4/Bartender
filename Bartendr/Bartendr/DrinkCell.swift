@@ -10,4 +10,8 @@ import UIKit
 
 class DrinkCell: UICollectionViewCell {
     
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
 }

@@ -32,6 +32,11 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
         segmentedController.delegate = self
         
         segmentedControl.addSubview(segmentedController)
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        networkRequest()
 
         // Do any additional setup after loading the view.
     }
@@ -55,7 +60,16 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as! DrinkCell
-
+        
+        cell.titleLabel.text = drinks![indexPath.row].name
+        var ingredients = ""
+        for ingredient in drinks![indexPath.row].ingredients{
+            ingredients = ingredients + "\(ingredient.text!), "
+        }
+        ingredients = String(ingredients.characters.dropLast(2))
+        cell.descriptionLabel.text = ingredients
+        cell.backgroundImageView.image = UIImage(named: "CellBackground")
+        
         return cell
     }
     
@@ -64,7 +78,8 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
             if error != nil{
                 print("error")
             }else {
-                //self.drinks = drinkData
+                self.drinks = drinkData
+                self.collectionView.reloadData()
             }
         }
     }
