@@ -9,6 +9,7 @@
 import UIKit
 import XMSegmentedControl
 import AFNetworking
+import SACollectionViewVerticalScalingFlowLayout
 
 class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 

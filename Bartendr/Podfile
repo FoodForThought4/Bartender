@@ -7,5 +7,6 @@ target 'Bartendr' do
     pod 'Parse'
     pod 'AFNetworking'
     pod 'XMSegmentedControl'
+    pod 'SACollectionViewVerticalScalingFlowLayout'
 end
 

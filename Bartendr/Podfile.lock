@@ -17,17 +17,20 @@ PODS:
   - Bolts/Tasks (1.6.0)
   - Parse (1.12.0):
     - Bolts/Tasks (~> 1.5)
+  - SACollectionViewVerticalScalingFlowLayout (2.2.0)
   - XMSegmentedControl (0.1.4)
 
 DEPENDENCIES:
   - AFNetworking
   - Parse
+  - SACollectionViewVerticalScalingFlowLayout
   - XMSegmentedControl
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   Parse: de2c52a9a1421b91ae7594ab8ce191afd184f19b
+  SACollectionViewVerticalScalingFlowLayout: 0a963e11d7d98c25dfc08ab888990611606260fc
   XMSegmentedControl: 51cf4f3daf14920692a064d9252aa7b29622dda6
 
 COCOAPODS: 0.39.0
