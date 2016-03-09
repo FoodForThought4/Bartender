@@ -39,6 +39,10 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        let layout = SACollectionViewVerticalScalingFlowLayout()
+        layout.minimumLineSpacing = 15
+        collectionView.collectionViewLayout = layout
+        
         networkRequest()
 
         // Do any additional setup after loading the view.
@@ -96,6 +100,26 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
             }
         }
     }
+    
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            let s = CGSize(width: 316, height: 106)
+            return s
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 20 && scrollView.contentOffset.y < 100{
+            self.segmentedControl.frame.origin.y = 20 - (scrollView.contentOffset.y - 20)
+        }
+        if scrollView.contentOffset.y > 100{
+            self.segmentedControl.frame.origin.y = -100
+        }
+        if scrollView.contentOffset.y < 20{
+            self.segmentedControl.frame.origin.y = 20
+        }
+    }
+
     
 
     /*
