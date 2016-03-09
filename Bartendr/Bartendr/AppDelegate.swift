@@ -14,7 +14,7 @@ import Parse
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var storyboard = UIStoryboard(name: "TabBar", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -38,7 +38,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             ApiClient.addbApiKey = keys["ADDB_API_Key"] as! String
         }
-
+        
+        ApiClient.getDrinksADDB([]) { (drinkData, error) -> () in
+            if error == nil{
+                print("error")
+            }
+        }
+        
+        let vc = storyboard.instantiateViewControllerWithIdentifier("TabBar")
+        window?.rootViewController = vc
         
         return true
     }
