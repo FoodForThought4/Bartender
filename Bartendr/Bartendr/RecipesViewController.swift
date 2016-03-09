@@ -17,17 +17,25 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var drinks = [Drink]()
+    var filteredDrinks: [Drink]?
+    
     var currentView = 0
     var isMoreDataLoading = false
+    
+    var lastContentOffset = CGFloat(0)
+    var trackContentOffset = CGFloat(0)
+    var scrollingDown = true
+    var middleZone = false
+    var segmentedControlHidden = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
-    
+        
         setupSegmentedControl()
         setupCollectionView()
-
+        
         getDrinks(false)
     }
     
@@ -121,15 +129,58 @@ extension RecipesViewController: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 20 && scrollView.contentOffset.y < 100{
-            self.segmentedControl.frame.origin.y = 20 - (scrollView.contentOffset.y - 20)
+        if scrollView.contentOffset.y > lastContentOffset && scrollView.contentOffset.y > 0 {
+            scrollingDown = true
         }
-        if scrollView.contentOffset.y > 100{
-            self.segmentedControl.frame.origin.y = -100
+        if scrollView.contentOffset.y < lastContentOffset && scrollView.contentOffset.y > 0 {
+            scrollingDown = false
+        }
+        
+        //hiding and showing segmentedControl when reaching the top of the scrollView
+        if scrollView.contentOffset.y > 20 && scrollView.contentOffset.y < 100 &&
+            ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
+                self.segmentedControl.frame.origin.y = 20 - (scrollView.contentOffset.y - 20)
+        }
+        if scrollView.contentOffset.y > 100 && scrollView.contentOffset.y < 250 && scrollingDown {
+            self.segmentedControl.frame.origin.y = -80
+            segmentedControlHidden = true
         }
         if scrollView.contentOffset.y < 20{
             self.segmentedControl.frame.origin.y = 20
+            segmentedControlHidden = false
         }
+        
+        if scrollView.contentOffset.y > 300 && !scrollingDown && !middleZone && segmentedControlHidden {
+            middleZone = true
+            trackContentOffset = scrollView.contentOffset.y
+        }
+        
+        
+        if scrollView.contentOffset.y > 300 && scrollingDown && !middleZone && !segmentedControlHidden {
+            middleZone = true
+            trackContentOffset = scrollView.contentOffset.y
+        }
+        
+        if middleZone && !scrollingDown {
+            self.segmentedControl.frame.origin.y = -120 + (trackContentOffset-scrollView.contentOffset.y)
+            if(trackContentOffset-scrollView.contentOffset.y) > 140{
+                middleZone = false
+                segmentedControlHidden = false
+                self.segmentedControl.frame.origin.y = 20
+            }
+        }
+        if middleZone && scrollingDown {
+            self.segmentedControl.frame.origin.y = 20 + (trackContentOffset-scrollView.contentOffset.y)
+            if(trackContentOffset-scrollView.contentOffset.y) < -100{
+                middleZone = false
+                segmentedControlHidden = true
+                self.segmentedControl.frame.origin.y = -80
+            }
+        }
+        
+        lastContentOffset = scrollView.contentOffset.y
+        print(scrollingDown)
+        
         
         
         // paging for fetching new data
@@ -163,5 +214,5 @@ extension RecipesViewController: UICollectionViewDataSource {
         
         return cell
     }
-
+    
 }
