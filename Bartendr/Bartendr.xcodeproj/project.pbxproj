@@ -18,6 +18,7 @@
 		BD206E3A1C8649DD001A409A /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E391C8649DD001A409A /* Drink.swift */; };
 		BD206E3C1C864B81001A409A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E3B1C864B81001A409A /* Ingredient.swift */; };
 		BD206E3E1C864C00001A409A /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E3D1C864C00001A409A /* ApiClient.swift */; };
+		E4A038531C8FCD3200889EE2 /* DrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A038521C8FCD3200889EE2 /* DrinkCell.swift */; };
 		E4D0D4191C8F876800F5357C /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4D0D4181C8F876800F5357C /* TabBar.storyboard */; };
 		E4D0D41B1C8F87F800F5357C /* Recipes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4D0D41A1C8F87F800F5357C /* Recipes.storyboard */; };
 		E4D0D41E1C8F8FD500F5357C /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D0D41D1C8F8FD500F5357C /* RecipesViewController.swift */; };
@@ -38,6 +39,7 @@
 		BD206E3D1C864C00001A409A /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		CB5F929BA0DEFA6140B442BE /* Pods_Bartendr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bartendr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC989D379955EB429FBC15DA /* Pods-Bartendr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartendr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bartendr/Pods-Bartendr.debug.xcconfig"; sourceTree = "<group>"; };
+		E4A038521C8FCD3200889EE2 /* DrinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkCell.swift; sourceTree = "<group>"; };
 		E4D0D4181C8F876800F5357C /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		E4D0D41A1C8F87F800F5357C /* Recipes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Recipes.storyboard; sourceTree = "<group>"; };
 		E4D0D41D1C8F8FD500F5357C /* RecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
@@ -121,7 +123,8 @@
 		BD206E371C8649AC001A409A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BD206E251C863BBC001A409A /* Main.storyboard */,
+				E4A038511C8FCD1800889EE2 /* Don't Touch */,
+				E4A038521C8FCD3200889EE2 /* DrinkCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -133,6 +136,14 @@
 				E4D0D41D1C8F8FD500F5357C /* RecipesViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E4A038511C8FCD1800889EE2 /* Don't Touch */ = {
+			isa = PBXGroup;
+			children = (
+				BD206E251C863BBC001A409A /* Main.storyboard */,
+			);
+			name = "Don't Touch";
 			sourceTree = "<group>";
 		};
 		E4D0D41C1C8F887800F5357C /* Brian */ = {
@@ -271,6 +282,7 @@
 			files = (
 				BD206E241C863BBC001A409A /* ViewController.swift in Sources */,
 				E4D0D41E1C8F8FD500F5357C /* RecipesViewController.swift in Sources */,
+				E4A038531C8FCD3200889EE2 /* DrinkCell.swift in Sources */,
 				BD206E2A1C863BBC001A409A /* Bartendr.xcdatamodeld in Sources */,
 				BD206E3C1C864B81001A409A /* Ingredient.swift in Sources */,
 				BD206E3A1C8649DD001A409A /* Drink.swift in Sources */,

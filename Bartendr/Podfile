@@ -6,5 +6,6 @@ use_frameworks!
 target 'Bartendr' do
     pod 'Parse'
     pod 'AFNetworking'
+    pod 'XMSegmentedControl'
 end
 
