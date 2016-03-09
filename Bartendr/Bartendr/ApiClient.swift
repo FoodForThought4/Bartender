@@ -17,18 +17,44 @@ class ApiClient {
     static var addbApiKey: String!
     
     // get the drinks from ADDB api
-    class func getDrinksADDB(params: AnyObject?, completion: (drinkData: NSDictionary?, error: NSError?) -> ()) {
+    class func getDrinksADDB(params: AnyObject?, completion: (drinkData: [Drink]?, error: NSError?) -> ()) {
         http.GET(apiURL + "/drinks/?apiKey=\(addbApiKey)", parameters: [], progress: { (progress: NSProgress) -> Void in
             }, success: { (dataTask: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 
+                var drinks = [Drink]()
+                
+                for drink in response!["result"] as! NSArray {
+                    drinks.append(Drink(drinkDetails: drink as! NSDictionary))
+                }
+                
                 print("response = \(response)")
-                completion(drinkData: response as? NSDictionary, error: nil)
+                completion(drinkData: drinks, error: nil)
                 
             }) { (dataTask: NSURLSessionDataTask?, error: NSError) -> Void in
                 
                 print("failure retrieving drinks")
                 completion(drinkData: nil, error: error)
         }
+    }
+    
+    class func getDrinksParse(params: [String: String], completion: (drinkData: NSDictionary?, error: NSError?) -> ()) {
+        let query = PFQuery(className: "Drink")
+        
+        for param in params {
+            query.whereKey(param.0, containsString: param.1)
+        }
+        
+        
+//        query.getFirstObjectInBackgroundWithBlock { (var drink: PFObject?, error: NSError?) -> Void in
+//            if error != nil {
+//                
+//                drink = Drink.convertDrinkToPFObject(updatedDrink)
+//                drink?.saveInBackground()
+//            } else {
+//                print("error getting drink to update it")
+//            }
+//        }
+        
     }
     
     
