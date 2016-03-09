@@ -18,6 +18,7 @@ class Drink {
     var description: String?
     var imgURL: String?
     var customImg: UIImage?
+    var ingredientList = ""
     
     var ingredients = [Ingredient]()
     
@@ -25,11 +26,22 @@ class Drink {
         id = drinkDetails["id"] as? String
         name = drinkDetails["name"] as? String
         description = drinkDetails["descriptionPlain"] as? String
-        imgURL = "http://assets.absolutdrinks.com/drinks/100x100/\(id!).png"
+        imgURL = "https://assets.absolutdrinks.com/drinks/100x100/\(id!).png"
         
         for ingredient in (drinkDetails["ingredients"] as? [NSDictionary])! {
             ingredients.append(Ingredient(ingredientData: ingredient))
         }
+
+        
+        for ingredient in ingredients{
+            var text = ingredient.text!
+            text = (text.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet()) as NSArray).componentsJoinedByString("")
+            text = text.stringByReplacingOccurrencesOfString("Parts", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Part", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            ingredientList = ingredientList + "\(text), "
+        }
+        ingredientList = String(ingredientList.characters.dropLast(2))
     }
     
     class func convertDrinkToPFObject(newDrink: Drink) -> PFObject {

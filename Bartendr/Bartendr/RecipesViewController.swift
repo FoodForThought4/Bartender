@@ -8,6 +8,7 @@
 
 import UIKit
 import XMSegmentedControl
+import AFNetworking
 
 class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
@@ -15,6 +16,7 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
     @IBOutlet weak var collectionView: UICollectionView!
     
     var drinks: [Drink]?
+    var currentView = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +49,18 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
     }
     
     func xmSegmentedControl(xmSegmentedControl: XMSegmentedControl, selectedSegment:Int){
-        
+        if selectedSegment == 0 && currentView != 0{
+            UIView.animateWithDuration(0.3, animations: {
+                self.collectionView.frame.origin.x = 0
+            })
+            currentView = 0
+            
+        } else if selectedSegment == 1 && currentView != 1{
+            UIView.animateWithDuration(0.3, animations: {
+                self.collectionView.frame.origin.x = -400
+            })
+            currentView = 1
+        }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
@@ -62,13 +75,12 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as! DrinkCell
         
         cell.titleLabel.text = drinks![indexPath.row].name
-        var ingredients = ""
-        for ingredient in drinks![indexPath.row].ingredients{
-            ingredients = ingredients + "\(ingredient.text!), "
-        }
-        ingredients = String(ingredients.characters.dropLast(2))
-        cell.descriptionLabel.text = ingredients
+        cell.descriptionLabel.text = drinks![indexPath.row].ingredientList
         cell.backgroundImageView.image = UIImage(named: "CellBackground")
+        if let url = drinks![indexPath.row].imgURL{
+            let imageURL = NSURL(string: url)
+            cell.drinkImageView.setImageWithURL(imageURL!)
+        }
         
         return cell
     }
