@@ -11,19 +11,41 @@ import XMSegmentedControl
 import AFNetworking
 import SACollectionViewVerticalScalingFlowLayout
 
-class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
-
+class RecipesViewController: UIViewController {
+    
     @IBOutlet weak var segmentedControl: XMSegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var drinks: [Drink]?
+    var drinks = [Drink]()
     var currentView = 0
+    var isMoreDataLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
+    
+        setupSegmentedControl()
+        setupCollectionView()
+
+        getDrinks(false)
+    }
+    
+    func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
+        // pull down to refresh
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.insertSubview(refreshControl, atIndex: 0)
+        
+        let layout = SACollectionViewVerticalScalingFlowLayout()
+        layout.minimumLineSpacing = 15
+        collectionView.collectionViewLayout = layout
+    }
+    
+    func setupSegmentedControl() {
         let segmentedController = XMSegmentedControl(frame: CGRect(x: 0, y: 0, width: segmentedControl.frame.width, height: 44), segmentTitle: ["Recipes", "Ingredients"], selectedItemHighlightStyle: XMSelectedItemHighlightStyle.BottomEdge)
         
         segmentedController.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 0)
@@ -35,24 +57,44 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
         segmentedController.delegate = self
         
         segmentedControl.addSubview(segmentedController)
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        let layout = SACollectionViewVerticalScalingFlowLayout()
-        layout.minimumLineSpacing = 15
-        collectionView.collectionViewLayout = layout
-        
-        networkRequest()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    func getDrinks(nextPage: Bool) {
+        ApiClient.getDrinksADDB([], nextPage: nextPage) { (drinkData, error) -> () in
+            if error != nil{
+                print("error")
+            } else {
+                if nextPage {
+                    self.drinks += drinkData!
+                } else {
+                    self.drinks = drinkData!
+                }
+                
+                self.collectionView.reloadData()
+            }
+            
+            self.isMoreDataLoading = false
+        }
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        getDrinks(false)
+        refreshControl.endRefreshing()
+    }
+    
+    /*
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+    }
+    */
+    
+}
+
+extension RecipesViewController: XMSegmentedControlDelegate {
     func xmSegmentedControl(xmSegmentedControl: XMSegmentedControl, selectedSegment:Int){
         if selectedSegment == 0 && currentView != 0{
             UIView.animateWithDuration(0.3, animations: {
@@ -67,40 +109,10 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
             currentView = 1
         }
     }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        if let drinks = drinks{
-            return drinks.count
-        } else{
-            return 0
-        }
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as! DrinkCell
-        
-        cell.titleLabel.text = drinks![indexPath.row].name
-        cell.descriptionLabel.text = drinks![indexPath.row].ingredientList
-        cell.backgroundImageView.image = UIImage(named: "CellBackground")
-        if let url = drinks![indexPath.row].imgURL{
-            let imageURL = NSURL(string: url)
-            cell.drinkImageView.setImageWithURL(imageURL!)
-        }
-        
-        return cell
-    }
-    
-    func networkRequest(){
-        ApiClient.getDrinksADDB([]) { (drinkData, error) -> () in
-            if error != nil{
-                print("error")
-            }else {
-                self.drinks = drinkData
-                self.collectionView.reloadData()
-            }
-        }
-    }
-    
+}
+
+
+extension RecipesViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -118,18 +130,38 @@ class RecipesViewController: UIViewController, XMSegmentedControlDelegate, UICol
         if scrollView.contentOffset.y < 20{
             self.segmentedControl.frame.origin.y = 20
         }
+        
+        
+        // paging for fetching new data
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = scrollView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - scrollView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && scrollView.dragging) {
+                
+                isMoreDataLoading = true
+                
+                // load more results
+                getDrinks(true)
+            }
+        }
     }
+}
 
+extension RecipesViewController: UICollectionViewDataSource {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        return drinks.count
     }
-    */
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as! DrinkCell
+        
+        cell.drink = drinks[indexPath.row]
+        
+        return cell
+    }
 
 }

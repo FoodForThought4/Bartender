@@ -15,10 +15,20 @@ class ApiClient {
     static let http = AFHTTPSessionManager()
     static let apiURL = "https://addb.absolutdrinks.com"
     static var addbApiKey: String!
+    static var nextPageURL: String?
+    
     
     // get the drinks from ADDB api
-    class func getDrinksADDB(params: AnyObject?, completion: (drinkData: [Drink]?, error: NSError?) -> ()) {
-        http.GET(apiURL + "/drinks/?apiKey=\(addbApiKey)", parameters: [], progress: { (progress: NSProgress) -> Void in
+    class func getDrinksADDB(params: AnyObject?, nextPage: Bool, completion: (drinkData: [Drink]?, error: NSError?) -> ()) {
+        
+        var url: String!
+        if let nextPageURL = nextPageURL where nextPage == true {
+            url = nextPageURL
+        } else {
+            url = apiURL + "/drinks/?apiKey=\(addbApiKey)"
+        }
+        
+        http.GET(url, parameters: [], progress: { (progress: NSProgress) -> Void in
             }, success: { (dataTask: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 
                 var drinks = [Drink]()
@@ -26,6 +36,8 @@ class ApiClient {
                 for drink in response!["result"] as! NSArray {
                     drinks.append(Drink(drinkDetails: drink as! NSDictionary))
                 }
+                
+                nextPageURL = response!["next"] as? String
                 
                 print("response = \(response)")
                 completion(drinkData: drinks, error: nil)
