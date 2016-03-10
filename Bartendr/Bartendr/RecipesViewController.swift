@@ -212,14 +212,8 @@ extension RecipesViewController: UICollectionViewDelegate {
             return s
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-        for cell in collectionView.visibleCells() as [UICollectionViewCell] {
-            
-            let point = collectionView.convertPoint(cell.center, toView: collectionView.superview)
-            cell.alpha = (point.y - 80) / 50
-        }
-        
+    func animateHeader(scrollView: UIScrollView){
+        //tracking if user is scrolling down or up
         if scrollView.contentOffset.y > lastContentOffset && scrollView.contentOffset.y > 0 {
             scrollingDown = true
         }
@@ -227,76 +221,111 @@ extension RecipesViewController: UICollectionViewDelegate {
             scrollingDown = false
         }
         
-        //hiding and showing segmentedControl when reaching the top of the scrollView
-        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 150{
-            //&& ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
-                if scrollView.contentOffset.y > 40{
-                    self.searchView.frame.origin.y = 38
-                } else if scrollView.contentOffset.y < 0 {
+        //tracks switch directions while scrolling
+        if scrollView.contentOffset.y > 500 && !scrollingDown && !middleZone && segmentedControlHidden {
+            middleZone = true
+            trackContentOffset = scrollView.contentOffset.y
+        }
+        
+        
+        if scrollView.contentOffset.y > 500 && scrollingDown && !middleZone && !segmentedControlHidden {
+            middleZone = true
+            trackContentOffset = scrollView.contentOffset.y
+        }
+        
+        //search movement animation
+        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 250
+            && ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
+                if scrollView.contentOffset.y < 0 {
                     self.searchView.frame.origin.y = 77
+                } else if scrollView.contentOffset.y > 40 {
+                    self.searchView.frame.origin.y = 38
                 } else {
                     self.searchView.frame.origin.y = 77 - (scrollView.contentOffset.y)
                 }
         }
         
-        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 150{
-            if scrollView.contentOffset.y < 0{
-                collectionView.frame.origin.y = 148
-            } else if scrollView.contentOffset.y > 50 {
-                collectionView.frame.origin.y = 99
-            } else {
-                collectionView.frame.origin.y = 148 - scrollView.contentOffset.y
-            }
+        //collection view movement animation
+        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 250
+            && ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
+                if scrollView.contentOffset.y < 0{
+                    collectionView.frame.origin.y = 148
+                } else if scrollView.contentOffset.y > 50 {
+                    collectionView.frame.origin.y = 99
+                } else {
+                    collectionView.frame.origin.y = 148 - scrollView.contentOffset.y
+                }
         }
         
-        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 150{
-            //&& ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
-            if scrollView.contentOffset.y < 0 {
-                self.segmentedControl.frame.origin.y = 20
+        //hiding and showing segmentedControl when reaching the top of the scrollView
+        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 250
+            && ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
+                if scrollView.contentOffset.y < 0 {
+                    self.segmentedControl.frame.origin.y = 20
+                    segmentedControlHidden = false
+                } else if scrollView.contentOffset.y > 80 {
+                    self.segmentedControl.frame.origin.y = -80
+                    segmentedControlHidden = true
+                } else {
+                    self.segmentedControl.frame.origin.y = 20 - (scrollView.contentOffset.y)
+                }
+        }
+        
+        if middleZone && !scrollingDown {
+            if (trackContentOffset-scrollView.contentOffset.y) < 100 {
+                self.segmentedControl.frame.origin.y = -80 + (trackContentOffset-scrollView.contentOffset.y)
+                if (trackContentOffset-scrollView.contentOffset.y) < 40 {
+                    self.searchView.frame.origin.y = 38 + (trackContentOffset-scrollView.contentOffset.y)
+                } else {
+                    self.searchView.frame.origin.y = 77
+                }
+                
+                if (trackContentOffset-scrollView.contentOffset.y) < 50 {
+                    collectionView.frame.origin.y = 99 + (trackContentOffset-scrollView.contentOffset.y)
+                } else {
+                    collectionView.frame.origin.y = 148
+                }
+            } else {
+                middleZone = false
                 segmentedControlHidden = false
-            } else if scrollView.contentOffset.y > 80 {
-                self.segmentedControl.frame.origin.y = -80
-                segmentedControlHidden = true
-            } else {
-                self.segmentedControl.frame.origin.y = 20 - (scrollView.contentOffset.y)
+                self.segmentedControl.frame.origin.y = 20
             }
         }
         
-        
-//        if scrollView.contentOffset.y > 300 && !scrollingDown && !middleZone && segmentedControlHidden {
-//            middleZone = true
-//            trackContentOffset = scrollView.contentOffset.y
-//        }
-//        
-//        
-//        if scrollView.contentOffset.y > 300 && scrollingDown && !middleZone && !segmentedControlHidden {
-//            middleZone = true
-//            trackContentOffset = scrollView.contentOffset.y
-//        }
-//        
-//        if middleZone && !scrollingDown {
-//            self.segmentedControl.frame.origin.y = -120 + (trackContentOffset-scrollView.contentOffset.y)
-//            self.searchView.frame.origin.y = 20 + (trackContentOffset-scrollView.contentOffset.y)
-//            if(trackContentOffset-scrollView.contentOffset.y) > 140{
-//                middleZone = false
-//                segmentedControlHidden = false
-//                self.segmentedControl.frame.origin.y = 20
-//                self.searchView.frame.origin.y = 77
-//            }
-//        }
-//        if middleZone && scrollingDown {
-//            self.segmentedControl.frame.origin.y = 20 + (trackContentOffset-scrollView.contentOffset.y)
-//            self.searchView.frame.origin.y = 77 + (trackContentOffset-scrollView.contentOffset.y)
-//            if(trackContentOffset-scrollView.contentOffset.y) < -100{
-//                middleZone = false
-//                segmentedControlHidden = true
-//                self.segmentedControl.frame.origin.y = -80
-//                self.searchView.frame.origin.y = 20
-//            }
-//        }
+        if middleZone && scrollingDown {
+            if (trackContentOffset-scrollView.contentOffset.y) > -100 {
+                self.segmentedControl.frame.origin.y = 20 + (trackContentOffset-scrollView.contentOffset.y)
+                if (trackContentOffset-scrollView.contentOffset.y) > -40 {
+                    self.searchView.frame.origin.y = 77 + (trackContentOffset-scrollView.contentOffset.y)
+                } else {
+                    self.searchView.frame.origin.y = 38
+                }
+                
+                if (trackContentOffset-scrollView.contentOffset.y) > -50 {
+                    collectionView.frame.origin.y = 148 + (trackContentOffset-scrollView.contentOffset.y)
+                } else {
+                    collectionView.frame.origin.y = 99
+                }
+            } else {
+                middleZone = false
+                segmentedControlHidden = true
+                self.segmentedControl.frame.origin.y = -80
+            }
+        }
         
         lastContentOffset = scrollView.contentOffset.y
-        //print(self.searchView.frame.origin.y)
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        animateHeader(scrollView)
+        
+        //fading in cells
+        for cell in collectionView.visibleCells() as [UICollectionViewCell] {
+            
+            let point = collectionView.convertPoint(cell.center, toView: collectionView.superview)
+            cell.alpha = (point.y - 80) / 50
+        }
         
         // paging for fetching new data
         if (!isMoreDataLoading) {
