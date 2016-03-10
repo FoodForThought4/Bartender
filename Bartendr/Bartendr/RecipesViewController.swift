@@ -15,6 +15,7 @@ class RecipesViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: XMSegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchView: UIView!
     
     var drinks = [Drink]()
     var filteredDrinks: [Drink]?
@@ -28,6 +29,9 @@ class RecipesViewController: UIViewController {
     var middleZone = false
     var segmentedControlHidden = false
     
+    var shouldShowSearchResults = false
+    var customSearchController: CustomSearchController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +40,11 @@ class RecipesViewController: UIViewController {
         setupSegmentedControl()
         setupCollectionView()
         
+        configureCustomSearchController()
+        
         getDrinks(false)
+        
+        print(searchView.frame.origin.x)
     }
     
     func setupCollectionView() {
@@ -51,6 +59,34 @@ class RecipesViewController: UIViewController {
         let layout = SACollectionViewVerticalScalingFlowLayout()
         layout.minimumLineSpacing = 15
         collectionView.collectionViewLayout = layout
+        
+        let tap = UITapGestureRecognizer(target: self, action: "dismissSearch")
+        collectionView.backgroundView = UIView()
+        collectionView.backgroundView!.addGestureRecognizer(tap)
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: "swipeLeft")
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: "swipeRight")
+        
+        leftSwipe.direction = .Left
+        rightSwipe.direction = .Right
+        
+        collectionView.addGestureRecognizer(leftSwipe)
+        collectionView.addGestureRecognizer(rightSwipe)
+    }
+    
+    func swipeLeft(){
+        //segmentedControl.selectedSegment = 1
+        print("1")
+    }
+    
+    func swipeRight(){
+        //segmentedControl.selectedSegment = 0
+        print("0")
+        
+    }
+    
+    func dismissSearch(){
+        view.endEditing(true)
     }
     
     func setupSegmentedControl() {
@@ -76,6 +112,7 @@ class RecipesViewController: UIViewController {
                     self.drinks += drinkData!
                 } else {
                     self.drinks = drinkData!
+                    self.filteredDrinks = drinkData!
                 }
                 
                 self.collectionView.reloadData()
@@ -102,17 +139,67 @@ class RecipesViewController: UIViewController {
     
 }
 
+extension RecipesViewController: CustomSearchControllerDelegate{
+    func configureCustomSearchController() {
+        customSearchController = CustomSearchController(searchResultsController: self, searchBarFrame: CGRectMake(10.0, 5.0, collectionView.frame.size.width - 25, 40.0), searchBarFont: UIFont(name: "Avenir Next Condensed Heavy", size: 16.0)!, searchBarTextColor: UIColor.grayColor(), searchBarTintColor: UIColor.clearColor())
+        
+        customSearchController.customSearchBar.placeholder = "Search for drinks..."
+        customSearchController.customDelegate = self
+        searchView.addSubview(customSearchController.customSearchBar)
+    }
+    
+    func didStartSearching() {
+        shouldShowSearchResults = true
+        collectionView.reloadData()
+    }
+    
+    func didTapOnSearchButton() {
+        if !shouldShowSearchResults {
+            shouldShowSearchResults = true
+            collectionView.reloadData()
+        }
+    }
+    
+    func didTapOnCancelButton() {
+        shouldShowSearchResults = false
+        collectionView.reloadData()
+    }
+    
+    func didChangeSearchText(searchText: String) {
+        // Filter the data array and get only those countries that match the search text.
+        if searchText.isEmpty{
+            shouldShowSearchResults = false
+        } else{
+            filteredDrinks = drinks.filter({ (dataItem: Drink) -> Bool in
+                let name = dataItem.name!
+                
+                if name.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
+                    return true
+                } else {
+                    return false
+                }
+            })
+            shouldShowSearchResults = true
+        }
+        
+        // Reload the tableview.
+        collectionView.reloadData()
+    }
+}
+
 extension RecipesViewController: XMSegmentedControlDelegate {
     func xmSegmentedControl(xmSegmentedControl: XMSegmentedControl, selectedSegment:Int){
         if selectedSegment == 0 && currentView != 0{
             UIView.animateWithDuration(0.3, animations: {
                 self.collectionView.frame.origin.x = 0
+                self.searchView.frame.origin.x = 30
             })
             currentView = 0
             
         } else if selectedSegment == 1 && currentView != 1{
             UIView.animateWithDuration(0.3, animations: {
                 self.collectionView.frame.origin.x = -400
+                self.searchView.frame.origin.x = -370
             })
             currentView = 1
         }
@@ -129,6 +216,7 @@ extension RecipesViewController: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        
         if scrollView.contentOffset.y > lastContentOffset && scrollView.contentOffset.y > 0 {
             scrollingDown = true
         }
@@ -137,51 +225,67 @@ extension RecipesViewController: UICollectionViewDelegate {
         }
         
         //hiding and showing segmentedControl when reaching the top of the scrollView
-        if scrollView.contentOffset.y > 20 && scrollView.contentOffset.y < 100 &&
-            ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
-                self.segmentedControl.frame.origin.y = 20 - (scrollView.contentOffset.y - 20)
+        if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < 150{
+            //&& ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
+                if scrollView.contentOffset.y > 40{
+                    self.searchView.frame.origin.y = 38
+                } else{
+                    self.searchView.frame.origin.y = 77 - (scrollView.contentOffset.y)
+                }
+        }
+        if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < 80{
+            //&& ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
+                self.segmentedControl.frame.origin.y = 20 - (scrollView.contentOffset.y)
         }
         if scrollView.contentOffset.y > 100 && scrollView.contentOffset.y < 250 && scrollingDown {
             self.segmentedControl.frame.origin.y = -80
+            //self.searchView.frame.origin.y = 38
             segmentedControlHidden = true
         }
-        if scrollView.contentOffset.y < 20{
+        
+        if scrollView.contentOffset.y < 0{
+            self.searchView.frame.origin.y = 77
+        }
+        
+        if scrollView.contentOffset.y < 0{
             self.segmentedControl.frame.origin.y = 20
             segmentedControlHidden = false
         }
         
-        if scrollView.contentOffset.y > 300 && !scrollingDown && !middleZone && segmentedControlHidden {
-            middleZone = true
-            trackContentOffset = scrollView.contentOffset.y
-        }
-        
-        
-        if scrollView.contentOffset.y > 300 && scrollingDown && !middleZone && !segmentedControlHidden {
-            middleZone = true
-            trackContentOffset = scrollView.contentOffset.y
-        }
-        
-        if middleZone && !scrollingDown {
-            self.segmentedControl.frame.origin.y = -120 + (trackContentOffset-scrollView.contentOffset.y)
-            if(trackContentOffset-scrollView.contentOffset.y) > 140{
-                middleZone = false
-                segmentedControlHidden = false
-                self.segmentedControl.frame.origin.y = 20
-            }
-        }
-        if middleZone && scrollingDown {
-            self.segmentedControl.frame.origin.y = 20 + (trackContentOffset-scrollView.contentOffset.y)
-            if(trackContentOffset-scrollView.contentOffset.y) < -100{
-                middleZone = false
-                segmentedControlHidden = true
-                self.segmentedControl.frame.origin.y = -80
-            }
-        }
+//        if scrollView.contentOffset.y > 300 && !scrollingDown && !middleZone && segmentedControlHidden {
+//            middleZone = true
+//            trackContentOffset = scrollView.contentOffset.y
+//        }
+//        
+//        
+//        if scrollView.contentOffset.y > 300 && scrollingDown && !middleZone && !segmentedControlHidden {
+//            middleZone = true
+//            trackContentOffset = scrollView.contentOffset.y
+//        }
+//        
+//        if middleZone && !scrollingDown {
+//            self.segmentedControl.frame.origin.y = -120 + (trackContentOffset-scrollView.contentOffset.y)
+//            self.searchView.frame.origin.y = 20 + (trackContentOffset-scrollView.contentOffset.y)
+//            if(trackContentOffset-scrollView.contentOffset.y) > 140{
+//                middleZone = false
+//                segmentedControlHidden = false
+//                self.segmentedControl.frame.origin.y = 20
+//                self.searchView.frame.origin.y = 77
+//            }
+//        }
+//        if middleZone && scrollingDown {
+//            self.segmentedControl.frame.origin.y = 20 + (trackContentOffset-scrollView.contentOffset.y)
+//            self.searchView.frame.origin.y = 77 + (trackContentOffset-scrollView.contentOffset.y)
+//            if(trackContentOffset-scrollView.contentOffset.y) < -100{
+//                middleZone = false
+//                segmentedControlHidden = true
+//                self.segmentedControl.frame.origin.y = -80
+//                self.searchView.frame.origin.y = 20
+//            }
+//        }
         
         lastContentOffset = scrollView.contentOffset.y
-        print(scrollingDown)
-        
-        
+        print(self.searchView.frame.origin.y)
         
         // paging for fetching new data
         if (!isMoreDataLoading) {
@@ -204,13 +308,25 @@ extension RecipesViewController: UICollectionViewDelegate {
 extension RecipesViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return drinks.count
+        if shouldShowSearchResults{
+            if let filteredDrinks = filteredDrinks{
+                return filteredDrinks.count
+            } else{
+                return 0
+            }
+        } else{
+            return drinks.count
+        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as! DrinkCell
         
-        cell.drink = drinks[indexPath.row]
+        if shouldShowSearchResults{
+            cell.drink = filteredDrinks![indexPath.row]
+        } else{
+            cell.drink = drinks[indexPath.row]
+        }
         
         return cell
     }
