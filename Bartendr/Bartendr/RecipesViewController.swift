@@ -9,7 +9,6 @@
 import UIKit
 import XMSegmentedControl
 import AFNetworking
-import SACollectionViewVerticalScalingFlowLayout
 
 class RecipesViewController: UIViewController {
     
@@ -55,10 +54,6 @@ class RecipesViewController: UIViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.insertSubview(refreshControl, atIndex: 0)
-        
-        let layout = SACollectionViewVerticalScalingFlowLayout()
-        layout.minimumLineSpacing = 15
-        collectionView.collectionViewLayout = layout
         
         let tap = UITapGestureRecognizer(target: self, action: "dismissSearch")
         collectionView.backgroundView = UIView()
