@@ -38,7 +38,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zf9-qT-bxB">
-                                <rect key="frame" x="0.0" y="148" width="320" height="420"/>
+                                <rect key="frame" x="0.0" y="148" width="320" height="477"/>
                                 <color key="backgroundColor" red="0.94509803921568625" green="0.96470588235294119" blue="0.94509803921568625" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ue1-hZ-m6Y">
                                     <size key="itemSize" width="50" height="50"/>
@@ -145,7 +145,7 @@
                             <constraint firstItem="Zf9-qT-bxB" firstAttribute="leading" secondItem="kQO-wK-B16" secondAttribute="leading" id="MbH-xp-BvK"/>
                             <constraint firstItem="Lai-xq-dLA" firstAttribute="top" secondItem="uP5-IW-Wfb" secondAttribute="bottom" constant="13" id="Yes-jS-dl8"/>
                             <constraint firstItem="uP5-IW-Wfb" firstAttribute="top" secondItem="MHf-a9-If0" secondAttribute="bottom" id="k7W-E7-KTn"/>
-                            <constraint firstItem="IVc-nl-jEl" firstAttribute="top" secondItem="Zf9-qT-bxB" secondAttribute="bottom" id="l80-bP-Ru8"/>
+                            <constraint firstItem="IVc-nl-jEl" firstAttribute="top" secondItem="Zf9-qT-bxB" secondAttribute="bottom" constant="-57" id="l80-bP-Ru8"/>
                             <constraint firstAttribute="trailing" secondItem="Lai-xq-dLA" secondAttribute="trailing" constant="30" id="mb0-LS-uc4"/>
                         </constraints>
                     </view>
