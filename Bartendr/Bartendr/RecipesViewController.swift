@@ -226,32 +226,40 @@ extension RecipesViewController: UICollectionViewDelegate {
         }
         
         //hiding and showing segmentedControl when reaching the top of the scrollView
-        if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < 150{
+        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 150{
             //&& ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
                 if scrollView.contentOffset.y > 40{
                     self.searchView.frame.origin.y = 38
-                } else{
+                } else if scrollView.contentOffset.y < 0 {
+                    self.searchView.frame.origin.y = 77
+                } else {
                     self.searchView.frame.origin.y = 77 - (scrollView.contentOffset.y)
                 }
         }
-        if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < 80{
+        
+        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 150{
+            if scrollView.contentOffset.y < 0{
+                collectionView.frame.origin.y = 148
+            } else if scrollView.contentOffset.y > 50 {
+                collectionView.frame.origin.y = 99
+            } else {
+                collectionView.frame.origin.y = 148 - scrollView.contentOffset.y
+            }
+        }
+        
+        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 150{
             //&& ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
+            if scrollView.contentOffset.y < 0 {
+                self.segmentedControl.frame.origin.y = 20
+                segmentedControlHidden = false
+            } else if scrollView.contentOffset.y > 80 {
+                self.segmentedControl.frame.origin.y = -80
+                segmentedControlHidden = true
+            } else {
                 self.segmentedControl.frame.origin.y = 20 - (scrollView.contentOffset.y)
-        }
-        if scrollView.contentOffset.y > 100 && scrollView.contentOffset.y < 250 && scrollingDown {
-            self.segmentedControl.frame.origin.y = -80
-            //self.searchView.frame.origin.y = 38
-            segmentedControlHidden = true
+            }
         }
         
-        if scrollView.contentOffset.y < 0{
-            self.searchView.frame.origin.y = 77
-        }
-        
-        if scrollView.contentOffset.y < 0{
-            self.segmentedControl.frame.origin.y = 20
-            segmentedControlHidden = false
-        }
         
 //        if scrollView.contentOffset.y > 300 && !scrollingDown && !middleZone && segmentedControlHidden {
 //            middleZone = true
