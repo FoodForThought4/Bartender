@@ -39,6 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ApiClient.addbApiKey = keys["ADDB_API_Key"] as! String
         }
         
+        ApiClient.searchDrinkADDB("cos", nextPage: false) { (drinkData, error) -> () in
+            if error == nil {
+                print("success")
+            }
+            else {
+               print("error")
+            }
+        }
+        
         let vc = storyboard.instantiateViewControllerWithIdentifier("TabBar")
         window?.rootViewController = vc
         

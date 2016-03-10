@@ -21,13 +21,6 @@ class DrinkCell: UICollectionViewCell {
             descriptionLabel.text = drink.ingredientList
             backgroundImageView.image = UIImage(named: "CellBackground")
             
-//            if let url = drink.imgURL {
-//                let imageURL = NSURL(string: url)
-//                drinkImageView.setImageWithURL(imageURL!)
-//                drinkImageView.setImageWithURLRequest(<#T##urlRequest: NSURLRequest##NSURLRequest#>, placeholderImage: <#T##UIImage?#>, success: <#T##((NSURLRequest, NSHTTPURLResponse?, UIImage) -> Void)?##((NSURLRequest, NSHTTPURLResponse?, UIImage) -> Void)?##(NSURLRequest, NSHTTPURLResponse?, UIImage) -> Void#>, failure: <#T##((NSURLRequest, NSHTTPURLResponse?, NSError) -> Void)?##((NSURLRequest, NSHTTPURLResponse?, NSError) -> Void)?##(NSURLRequest, NSHTTPURLResponse?, NSError) -> Void#>)
-//            }
-            
-            
             if let url = drink.imgURL {
                 let imageRequest = NSURLRequest(URL: NSURL(string: url)!)
                 

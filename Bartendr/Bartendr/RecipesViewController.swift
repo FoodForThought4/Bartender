@@ -160,20 +160,22 @@ extension RecipesViewController: CustomSearchControllerDelegate{
         collectionView.reloadData()
     }
     
-    func didChangeSearchText(searchText: String) {
+    func didChangeSearchText(var searchText: String) {
         // Filter the data array and get only those countries that match the search text.
         if searchText.isEmpty{
             shouldShowSearchResults = false
-        } else{
-            filteredDrinks = drinks.filter({ (dataItem: Drink) -> Bool in
-                let name = dataItem.name!
-                
-                if name.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
-                    return true
+        } else {
+            
+            searchText = searchText.stringByReplacingOccurrencesOfString(" ", withString: "/")
+            ApiClient.searchDrinkADDB(searchText, nextPage: false, completion: { (drinkData, error) -> () in
+                if error == nil {
+                    print("success!")
+                    self.filteredDrinks = drinkData
                 } else {
-                    return false
+                    print("error retrieving searched items")
                 }
             })
+
             shouldShowSearchResults = true
         }
         

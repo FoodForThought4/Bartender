@@ -39,7 +39,30 @@ class ApiClient {
                 
                 nextPageURL = response!["next"] as? String
                 
-                print("response = \(response)")
+                completion(drinkData: drinks, error: nil)
+                
+            }) { (dataTask: NSURLSessionDataTask?, error: NSError) -> Void in
+                
+                print("failure retrieving drinks")
+                completion(drinkData: nil, error: error)
+        }
+    }
+    
+    class func searchDrinkADDB(drinkSubstring: String, nextPage: Bool, completion: (drinkData: [Drink]?, error: NSError?) -> ()) {
+        
+        
+        print("\(apiURL)/quickSearch/drinks/\(drinkSubstring)/?apiKey=\(addbApiKey)")
+        http.GET("\(apiURL)/quickSearch/drinks/\(drinkSubstring)/?apiKey=\(addbApiKey)", parameters: [], progress: { (progress: NSProgress) -> Void in
+            }, success: { (dataTask: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                
+                var drinks = [Drink]()
+                
+                for drink in response!["result"] as! NSArray {
+                    drinks.append(Drink(drinkDetails: drink as! NSDictionary))
+                }
+                
+                nextPageURL = response!["next"] as? String
+                
                 completion(drinkData: drinks, error: nil)
                 
             }) { (dataTask: NSURLSessionDataTask?, error: NSError) -> Void in

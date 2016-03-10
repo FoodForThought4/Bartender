@@ -5,6 +5,12 @@
 ## Keys
 Bartendr/Bartendr/Keys.plist
 
+## MAC crap
+.DS_STORE
+Bartendr/.DS_Store
+Bartendr/Bartendr/.DS_Store
+
+
 ## Build generated
 build/
 DerivedData/
