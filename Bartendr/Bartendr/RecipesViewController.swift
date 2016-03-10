@@ -217,7 +217,7 @@ extension RecipesViewController: UICollectionViewDelegate {
         for cell in collectionView.visibleCells() as [UICollectionViewCell] {
             
             let point = collectionView.convertPoint(cell.center, toView: collectionView.superview)
-            cell.alpha = (point.y - 100) / 100
+            cell.alpha = (point.y - 80) / 50
         }
         
         if scrollView.contentOffset.y > lastContentOffset && scrollView.contentOffset.y > 0 {
