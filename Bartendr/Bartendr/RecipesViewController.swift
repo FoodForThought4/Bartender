@@ -217,6 +217,12 @@ extension RecipesViewController: UICollectionViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
+        for cell in collectionView.visibleCells() as [UICollectionViewCell] {
+            
+            let point = collectionView.convertPoint(cell.center, toView: collectionView.superview)
+            cell.alpha = (point.y - 100) / 100
+        }
+        
         if scrollView.contentOffset.y > lastContentOffset && scrollView.contentOffset.y > 0 {
             scrollingDown = true
         }
@@ -285,7 +291,7 @@ extension RecipesViewController: UICollectionViewDelegate {
 //        }
         
         lastContentOffset = scrollView.contentOffset.y
-        print(self.searchView.frame.origin.y)
+        //print(self.searchView.frame.origin.y)
         
         // paging for fetching new data
         if (!isMoreDataLoading) {
