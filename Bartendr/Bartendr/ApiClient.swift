@@ -33,11 +33,11 @@ class ApiClient {
                 
                 var drinks = [Drink]()
                 
-                for drink in response!["result"] as! NSArray {
+                for drink in response?.valueForKey("result") as! NSArray {
                     drinks.append(Drink(drinkDetails: drink as! NSDictionary))
                 }
                 
-                nextPageURL = response!["next"] as? String
+                nextPageURL = response?.valueForKey("next") as? String
                 
                 completion(drinkData: drinks, error: nil)
                 
@@ -57,11 +57,11 @@ class ApiClient {
                 
                 var drinks = [Drink]()
                 
-                for drink in response!["result"] as! NSArray {
+                for drink in response?.valueForKey("result") as! NSArray {
                     drinks.append(Drink(drinkDetails: drink as! NSDictionary))
                 }
                 
-                nextPageURL = response!["next"] as? String
+                nextPageURL = response?.valueForKey("next") as? String
                 
                 completion(drinkData: drinks, error: nil)
                 
@@ -125,11 +125,11 @@ class ApiClient {
         let query = PFQuery(className: "Drink")
         query.whereKey("id", containsString: updatedDrink.id)
         
-        query.getFirstObjectInBackgroundWithBlock { (var drink: PFObject?, error: NSError?) -> Void in
+        query.getFirstObjectInBackgroundWithBlock { (drink: PFObject?, error: NSError?) -> Void in
             if error != nil {
                 
-                drink = Drink.convertDrinkToPFObject(updatedDrink)
-                drink?.saveInBackground()
+                let updatedDrinkObject = Drink.convertDrinkToPFObject(updatedDrink)
+                updatedDrinkObject.saveInBackground()
             } else {
                 print("error getting drink to update it")
             }
