@@ -4,35 +4,48 @@
 
 ### Sprint 1
 - [ ] As a user, I would like all content to be displayed with good design (brian)
-ingredient adding page 
+    - [X] ingredient adding page 
     - [ ] drink detail view 
-    - [ ] drink listings 
+    - [X] drink listings 
     - [ ] drink creation
 
-- [ ] As a user, I would like to be able to save drinks I create and bookmark (lainie) 
-    - [ ] login via fb
 
-- [ ] As a user, I would like to be able to view common drinks (marty)
-    - [ ] implement absolute api communication
-    - [ ] implement parse communication
-        - [ ] create drinks
-        - [ ] retrieve drinks
-        - [ ] etc. (see more in schema photo)
-    - [ ] solidify models for use with parse and absolut
+- [X] As a user, I would like to be able to view common drinks (marty)
+    - [X] implement absolute api communication
+    - [X] implement parse communication
+        - [X] create drinks
+        - [X] retrieve drinks
+        - [X] etc. (see more in schema photo)
+    - [X] solidify models for use with parse and absolut
+
+
+
+- [ ] As a user, I would like to be able to be able to share (on app) my own and view other’s drinks
+    - [X] setup of parse server (lainie) 
+    - [ ] implementation 
+    - [ ] create apiclient
+
+### Sprint 2
+- [ ] As a user, I would like all content to be displayed with good design (brian)
+    - [ ] drink detail view 
+    - [ ] drink creation
 
 - [ ] As a user, I would like to be able to create my own drinks and post them (lainie)
     - [ ] implement design
     - [ ] link to ApiClient
 
-- [ ] As a user, I would like to be able to be able to share (on app) my own and view other’s drinks
-    - [X] setup of parse server 
-    - [ ] implementation (lainie)
-    - [ ] create apiclient (marty)
+- [ ] As a user, I would like to be able to be able to share (on app) my own and view other’s drinks (marty)
+    - [ ] implementation 
+    - [ ] create apiclient
 
-- [ ] As a user, I would like to know what drinks I can make given the ingredients I have (brian)
-    - [ ] implementation
+- [ ] As a user, I would like to know what drinks I can make given the ingredients I have
+    - [ ] implementation (brian)
+    - [ ] API communication (marty)
 
 ### Later Sprint 
+
+- [ ] As a user, I would like to be able to save drinks I create and bookmark (lainie) 
+    - [ ] login via fb
 
 - [ ] As a user, I would like all content to be displayed with good design (continued)
 - [ ] As a user, I would like to be able to have a shuffle drink view
