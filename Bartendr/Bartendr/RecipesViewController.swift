@@ -15,9 +15,11 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var segmentedControl: XMSegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     var drinks = [Drink]()
     var filteredDrinks: [Drink]?
+    let ingredients = ["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth", "Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola", "Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]
     
     var currentView = 0
     var isMoreDataLoading = false
@@ -38,6 +40,7 @@ class RecipesViewController: UIViewController {
         
         setupSegmentedControl()
         setupCollectionView()
+        setupTableView()
         
         configureCustomSearchController()
         
@@ -49,6 +52,7 @@ class RecipesViewController: UIViewController {
     func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         
         // pull down to refresh
         let refreshControl = UIRefreshControl()
@@ -67,6 +71,14 @@ class RecipesViewController: UIViewController {
         
         collectionView.addGestureRecognizer(leftSwipe)
         collectionView.addGestureRecognizer(rightSwipe)
+    }
+    
+    func setupTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.hidden = true
+        tableView.frame.origin.x = 400
     }
     
     func swipeLeft(){
@@ -188,13 +200,16 @@ extension RecipesViewController: XMSegmentedControlDelegate {
     func xmSegmentedControl(xmSegmentedControl: XMSegmentedControl, selectedSegment:Int){
         if selectedSegment == 0 && currentView != 0{
             UIView.animateWithDuration(0.3, animations: {
+                self.tableView.frame.origin.x = 400
                 self.collectionView.frame.origin.x = 0
                 self.searchView.frame.origin.x = 30
             })
             currentView = 0
             
         } else if selectedSegment == 1 && currentView != 1{
+            tableView.hidden = false
             UIView.animateWithDuration(0.3, animations: {
+                self.tableView.frame.origin.x = 20
                 self.collectionView.frame.origin.x = -400
                 self.searchView.frame.origin.x = -370
             })
@@ -205,13 +220,6 @@ extension RecipesViewController: XMSegmentedControlDelegate {
 
 
 extension RecipesViewController: UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            let s = CGSize(width: 316, height: 106)
-            return s
-    }
-    
     func animateHeader(scrollView: UIScrollView){
         //tracking if user is scrolling down or up
         if scrollView.contentOffset.y > lastContentOffset && scrollView.contentOffset.y > 0 {
@@ -271,7 +279,7 @@ extension RecipesViewController: UICollectionViewDelegate {
                 }
         }
         
-        if middleZone && !scrollingDown {
+        if middleZone && !scrollingDown{
             if (trackContentOffset-scrollView.contentOffset.y) < 100 {
                 self.segmentedControl.frame.origin.y = -80 + (trackContentOffset-scrollView.contentOffset.y)
                 if (trackContentOffset-scrollView.contentOffset.y) < 40 {
@@ -361,7 +369,7 @@ extension RecipesViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as! DrinkCell
-        
+            
         if shouldShowSearchResults{
             cell.drink = filteredDrinks![indexPath.row]
         } else{
@@ -369,6 +377,35 @@ extension RecipesViewController: UICollectionViewDataSource {
         }
         
         return cell
+    }
+    
+    
+}
+
+extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ingredients.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
+        
+        cell.nameLabel.text = ingredients[indexPath.row]
+        cell.isSelected = false
+        cell.selectionStyle = .None
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("cellSelected:"))
+        cell.checkBoxImageView.tag = indexPath.row
+        cell.checkBoxImageView.userInteractionEnabled = true
+        cell.checkBoxImageView.addGestureRecognizer(tapGestureRecognizer)
+        
+        return cell
+    }
+    
+    func cellSelected(sender: AnyObject){
+        let imageView = sender.view as! UIImageView
+        imageView.image = UIImage(named: "CheckBoxSelected")
     }
     
 }

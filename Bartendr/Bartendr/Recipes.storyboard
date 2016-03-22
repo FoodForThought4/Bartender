@@ -41,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="148" width="320" height="457"/>
                                 <color key="backgroundColor" red="0.94509803921568625" green="0.96470588235294119" blue="0.94509803921568625" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ue1-hZ-m6Y">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="316" height="106"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -135,15 +135,70 @@
                                     <constraint firstItem="ZIt-QU-qBC" firstAttribute="leading" secondItem="Lai-xq-dLA" secondAttribute="leading" id="chI-JV-cAl"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="31" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="y7C-kO-voS">
+                                <rect key="frame" x="20" y="82" width="280" height="486"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.94509803921568625" green="0.96470588235294119" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" rowHeight="31" id="TAh-BV-Keg" customClass="IngredientCell" customModule="Bartendr" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="280" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TAh-BV-Keg" id="JkJ-jd-xct">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="30.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wm2-UN-aTs">
+                                                    <rect key="frame" x="58" y="4" width="32" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="9Jx-ot-oeD"/>
+                                                    </constraints>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Label">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.52456480704697983" green="0.52456480704697983" blue="0.52456480704697983" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <font key="NSFont" size="17" name="AvenirNextCondensed-Regular"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CheckBox" translatesAutoresizingMaskIntoConstraints="NO" id="seh-HK-fpi">
+                                                    <rect key="frame" x="21" y="5" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Sq6-qk-T3v"/>
+                                                        <constraint firstAttribute="width" constant="20" id="ddA-PP-Pa6"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="seh-HK-fpi" firstAttribute="top" secondItem="JkJ-jd-xct" secondAttribute="top" constant="5" id="LrR-nV-8ER"/>
+                                                <constraint firstItem="Wm2-UN-aTs" firstAttribute="leading" secondItem="seh-HK-fpi" secondAttribute="trailing" constant="17" id="cFn-XM-On0"/>
+                                                <constraint firstAttribute="bottom" secondItem="seh-HK-fpi" secondAttribute="bottom" constant="5.5" id="gX6-UK-m1s"/>
+                                                <constraint firstItem="Wm2-UN-aTs" firstAttribute="centerY" secondItem="seh-HK-fpi" secondAttribute="centerY" id="rWv-yL-m9I"/>
+                                                <constraint firstItem="seh-HK-fpi" firstAttribute="leading" secondItem="JkJ-jd-xct" secondAttribute="leading" constant="21" id="zaf-MH-dCE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.94509803921568625" green="0.96470588235294119" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="checkBoxImageView" destination="seh-HK-fpi" id="vnX-Ko-qgk"/>
+                                            <outlet property="nameLabel" destination="Wm2-UN-aTs" id="Gfk-jv-64P"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Zf9-qT-bxB" secondAttribute="trailing" id="9K5-tL-YH8"/>
+                            <constraint firstAttribute="trailing" secondItem="y7C-kO-voS" secondAttribute="trailing" constant="20" id="AL2-Nz-aYT"/>
                             <constraint firstItem="Lai-xq-dLA" firstAttribute="leading" secondItem="kQO-wK-B16" secondAttribute="leading" constant="30" id="HOg-qM-Uxb"/>
                             <constraint firstItem="Zf9-qT-bxB" firstAttribute="top" secondItem="ZIt-QU-qBC" secondAttribute="bottom" constant="21" id="J7i-zC-40s"/>
                             <constraint firstItem="uP5-IW-Wfb" firstAttribute="centerX" secondItem="kQO-wK-B16" secondAttribute="centerX" id="JPv-5s-1Lq"/>
                             <constraint firstItem="Zf9-qT-bxB" firstAttribute="leading" secondItem="kQO-wK-B16" secondAttribute="leading" id="MbH-xp-BvK"/>
                             <constraint firstItem="Lai-xq-dLA" firstAttribute="top" secondItem="uP5-IW-Wfb" secondAttribute="bottom" constant="13" id="Yes-jS-dl8"/>
+                            <constraint firstItem="IVc-nl-jEl" firstAttribute="top" secondItem="y7C-kO-voS" secondAttribute="bottom" id="Zcg-zV-j1n"/>
+                            <constraint firstItem="y7C-kO-voS" firstAttribute="top" secondItem="uP5-IW-Wfb" secondAttribute="bottom" constant="18" id="apn-tF-u1H"/>
+                            <constraint firstItem="y7C-kO-voS" firstAttribute="leading" secondItem="kQO-wK-B16" secondAttribute="leading" constant="20" id="ftO-Qw-hqp"/>
                             <constraint firstItem="uP5-IW-Wfb" firstAttribute="top" secondItem="MHf-a9-If0" secondAttribute="bottom" id="k7W-E7-KTn"/>
                             <constraint firstItem="IVc-nl-jEl" firstAttribute="top" secondItem="Zf9-qT-bxB" secondAttribute="bottom" constant="-37" id="l80-bP-Ru8"/>
                             <constraint firstAttribute="trailing" secondItem="Lai-xq-dLA" secondAttribute="trailing" constant="30" id="mb0-LS-uc4"/>
@@ -153,14 +208,16 @@
                         <outlet property="collectionView" destination="Zf9-qT-bxB" id="OBQ-XR-jAA"/>
                         <outlet property="searchView" destination="Lai-xq-dLA" id="mNY-Ke-JT3"/>
                         <outlet property="segmentedControl" destination="uP5-IW-Wfb" id="x2F-6J-Nl2"/>
+                        <outlet property="tableView" destination="y7C-kO-voS" id="jcV-SR-Zzo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kd2-Jc-KiM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="144" y="528"/>
+            <point key="canvasLocation" x="135" y="528"/>
         </scene>
     </scenes>
     <resources>
+        <image name="CheckBox" width="16" height="16"/>
         <image name="SearchBackground" width="330" height="37"/>
     </resources>
 </document>

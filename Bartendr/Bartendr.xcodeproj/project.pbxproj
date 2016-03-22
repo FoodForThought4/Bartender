@@ -18,6 +18,7 @@
 		BD206E3A1C8649DD001A409A /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E391C8649DD001A409A /* Drink.swift */; };
 		BD206E3C1C864B81001A409A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E3B1C864B81001A409A /* Ingredient.swift */; };
 		BD206E3E1C864C00001A409A /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E3D1C864C00001A409A /* ApiClient.swift */; };
+		E45E4D8D1C9A349A000CD7BB /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45E4D8C1C9A349A000CD7BB /* IngredientCell.swift */; };
 		E4A038531C8FCD3200889EE2 /* DrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A038521C8FCD3200889EE2 /* DrinkCell.swift */; };
 		E4C2CA341C90FBE700CE0C3C /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C2CA331C90FBE700CE0C3C /* CustomSearchController.swift */; };
 		E4C2CA361C90FC8F00CE0C3C /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C2CA351C90FC8F00CE0C3C /* CustomSearchBar.swift */; };
@@ -41,6 +42,7 @@
 		BD206E3D1C864C00001A409A /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		CB5F929BA0DEFA6140B442BE /* Pods_Bartendr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bartendr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC989D379955EB429FBC15DA /* Pods-Bartendr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartendr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bartendr/Pods-Bartendr.debug.xcconfig"; sourceTree = "<group>"; };
+		E45E4D8C1C9A349A000CD7BB /* IngredientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
 		E4A038521C8FCD3200889EE2 /* DrinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkCell.swift; sourceTree = "<group>"; };
 		E4C2CA331C90FBE700CE0C3C /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		E4C2CA351C90FC8F00CE0C3C /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				E4A038511C8FCD1800889EE2 /* Don't Touch */,
 				E4A038521C8FCD3200889EE2 /* DrinkCell.swift */,
 				E4C2CA351C90FC8F00CE0C3C /* CustomSearchBar.swift */,
+				E45E4D8C1C9A349A000CD7BB /* IngredientCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				E4A038531C8FCD3200889EE2 /* DrinkCell.swift in Sources */,
 				BD206E2A1C863BBC001A409A /* Bartendr.xcdatamodeld in Sources */,
 				BD206E3C1C864B81001A409A /* Ingredient.swift in Sources */,
+				E45E4D8D1C9A349A000CD7BB /* IngredientCell.swift in Sources */,
 				BD206E3A1C8649DD001A409A /* Drink.swift in Sources */,
 				E4C2CA341C90FBE700CE0C3C /* CustomSearchController.swift in Sources */,
 				BD206E221C863BBC001A409A /* AppDelegate.swift in Sources */,
