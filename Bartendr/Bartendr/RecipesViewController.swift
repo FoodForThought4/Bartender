@@ -26,6 +26,7 @@ class RecipesViewController: UIViewController {
     
     var currentView = 0
     var isMoreDataLoading = false
+    var atBottomThreshold = false
     
     var lastContentOffset = CGFloat(0)
     var trackContentOffset = CGFloat(0)
@@ -82,16 +83,16 @@ class RecipesViewController: UIViewController {
         tableView.frame.origin.x = 400
     }
     
-    func swipeLeft(){
-        //segmentedControl.selectedSegment = 1
-        print("1")
-    }
-    
-    func swipeRight(){
-        //segmentedControl.selectedSegment = 0
-        print("0")
-        
-    }
+//    func swipeLeft(){
+//        //segmentedControl.selectedSegment = 1
+//        print("1")
+//    }
+//    
+//    func swipeRight(){
+//        //segmentedControl.selectedSegment = 0
+//        print("0")
+//        
+//    }
     
     func dismissSearch(){
         view.endEditing(true)
@@ -200,10 +201,15 @@ extension RecipesViewController: CustomSearchControllerDelegate{
 extension RecipesViewController: XMSegmentedControlDelegate {
     func xmSegmentedControl(xmSegmentedControl: XMSegmentedControl, selectedSegment:Int){
         if selectedSegment == 0 && currentView != 0{
+            self.collectionView.hidden = false
             UIView.animateWithDuration(0.3, animations: {
                 self.tableView.frame.origin.x = 400
                 self.collectionView.frame.origin.x = 0
                 self.searchView.frame.origin.x = 30
+                },  completion: { finished in
+                    if (finished) {
+                        self.tableView.hidden = true
+                    }
             })
             currentView = 0
             print("this is page 1")
@@ -217,6 +223,10 @@ extension RecipesViewController: XMSegmentedControlDelegate {
                 self.tableView.frame.origin.x = 20
                 self.collectionView.frame.origin.x = -400
                 self.searchView.frame.origin.x = -370
+                },  completion: { finished in
+                    if (finished) {
+                        self.collectionView.hidden = true
+                    }
             })
             currentView = 1
         }
@@ -226,6 +236,15 @@ extension RecipesViewController: XMSegmentedControlDelegate {
 
 extension RecipesViewController: UICollectionViewDelegate {
     func animateHeader(scrollView: UIScrollView){
+        let scrollViewContentHeight = scrollView.contentSize.height
+        let scrollOffsetThreshold = scrollViewContentHeight - scrollView.bounds.size.height
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y + 20 > scrollOffsetThreshold){
+            atBottomThreshold = true
+        } else {
+            atBottomThreshold = false
+        }
         //tracking if user is scrolling down or up
         if scrollView.contentOffset.y > lastContentOffset && scrollView.contentOffset.y > 0 {
             scrollingDown = true
@@ -284,7 +303,7 @@ extension RecipesViewController: UICollectionViewDelegate {
                 }
         }
         
-        if middleZone && !scrollingDown{
+        if middleZone && !scrollingDown && !atBottomThreshold{
             if (trackContentOffset-scrollView.contentOffset.y) < 100 {
                 self.segmentedControl.frame.origin.y = -80 + (trackContentOffset-scrollView.contentOffset.y)
                 if (trackContentOffset-scrollView.contentOffset.y) < 40 {
@@ -305,7 +324,7 @@ extension RecipesViewController: UICollectionViewDelegate {
             }
         }
         
-        if middleZone && scrollingDown {
+        if middleZone && scrollingDown && !atBottomThreshold{
             if (trackContentOffset-scrollView.contentOffset.y) > -100 {
                 self.segmentedControl.frame.origin.y = 20 + (trackContentOffset-scrollView.contentOffset.y)
                 if (trackContentOffset-scrollView.contentOffset.y) > -40 {

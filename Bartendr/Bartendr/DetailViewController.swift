@@ -17,6 +17,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var measurementLabel: UILabel!
     @IBOutlet weak var ingredientLabel: UILabel!
     @IBOutlet weak var prepLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var numLikedLabel: UILabel!
     
     var drink: Drink!
     var measurementList: String = ""
