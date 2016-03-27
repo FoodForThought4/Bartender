@@ -12,14 +12,21 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var drinkImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var ingredientDivider: UIView!
+    @IBOutlet weak var measurementLabel: UILabel!
+    @IBOutlet weak var ingredientLabel: UILabel!
+    @IBOutlet weak var prepLabel: UILabel!
     
     var drink: Drink!
+    var measurementList: String = ""
+    var ingredientList: String = ""
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         nameLabel.text = drink.name
+        prepLabel.text = drink.description
         
         if let url = drink.imgURL {
             let imageRequest = NSURLRequest(URL: NSURL(string: url)!)
@@ -46,6 +53,8 @@ class DetailViewController: UIViewController {
                     // do something for the failure condition
             })
         }
+        
+        parseIngredients()
 
 
         // Do any additional setup after loading the view.
@@ -54,6 +63,29 @@ class DetailViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func parseIngredients(){
+        for ingredient in drink.ingredients{
+            var text = ingredient.text!
+            var measurement = ingredient.text!
+            text = (text.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet()) as NSArray).componentsJoinedByString("")
+            text = text.stringByReplacingOccurrencesOfString("Parts", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Part", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Dash", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Twist", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Splash", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Slice", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            
+            measurement = measurement.stringByReplacingOccurrencesOfString(text, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            measurement = measurement.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            
+            ingredientList = ingredientList + "\(text)\n"
+            measurementList = measurementList + "\(measurement)\n"
+        }
+        ingredientLabel.text = ingredientList
+        measurementLabel.text = measurementList
     }
     
 

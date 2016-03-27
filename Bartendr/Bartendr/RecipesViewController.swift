@@ -56,21 +56,21 @@ class RecipesViewController: UIViewController {
         
         // pull down to refresh
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(RecipesViewController.refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.insertSubview(refreshControl, atIndex: 0)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(RecipesViewController.dismissSearch))
+        let tap = UITapGestureRecognizer(target: self, action: "dismissSearch")
         collectionView.backgroundView = UIView()
         collectionView.backgroundView!.addGestureRecognizer(tap)
         
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(RecipesViewController.swipeLeft))
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(RecipesViewController.swipeRight))
-        
-        leftSwipe.direction = .Left
-        rightSwipe.direction = .Right
-        
-        collectionView.addGestureRecognizer(leftSwipe)
-        collectionView.addGestureRecognizer(rightSwipe)
+//        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(RecipesViewController.swipeLeft))
+//        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(RecipesViewController.swipeRight))
+//        
+//        leftSwipe.direction = .Left
+//        rightSwipe.direction = .Right
+//        
+//        collectionView.addGestureRecognizer(leftSwipe)
+//        collectionView.addGestureRecognizer(rightSwipe)
     }
     
     func setupTableView(){
