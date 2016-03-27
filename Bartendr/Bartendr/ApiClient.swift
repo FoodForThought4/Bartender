@@ -30,12 +30,11 @@ class ApiClient {
             
             // add ingredients if specified
             for i in 0 ..< ingredients.count {
-                url += "/withtype/\(ingredients[i])" // change this to non-type when more ingredients are implemented
+                url += "/withtype/\(ingredients[i])" // change this to non-type when more ingredients are implementedim
             }
         }
         
         url += "?apiKey=\(addbApiKey)"
-        print(url)
         
         http.GET(url, parameters: [], progress: { (progress: NSProgress) -> Void in
             }, success: { (dataTask: NSURLSessionDataTask, response: AnyObject?) -> Void in

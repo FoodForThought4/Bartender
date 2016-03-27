@@ -31,14 +31,12 @@ class DrinkCell: UICollectionViewCell {
                         
                         // imageResponse will be nil if the image is cached
                         if imageResponse != nil {
-                            print("Image was NOT cached, fade in image")
                             self.drinkImageView.alpha = 0.0
                             self.drinkImageView.image = image
                             UIView.animateWithDuration(0.3, animations: { () -> Void in
                                 self.drinkImageView.alpha = 1.0
                             })
                         } else {
-                            print("Image was cached so just update the image")
                             self.drinkImageView.image = image
                         }
                     },
