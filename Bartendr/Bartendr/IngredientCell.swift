@@ -18,6 +18,7 @@ class IngredientCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        isSelected = false
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

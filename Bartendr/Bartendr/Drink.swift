@@ -28,6 +28,8 @@ class Drink {
         description = drinkDetails["descriptionPlain"] as? String
         imgURL = "https://assets.absolutdrinks.com/drinks/100x100/\(id!).png"
         
+        print(description)
+        
         for ingredient in (drinkDetails["ingredients"] as? [NSDictionary])! {
             ingredients.append(Ingredient(ingredientData: ingredient))
         }

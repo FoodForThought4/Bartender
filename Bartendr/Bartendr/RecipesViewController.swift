@@ -21,6 +21,8 @@ class RecipesViewController: UIViewController {
     var filteredDrinks: [Drink]?
     let ingredients = ["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth", "Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola", "Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]
     
+    var selectedIngredients: [String] = []
+    
     var currentView = 0
     var isMoreDataLoading = false
     
@@ -45,8 +47,6 @@ class RecipesViewController: UIViewController {
         configureCustomSearchController()
         
         getDrinks(false)
-        
-        print(searchView.frame.origin.x)
     }
     
     func setupCollectionView() {
@@ -77,7 +77,7 @@ class RecipesViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.hidden = true
+        //tableView.hidden = true
         tableView.frame.origin.x = 400
     }
     
@@ -392,13 +392,8 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
         
         cell.nameLabel.text = ingredients[indexPath.row]
-        cell.isSelected = false
+        //cell.isSelected = false
         cell.selectionStyle = .None
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("cellSelected:"))
-        cell.checkBoxImageView.tag = indexPath.row
-        cell.checkBoxImageView.userInteractionEnabled = true
-        cell.checkBoxImageView.addGestureRecognizer(tapGestureRecognizer)
         
         return cell
     }
@@ -408,4 +403,23 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
         imageView.image = UIImage(named: "CheckBoxSelected")
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! IngredientCell
+        
+        if(cell.isSelected == false){
+            cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
+            cell.isSelected = true
+            if selectedIngredients.indexOf(cell.nameLabel.text!) == nil{
+                selectedIngredients.append(cell.nameLabel.text!)
+            }
+        } else {
+            cell.checkBoxImageView.image = UIImage(named: "CheckBox")
+            cell.isSelected = false
+            if selectedIngredients.indexOf(cell.nameLabel.text!) != nil{
+                selectedIngredients.removeAtIndex(selectedIngredients.indexOf(cell.nameLabel.text!)!)
+            }
+        }
+        
+        tableView.reloadData()
+    }
 }
