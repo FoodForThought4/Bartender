@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wU2-qW-ecm">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wU2-qW-ecm">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="71E-V4-MGU">
@@ -27,36 +27,79 @@
                                             <constraint firstAttribute="height" constant="240" id="goz-7U-dm5"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVG-D1-O2T">
-                                        <rect key="frame" x="93" y="257" width="135" height="33"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rx4-U9-Xcg">
+                                        <rect key="frame" x="0.0" y="248" width="320" height="500"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVG-D1-O2T">
+                                                <rect key="frame" x="93.5" y="8" width="134.5" height="33"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="33" id="8Yl-Rq-nFp"/>
+                                                </constraints>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Cosmopolitan">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="24" name="AvenirNextCondensed-Bold"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Du9-KF-9cQ">
+                                                <rect key="frame" x="0.0" y="49" width="320" height="1"/>
+                                                <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="QM5-Mw-kTl"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FV-pz-krx">
+                                                <rect key="frame" x="95" y="58" width="129" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="5yF-UJ-r5Y"/>
+                                                    <constraint firstAttribute="width" constant="129" id="xjm-Lw-LeZ"/>
+                                                </constraints>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Drink Ingredients">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="18" name="AvenirNextCondensed-Bold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="33" id="iU6-tH-lhd"/>
+                                            <constraint firstAttribute="trailing" secondItem="Du9-KF-9cQ" secondAttribute="trailing" id="5z2-lt-B6g"/>
+                                            <constraint firstItem="aVG-D1-O2T" firstAttribute="centerX" secondItem="rx4-U9-Xcg" secondAttribute="centerX" id="AvO-kt-ofi"/>
+                                            <constraint firstItem="Du9-KF-9cQ" firstAttribute="leading" secondItem="rx4-U9-Xcg" secondAttribute="leading" id="Ia7-KO-hr1"/>
+                                            <constraint firstItem="1FV-pz-krx" firstAttribute="top" secondItem="Du9-KF-9cQ" secondAttribute="bottom" constant="8" id="Ii0-wp-JOn"/>
+                                            <constraint firstAttribute="height" constant="500" id="Pfk-xt-Efv"/>
+                                            <constraint firstItem="Du9-KF-9cQ" firstAttribute="top" secondItem="aVG-D1-O2T" secondAttribute="bottom" constant="8" id="Qgk-5t-E17"/>
+                                            <constraint firstItem="1FV-pz-krx" firstAttribute="centerX" secondItem="rx4-U9-Xcg" secondAttribute="centerX" id="lG9-Qn-ArB"/>
+                                            <constraint firstItem="aVG-D1-O2T" firstAttribute="top" secondItem="rx4-U9-Xcg" secondAttribute="top" constant="8" id="zEF-gF-Ght"/>
                                         </constraints>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Cosmopolitan">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="24" name="AvenirNextCondensed-Bold"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="71E-V4-MGU" firstAttribute="centerX" secondItem="wU2-qW-ecm" secondAttribute="centerX" id="1lb-lM-8ti"/>
-                                    <constraint firstItem="aVG-D1-O2T" firstAttribute="top" secondItem="71E-V4-MGU" secondAttribute="bottom" constant="17" id="NhO-Si-gYI"/>
+                                    <constraint firstAttribute="bottom" secondItem="rx4-U9-Xcg" secondAttribute="bottom" id="Hwe-A5-M83"/>
+                                    <constraint firstItem="rx4-U9-Xcg" firstAttribute="leading" secondItem="wU2-qW-ecm" secondAttribute="leading" id="T30-hW-Hm4"/>
+                                    <constraint firstAttribute="trailing" secondItem="rx4-U9-Xcg" secondAttribute="trailing" id="TWf-Ae-HFf"/>
                                     <constraint firstItem="71E-V4-MGU" firstAttribute="top" secondItem="wU2-qW-ecm" secondAttribute="top" id="ktu-ik-gRR"/>
-                                    <constraint firstItem="aVG-D1-O2T" firstAttribute="centerX" secondItem="wU2-qW-ecm" secondAttribute="centerX" id="kud-KG-1Go"/>
+                                    <constraint firstItem="rx4-U9-Xcg" firstAttribute="top" secondItem="71E-V4-MGU" secondAttribute="bottom" constant="8" id="o5e-0e-o5c"/>
+                                    <constraint firstItem="rx4-U9-Xcg" firstAttribute="centerX" secondItem="71E-V4-MGU" secondAttribute="centerX" id="yrq-Ve-U0V"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wU2-qW-ecm" firstAttribute="top" secondItem="TbF-xE-Xp9" secondAttribute="bottom" id="0fe-o2-1Rz"/>
-                            <constraint firstAttribute="trailing" secondItem="wU2-qW-ecm" secondAttribute="trailing" id="8ze-FD-dtq"/>
-                            <constraint firstItem="wU2-qW-ecm" firstAttribute="leading" secondItem="x9i-nM-qdQ" secondAttribute="leading" id="xme-yI-Wop"/>
-                            <constraint firstItem="ySd-TK-BoZ" firstAttribute="top" secondItem="wU2-qW-ecm" secondAttribute="bottom" id="yqp-b4-MTP"/>
+                            <constraint firstItem="ySd-TK-BoZ" firstAttribute="top" secondItem="wU2-qW-ecm" secondAttribute="bottom" id="99o-sV-JdO"/>
+                            <constraint firstItem="wU2-qW-ecm" firstAttribute="top" secondItem="TbF-xE-Xp9" secondAttribute="bottom" id="YJa-dw-5pR"/>
+                            <constraint firstItem="wU2-qW-ecm" firstAttribute="leading" secondItem="x9i-nM-qdQ" secondAttribute="leading" id="Zlb-TX-cq0"/>
+                            <constraint firstAttribute="trailing" secondItem="wU2-qW-ecm" secondAttribute="trailing" id="gtg-Nj-CWg"/>
                         </constraints>
                     </view>
                     <connections>
