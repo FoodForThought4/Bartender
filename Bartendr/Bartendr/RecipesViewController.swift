@@ -56,15 +56,15 @@ class RecipesViewController: UIViewController {
         
         // pull down to refresh
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(RecipesViewController.refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
         collectionView.insertSubview(refreshControl, atIndex: 0)
         
-        let tap = UITapGestureRecognizer(target: self, action: "dismissSearch")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(RecipesViewController.dismissSearch))
         collectionView.backgroundView = UIView()
         collectionView.backgroundView!.addGestureRecognizer(tap)
         
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: "swipeLeft")
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: "swipeRight")
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(RecipesViewController.swipeLeft))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(RecipesViewController.swipeRight))
         
         leftSwipe.direction = .Left
         rightSwipe.direction = .Right
@@ -172,14 +172,14 @@ extension RecipesViewController: CustomSearchControllerDelegate{
         collectionView.reloadData()
     }
     
-    func didChangeSearchText(var searchText: String) {
+    func didChangeSearchText(searchText: String) {
         // Filter the data array and get only those countries that match the search text.
         if searchText.isEmpty{
             shouldShowSearchResults = false
         } else {
             
-            searchText = searchText.stringByReplacingOccurrencesOfString(" ", withString: "/")
-            ApiClient.searchDrinkADDB(searchText, nextPage: false, completion: { (drinkData, error) -> () in
+            let newSearchText = searchText.stringByReplacingOccurrencesOfString(" ", withString: "/")
+            ApiClient.searchDrinkADDB(newSearchText, nextPage: false, completion: { (drinkData, error) -> () in
                 if error == nil {
                     print("success!")
                     self.filteredDrinks = drinkData
@@ -413,10 +413,6 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     
-    func cellSelected(sender: AnyObject){
-        let imageView = sender.view as! UIImageView
-        imageView.image = UIImage(named: "CheckBoxSelected")
-    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! IngredientCell
