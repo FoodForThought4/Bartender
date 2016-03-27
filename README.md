@@ -34,9 +34,8 @@
     - [ ] implement design
     - [ ] link to ApiClient
 
-- [ ] As a user, I would like to be able to be able to share (on app) my own and view other’s drinks (marty)
-    - [ ] implementation 
-    - [ ] create apiclient
+- [X] As a user, I would like to be able to be able to share (on app) my own and view other’s drinks (marty)
+    - [X] implementation 
 
 - [X] As a user, I would like to know what drinks I can make given the ingredients I have
     - [X] implementation (brian)

@@ -96,6 +96,15 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func onShare(sender: AnyObject) {
+        let messageVC = MFMessageComposeViewController()
+        
+        messageVC.body = "Name: \(drink.name)\n Ingredients: \(ingredientList)"
+        messageVC.recipients = [""]
+        messageVC.messageComposeDelegate = self
+        
+        if MFMessageComposeViewController.canSendText() {
+            self.presentViewController(messageVC, animated: false, completion: nil)
+        }
     }
     
     /*
@@ -113,7 +122,7 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController: MFMessageComposeViewControllerDelegate {
     func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
 }
