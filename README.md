@@ -26,21 +26,20 @@
     - [ ] create apiclient
 
 ### Sprint 2
-- [ ] As a user, I would like all content to be displayed with good design (brian)
-    - [ ] drink detail view 
-    - [ ] drink creation
+- [X] As a user, I would like all content to be displayed with good design (brian)
+    - [X] drink detail view 
+    - [X] drink creation
 
 - [ ] As a user, I would like to be able to create my own drinks and post them (lainie)
     - [ ] implement design
     - [ ] link to ApiClient
 
-- [ ] As a user, I would like to be able to be able to share (on app) my own and view other’s drinks (marty)
-    - [ ] implementation 
-    - [ ] create apiclient
+- [X] As a user, I would like to be able to be able to share (on app) my own and view other’s drinks (marty)
+    - [X] implementation 
 
-- [ ] As a user, I would like to know what drinks I can make given the ingredients I have
-    - [ ] implementation (brian)
-    - [ ] API communication (marty)
+- [X] As a user, I would like to know what drinks I can make given the ingredients I have
+    - [X] implementation (brian)
+    - [X] API communication (marty)
 
 ### Later Sprint 
 

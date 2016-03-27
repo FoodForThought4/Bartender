@@ -17,6 +17,7 @@ class Drink {
     var name: String?
     var description: String?
     var imgURL: String?
+    var imgURLBig: String?
     var customImg: UIImage?
     var ingredientList = ""
     
@@ -27,9 +28,8 @@ class Drink {
         name = drinkDetails["name"] as? String
         description = drinkDetails["descriptionPlain"] as? String
         imgURL = "https://assets.absolutdrinks.com/drinks/100x100/\(id!).png"
-        
-        print(description)
-        
+        imgURLBig = "https://assets.absolutdrinks.com/drinks/500x500/\(id!).png"
+                
         for ingredient in (drinkDetails["ingredients"] as? [NSDictionary])! {
             ingredients.append(Ingredient(ingredientData: ingredient))
         }

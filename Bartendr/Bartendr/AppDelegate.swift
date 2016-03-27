@@ -39,12 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ApiClient.addbApiKey = keys["ADDB_API_Key"] as! String
         }
         
-        ApiClient.searchDrinkADDB("cos", nextPage: false) { (drinkData, error) -> () in
+        ApiClient.getDrinksADDB(["lemon-juice", "ice-cube"], nextPage: false) { (drinkData, error) in
             if error == nil {
-                print("success")
+                
             }
             else {
-               print("error")
+                
             }
         }
         

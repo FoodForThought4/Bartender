@@ -7,21 +7,33 @@
 //
 
 import UIKit
+import MessageUI
 
 class DetailViewController: UIViewController {
     
     @IBOutlet weak var drinkImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var ingredientDivider: UIView!
+    @IBOutlet weak var measurementLabel: UILabel!
+    @IBOutlet weak var ingredientLabel: UILabel!
+    @IBOutlet weak var prepLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var numLikedLabel: UILabel!
     
     var drink: Drink!
+    var measurementList: String = ""
+    var ingredientList: String = ""
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nameLabel.text = drink.name
+        drinkImageView.contentMode = UIViewContentMode.ScaleAspectFit
         
-        if let url = drink.imgURL {
+        nameLabel.text = drink.name
+        prepLabel.text = drink.description
+        
+        if let url = drink.imgURLBig {
             let imageRequest = NSURLRequest(URL: NSURL(string: url)!)
             
             drinkImageView.setImageWithURLRequest(
@@ -31,14 +43,12 @@ class DetailViewController: UIViewController {
                     
                     // imageResponse will be nil if the image is cached
                     if imageResponse != nil {
-                        print("Image was NOT cached, fade in image")
                         self.drinkImageView.alpha = 0.0
                         self.drinkImageView.image = image
                         UIView.animateWithDuration(0.3, animations: { () -> Void in
                             self.drinkImageView.alpha = 1.0
                         })
                     } else {
-                        print("Image was cached so just update the image")
                         self.drinkImageView.image = image
                     }
                 },
@@ -46,6 +56,8 @@ class DetailViewController: UIViewController {
                     // do something for the failure condition
             })
         }
+        
+        parseIngredients()
 
 
         // Do any additional setup after loading the view.
@@ -56,7 +68,50 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func parseIngredients(){
+        for ingredient in drink.ingredients{
+            
+            if(!ingredient.text!.containsString("Ice Cubes")){
+                var text = ingredient.text!
+                var measurement = ingredient.text!
+                text = (text.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet()) as NSArray).componentsJoinedByString("")
+                text = text.stringByReplacingOccurrencesOfString("Parts", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                text = text.stringByReplacingOccurrencesOfString("Part", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                text = text.stringByReplacingOccurrencesOfString("Dash", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                text = text.stringByReplacingOccurrencesOfString("Twist", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                text = text.stringByReplacingOccurrencesOfString("Splash", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                text = text.stringByReplacingOccurrencesOfString("Slice", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                text = text.stringByReplacingOccurrencesOfString("Slices", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                text = text.stringByReplacingOccurrencesOfString("/", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                
+                measurement = measurement.stringByReplacingOccurrencesOfString(text, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                measurement = measurement.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                
+                ingredientList = ingredientList + "\(text)\n"
+                measurementList = measurementList + "\(measurement)\n"
+            }
+        }
+        ingredientLabel.text = ingredientList
+        measurementLabel.text = measurementList
+    }
+    
+    @IBAction func onClose(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
+    @IBAction func onShare(sender: AnyObject) {
+        let messageVC = MFMessageComposeViewController()
+        
+        messageVC.body = "Name: \(drink.name)\n Ingredients: \(ingredientList)"
+        messageVC.recipients = [""]
+        messageVC.messageComposeDelegate = self
+        
+        if MFMessageComposeViewController.canSendText() {
+            self.presentViewController(messageVC, animated: false, completion: nil)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -66,5 +121,13 @@ class DetailViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+
+extension DetailViewController: MFMessageComposeViewControllerDelegate {
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
 }
