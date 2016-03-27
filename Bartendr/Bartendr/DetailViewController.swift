@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class DetailViewController: UIViewController {
     
@@ -109,5 +110,13 @@ class DetailViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+
+extension DetailViewController: MFMessageComposeViewControllerDelegate {
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        
+    }
 
 }
