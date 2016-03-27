@@ -94,6 +94,9 @@ class DetailViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    @IBAction func onShare(sender: AnyObject) {
+    }
+    
     /*
     // MARK: - Navigation
 
