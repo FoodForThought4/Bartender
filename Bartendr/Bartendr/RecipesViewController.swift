@@ -19,7 +19,8 @@ class RecipesViewController: UIViewController {
     
     var drinks = [Drink]()
     var filteredDrinks: [Drink]?
-    let ingredients = ["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth", "Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola", "Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]
+//    let ingredients = ["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth", "Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola", "Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]
+    let ingredients = Ingredient.TYPES
     
     var selectedIngredients: [String] = []
     
@@ -111,7 +112,7 @@ class RecipesViewController: UIViewController {
     }
     
     func getDrinks(nextPage: Bool) {
-        ApiClient.getDrinksADDB([], nextPage: nextPage) { (drinkData, error) -> () in
+        ApiClient.getDrinksADDB(selectedIngredients, nextPage: nextPage) { (drinkData, error) -> () in
             if error != nil{
                 print("error")
             } else {
@@ -205,6 +206,10 @@ extension RecipesViewController: XMSegmentedControlDelegate {
                 self.searchView.frame.origin.x = 30
             })
             currentView = 0
+            print("this is page 1")
+            getDrinks(false)
+            
+            
             
         } else if selectedSegment == 1 && currentView != 1{
             tableView.hidden = false

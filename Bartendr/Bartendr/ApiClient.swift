@@ -16,17 +16,25 @@ class ApiClient {
     static let apiURL = "https://addb.absolutdrinks.com"
     static var addbApiKey: String!
     static var nextPageURL: String?
-    
+        
     
     // get the drinks from ADDB api
-    class func getDrinksADDB(params: AnyObject?, nextPage: Bool, completion: (drinkData: [Drink]?, error: NSError?) -> ()) {
+    class func getDrinksADDB(ingredients: [AnyObject], nextPage: Bool, completion: (drinkData: [Drink]?, error: NSError?) -> ()) {
         
-        var url: String!
+        var url: String
         if let nextPageURL = nextPageURL where nextPage == true {
             url = nextPageURL
         } else {
-            url = apiURL + "/drinks/?apiKey=\(addbApiKey)"
+            
+            url = apiURL + "/drinks" //?apiKey=\(addbApiKey)"
+            
+            // add ingredients if specified
+            for i in 0 ..< ingredients.count {
+                url += "/withtype/\(ingredients[i])" // change this to non-type when more ingredients are implementedim
+            }
         }
+        
+        url += "?apiKey=\(addbApiKey)"
         
         http.GET(url, parameters: [], progress: { (progress: NSProgress) -> Void in
             }, success: { (dataTask: NSURLSessionDataTask, response: AnyObject?) -> Void in
@@ -37,7 +45,9 @@ class ApiClient {
                     drinks.append(Drink(drinkDetails: drink as! NSDictionary))
                 }
                 
-                nextPageURL = response?.valueForKey("next") as? String
+                if let next = response?.valueForKey("next") as? String {
+                    nextPageURL = next
+                }
                 
                 completion(drinkData: drinks, error: nil)
                 
@@ -71,6 +81,7 @@ class ApiClient {
                 completion(drinkData: nil, error: error)
         }
     }
+    
     
     class func getDrinksParse(params: [String: String]?, completion: (drinkData: NSDictionary?, error: NSError?) -> ()) {
         let query = PFQuery(className: "Drink")
