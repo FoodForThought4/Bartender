@@ -177,17 +177,30 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcP-VB-Trd">
+                                        <rect key="frame" x="2" y="0.0" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="Ull-dg-A4G"/>
+                                            <constraint firstAttribute="height" constant="30" id="tNz-OO-hXT"/>
+                                        </constraints>
+                                        <state key="normal" title="x"/>
+                                        <connections>
+                                            <action selector="onClose:" destination="aKA-BY-2yc" eventType="touchUpInside" id="1ER-Md-sXL"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="71E-V4-MGU" firstAttribute="centerX" secondItem="wU2-qW-ecm" secondAttribute="centerX" id="1lb-lM-8ti"/>
                                     <constraint firstItem="o8u-w3-mol" firstAttribute="leading" secondItem="wU2-qW-ecm" secondAttribute="leading" constant="25" id="DLc-2l-IZ4"/>
                                     <constraint firstAttribute="bottom" secondItem="rx4-U9-Xcg" secondAttribute="bottom" id="Hwe-A5-M83"/>
+                                    <constraint firstItem="IcP-VB-Trd" firstAttribute="leading" secondItem="wU2-qW-ecm" secondAttribute="leading" constant="2" id="Qbw-Uo-ulv"/>
                                     <constraint firstItem="rx4-U9-Xcg" firstAttribute="leading" secondItem="wU2-qW-ecm" secondAttribute="leading" id="T30-hW-Hm4"/>
                                     <constraint firstAttribute="trailing" secondItem="rx4-U9-Xcg" secondAttribute="trailing" id="TWf-Ae-HFf"/>
                                     <constraint firstItem="o8u-w3-mol" firstAttribute="top" secondItem="kLw-j4-DdL" secondAttribute="bottom" constant="7" id="dFP-Or-NGq"/>
                                     <constraint firstAttribute="trailing" secondItem="o8u-w3-mol" secondAttribute="trailing" constant="25" id="jDf-OY-ZN9"/>
                                     <constraint firstItem="71E-V4-MGU" firstAttribute="top" secondItem="wU2-qW-ecm" secondAttribute="top" id="ktu-ik-gRR"/>
                                     <constraint firstItem="rx4-U9-Xcg" firstAttribute="top" secondItem="71E-V4-MGU" secondAttribute="bottom" constant="8" id="o5e-0e-o5c"/>
+                                    <constraint firstItem="IcP-VB-Trd" firstAttribute="top" secondItem="wU2-qW-ecm" secondAttribute="top" id="uEA-Ad-LCB"/>
                                     <constraint firstItem="o8u-w3-mol" firstAttribute="centerX" secondItem="wU2-qW-ecm" secondAttribute="centerX" id="xFC-xG-jUm"/>
                                     <constraint firstItem="rx4-U9-Xcg" firstAttribute="centerX" secondItem="71E-V4-MGU" secondAttribute="centerX" id="yrq-Ve-U0V"/>
                                 </constraints>

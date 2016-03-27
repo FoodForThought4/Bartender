@@ -88,6 +88,9 @@ class DetailViewController: UIViewController {
         measurementLabel.text = measurementList
     }
     
+    @IBAction func onClose(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
