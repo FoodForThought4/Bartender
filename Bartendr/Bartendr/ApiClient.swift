@@ -26,15 +26,15 @@ class ApiClient {
             url = nextPageURL
         } else {
             
-            url = apiURL + "/drinks" //?apiKey=\(addbApiKey)"
+            url = apiURL + "/drinks" 
             
             // add ingredients if specified
             for i in 0 ..< ingredients.count {
                 url += "/withtype/\(ingredients[i])" // change this to non-type when more ingredients are implementedim
             }
+            url += "?apiKey=\(addbApiKey)"
+
         }
-        
-        url += "?apiKey=\(addbApiKey)"
         
         http.GET(url, parameters: [], progress: { (progress: NSProgress) -> Void in
             }, success: { (dataTask: NSURLSessionDataTask, response: AnyObject?) -> Void in
