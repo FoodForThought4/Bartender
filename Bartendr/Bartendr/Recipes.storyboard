@@ -209,11 +209,22 @@
                         <outlet property="searchView" destination="Lai-xq-dLA" id="mNY-Ke-JT3"/>
                         <outlet property="segmentedControl" destination="uP5-IW-Wfb" id="x2F-6J-Nl2"/>
                         <outlet property="tableView" destination="y7C-kO-voS" id="jcV-SR-Zzo"/>
+                        <segue destination="QRh-8U-mNG" kind="modal" identifier="DetailViewSegue" modalTransitionStyle="flipHorizontal" id="7RA-du-dgs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kd2-Jc-KiM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="135" y="528"/>
+        </scene>
+        <!--DetailView-->
+        <scene sceneID="yGI-Xo-spD">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DetailView" id="QRh-8U-mNG" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Nvk-0z-3Iw"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AkJ-pq-iST" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="509.5" y="464"/>
         </scene>
     </scenes>
     <resources>

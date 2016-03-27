@@ -379,6 +379,21 @@ extension RecipesViewController: UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if shouldShowSearchResults{
+            self.performSegueWithIdentifier("DetailViewSegue", sender: filteredDrinks![indexPath.row])
+        } else{
+            self.performSegueWithIdentifier("DetailViewSegue", sender: drinks[indexPath.row])
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "DetailViewSegue"{
+            let viewController  = segue.destinationViewController as! DetailViewController
+            let drink = sender as! Drink
+            viewController.drink = drink
+        }
+    }
     
 }
 
