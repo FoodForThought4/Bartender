@@ -12,7 +12,7 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBOutlet weak var tableView: UITableView!
     
-    let ingredients = [["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth"], ["Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola", "Lime", "Lemon"], ["Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]]
+    let ingredients = [["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth"], ["Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola"], ["Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]]
     
     var checkStates = [Int:Bool]()
     
@@ -73,7 +73,7 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var ingredientList = [NSString]()
         for index in 0...checkStates.count {
             if checkStates[index] == true {
-                ingredientList.append(ingredients[index])
+                //ingredientList.append(ingredients[index])
             }
         }
         let name = "Another drink"
@@ -85,6 +85,16 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print("successfully created drink")
         }
         
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Spirits"
+        } else if section == 1 {
+            return "Mixers"
+        } else {
+            return "Fruits"
+        }
     }
     
 //    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -101,6 +111,7 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func createCell(createCell: CreateCell, didChangeValue value: Bool) {
         let indexPath = tableView.indexPathForCell(createCell)
+        
         checkStates[indexPath!.row] = value
     }
 
