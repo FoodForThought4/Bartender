@@ -27,9 +27,12 @@ class Drink {
         id = drinkDetails["id"] as? String
         name = drinkDetails["name"] as? String
         description = drinkDetails["descriptionPlain"] as? String
-        imgURL = "https://assets.absolutdrinks.com/drinks/100x100/\(id!).png"
-        imgURLBig = "https://assets.absolutdrinks.com/drinks/500x500/\(id!).png"
-                
+        
+        if let id = id {
+            imgURL = "https://assets.absolutdrinks.com/drinks/100x100/\(id).png"
+            imgURLBig = "https://assets.absolutdrinks.com/drinks/500x500/\(id).png"
+        }
+        
         for ingredient in (drinkDetails["ingredients"] as? [NSDictionary])! {
             ingredients.append(Ingredient(ingredientData: ingredient))
         }
