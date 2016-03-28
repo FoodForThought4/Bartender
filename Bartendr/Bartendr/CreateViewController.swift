@@ -50,9 +50,42 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        <#code#>
-//    }
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        footerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        
+        let button = UIButton(frame: CGRect(x: 50, y: 10, width: 200, height: 25))
+        button.setTitle("Create Drink", forState: UIControlState.Normal)
+        button.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        button.addTarget(self, action: #selector(CreateViewController.onPushCreate), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        footerView.addSubview(button)
+        
+        return footerView
+    }
+    
+    func onPushCreate() {
+        
+        var ingredientList = [NSString]()
+        for index in 0...checkStates.count {
+            if checkStates[index] == true {
+                ingredientList.append(ingredients[index])
+            }
+        }
+        let name = "Another drink"
+        let description = "description"
+        
+        let drink = Drink(drinkDetails: ["name": name, "description": description, "ingredientList": ingredientList])
+        
+        ApiClient.createDrink(drink) { (success) in
+            print("successfully created drink")
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 50
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateCell
@@ -65,7 +98,6 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func createCell(createCell: CreateCell, didChangeValue value: Bool) {
         let indexPath = tableView.indexPathForCell(createCell)
         checkStates[indexPath!.row] = value
-        
     }
 
     /*

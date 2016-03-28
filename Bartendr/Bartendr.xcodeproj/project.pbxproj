@@ -11,6 +11,7 @@
 		751146101CA76F9000993852 /* CreateDrink.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7511460F1CA76F9000993852 /* CreateDrink.storyboard */; };
 		751146121CA7701B00993852 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751146111CA7701B00993852 /* CreateViewController.swift */; };
 		751146141CA78CEA00993852 /* CreateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751146131CA78CE900993852 /* CreateCell.swift */; };
+		751146161CA8B70600993852 /* Keys-6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751146151CA8B70500993852 /* Keys-6.plist */; };
 		BD206E221C863BBC001A409A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E211C863BBC001A409A /* AppDelegate.swift */; };
 		BD206E241C863BBC001A409A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E231C863BBC001A409A /* ViewController.swift */; };
 		BD206E271C863BBC001A409A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD206E251C863BBC001A409A /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 		7511460F1CA76F9000993852 /* CreateDrink.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateDrink.storyboard; sourceTree = "<group>"; };
 		751146111CA7701B00993852 /* CreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		751146131CA78CE900993852 /* CreateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCell.swift; sourceTree = "<group>"; };
+		751146151CA8B70500993852 /* Keys-6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Keys-6.plist"; path = "../../../../Downloads/Keys-6.plist"; sourceTree = "<group>"; };
 		BD206E1E1C863BBC001A409A /* Bartendr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bartendr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD206E211C863BBC001A409A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD206E231C863BBC001A409A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		BD206E201C863BBC001A409A /* Bartendr */ = {
 			isa = PBXGroup;
 			children = (
+				751146151CA8B70500993852 /* Keys-6.plist */,
 				BD206E3D1C864C00001A409A /* ApiClient.swift */,
 				BD206E381C8649B3001A409A /* Controllers */,
 				E4D0D41C1C8F887800F5357C /* Brian */,
@@ -243,6 +246,7 @@
 				E4A8BA411CA760910018B042 /* DetailView.storyboard in Resources */,
 				BD206E2C1C863BBD001A409A /* Assets.xcassets in Resources */,
 				BD206E271C863BBC001A409A /* Main.storyboard in Resources */,
+				751146161CA8B70600993852 /* Keys-6.plist in Resources */,
 				E4D0D41B1C8F87F800F5357C /* Recipes.storyboard in Resources */,
 				E4D0D4191C8F876800F5357C /* TabBar.storyboard in Resources */,
 			);
