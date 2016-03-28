@@ -71,29 +71,38 @@ class DetailViewController: UIViewController {
     func parseIngredients(){
         for ingredient in drink.ingredients{
             
-            if(!ingredient.text!.containsString("Ice Cubes")){
-                var text = ingredient.text!
-                var measurement = ingredient.text!
-                text = (text.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet()) as NSArray).componentsJoinedByString("")
-                text = text.stringByReplacingOccurrencesOfString("Parts", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                text = text.stringByReplacingOccurrencesOfString("Part", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                text = text.stringByReplacingOccurrencesOfString("Dash", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                text = text.stringByReplacingOccurrencesOfString("Twist", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                text = text.stringByReplacingOccurrencesOfString("Splash", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                text = text.stringByReplacingOccurrencesOfString("Slice", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                text = text.stringByReplacingOccurrencesOfString("Slices", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                text = text.stringByReplacingOccurrencesOfString("/", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            var text = ingredient.text!
+            var measurement = ingredient.text!
+            text = text.stringByReplacingOccurrencesOfString("½", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = (text.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet()) as NSArray).componentsJoinedByString("")
+            text = text.stringByReplacingOccurrencesOfString("Spiral", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Half", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Parts", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Part", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Dashes", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Dash", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Twist", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Splash", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Slices", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Slice", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Whole", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Wedges", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Wedge", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                 
-                measurement = measurement.stringByReplacingOccurrencesOfString(text, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                measurement = measurement.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            measurement = measurement.stringByReplacingOccurrencesOfString(text, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            measurement = measurement.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                 
-                ingredientList = ingredientList + "\(text)\n"
-                measurementList = measurementList + "\(measurement)\n"
+            ingredientList = ingredientList + "\(text)\n"
+            if measurement == "" {
+                measurement = "-"
             }
+            measurementList = measurementList + "\(measurement)\n"
         }
         ingredientLabel.text = ingredientList
         measurementLabel.text = measurementList
+        print(ingredientList)
+        print(measurementList)
     }
     
     @IBAction func onClose(sender: AnyObject) {

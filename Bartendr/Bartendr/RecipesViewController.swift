@@ -366,7 +366,7 @@ extension RecipesViewController: UICollectionViewDelegate {
             let scrollOffsetThreshold = scrollViewContentHeight - scrollView.bounds.size.height
             
             // When the user has scrolled past the threshold, start requesting
-            if(scrollView.contentOffset.y > scrollOffsetThreshold && scrollView.dragging) {
+            if(scrollView.contentOffset.y + 80 > scrollOffsetThreshold && scrollView.dragging) {
                 
                 isMoreDataLoading = true
                 
@@ -375,6 +375,7 @@ extension RecipesViewController: UICollectionViewDelegate {
             }
         }
     }
+
 }
 
 extension RecipesViewController: UICollectionViewDataSource {
