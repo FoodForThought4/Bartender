@@ -12,7 +12,7 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBOutlet weak var tableView: UITableView!
     
-    let ingredients = ["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth", "Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola", "Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]
+    let ingredients = [["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth"], ["Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola", "Lime", "Lemon"], ["Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]]
     
     var checkStates = [Int:Bool]()
     
@@ -28,14 +28,18 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.didReceiveMemoryWarning()
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return ingredients.count
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return ingredients.count
+            return ingredients[section].count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CreateCell", forIndexPath: indexPath) as! CreateCell
         
-        cell.nameLabel.text = ingredients[indexPath.row]
+        cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
         cell.selectionStyle = .None
         cell.delegate = self
         
@@ -50,19 +54,19 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
-        footerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
-        
-        let button = UIButton(frame: CGRect(x: 50, y: 10, width: 200, height: 25))
-        button.setTitle("Create Drink", forState: UIControlState.Normal)
-        button.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(CreateViewController.onPushCreate), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        footerView.addSubview(button)
-        
-        return footerView
-    }
+//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+//        footerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+//        
+//        let button = UIButton(frame: CGRect(x: 50, y: 10, width: 200, height: 25))
+//        button.setTitle("Create Drink", forState: UIControlState.Normal)
+//        button.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+//        button.addTarget(self, action: #selector(CreateViewController.onPushCreate), forControlEvents: UIControlEvents.TouchUpInside)
+//        
+//        footerView.addSubview(button)
+//        
+//        return footerView
+//    }
     
     func onPushCreate() {
         
@@ -83,9 +87,9 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 50
-    }
+//    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 50
+//    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateCell
