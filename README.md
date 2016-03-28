@@ -69,9 +69,9 @@
 Here's a walkthrough of implemented user stories:
 
 Coming soon!
-<!-- ![alt tag](https://raw.githubusercontent.com/mkausas/Yelp/master/demo.gif "Video Walkthrough") 
+<img src='https://dl.dropboxusercontent.com/u/30186985/bartendr%20recording.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/). -->
+GIF created with [LiceCap](http://www.cockos.com/licecap/)
 
 ## License
 
