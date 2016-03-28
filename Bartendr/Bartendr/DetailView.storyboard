@@ -231,7 +231,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ef6-XX-qh0">
-                                                <rect key="frame" x="287" y="220" width="25" height="25"/>
+                                                <rect key="frame" x="285" y="220" width="25" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="25" id="9cN-Di-Ctp"/>
                                                     <constraint firstAttribute="height" constant="25" id="bwN-rj-6Ut"/>
@@ -254,7 +254,7 @@
                                             <constraint firstItem="71E-V4-MGU" firstAttribute="centerX" secondItem="1zt-iD-qjZ" secondAttribute="centerX" id="BBq-kf-kee"/>
                                             <constraint firstItem="IcP-VB-Trd" firstAttribute="leading" secondItem="1zt-iD-qjZ" secondAttribute="leading" constant="8" id="EDd-Hy-nbw"/>
                                             <constraint firstItem="IcP-VB-Trd" firstAttribute="top" secondItem="1zt-iD-qjZ" secondAttribute="top" constant="220" id="K9r-ep-qdv"/>
-                                            <constraint firstAttribute="trailing" secondItem="ef6-XX-qh0" secondAttribute="trailing" constant="8" id="XK4-om-0MD"/>
+                                            <constraint firstAttribute="trailing" secondItem="ef6-XX-qh0" secondAttribute="trailing" constant="10" id="XK4-om-0MD"/>
                                             <constraint firstItem="ef6-XX-qh0" firstAttribute="top" secondItem="1zt-iD-qjZ" secondAttribute="top" constant="220" id="bd1-3o-4O6"/>
                                             <constraint firstAttribute="bottom" secondItem="71E-V4-MGU" secondAttribute="bottom" id="eUx-o4-met"/>
                                             <constraint firstItem="71E-V4-MGU" firstAttribute="top" secondItem="1zt-iD-qjZ" secondAttribute="top" constant="220" id="t4a-sx-ce3"/>
