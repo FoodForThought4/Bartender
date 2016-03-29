@@ -18,7 +18,7 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var drinks = [Drink]()
-    var filteredDrinks: [Drink]?
+    var filteredDrinks = [Drink]()
 //    let ingredients = ["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth", "Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola", "Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]
     let ingredients = Ingredient.TYPES
     
@@ -119,6 +119,7 @@ class RecipesViewController: UIViewController {
             } else {
                 if nextPage {
                     self.drinks += drinkData!
+                    self.filteredDrinks += drinkData!
                 } else {
                     self.drinks = drinkData!
                     self.filteredDrinks = drinkData!
@@ -184,7 +185,7 @@ extension RecipesViewController: CustomSearchControllerDelegate{
             ApiClient.searchDrinkADDB(newSearchText, nextPage: false, completion: { (drinkData, error) -> () in
                 if error == nil {
                     print("success!")
-                    self.filteredDrinks = drinkData
+                    self.filteredDrinks = drinkData!
                 } else {
                     print("error retrieving searched items")
                 }
@@ -382,11 +383,7 @@ extension RecipesViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         if shouldShowSearchResults{
-            if let filteredDrinks = filteredDrinks{
-                return filteredDrinks.count
-            } else{
-                return 0
-            }
+            return filteredDrinks.count
         } else{
             return drinks.count
         }
@@ -396,7 +393,7 @@ extension RecipesViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as! DrinkCell
             
         if shouldShowSearchResults{
-            cell.drink = filteredDrinks![indexPath.row]
+            cell.drink = filteredDrinks[indexPath.row]
         } else{
             cell.drink = drinks[indexPath.row]
         }
@@ -406,7 +403,7 @@ extension RecipesViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if shouldShowSearchResults{
-            self.performSegueWithIdentifier("DetailViewSegue", sender: filteredDrinks![indexPath.row])
+            self.performSegueWithIdentifier("DetailViewSegue", sender: filteredDrinks[indexPath.row])
         } else{
             self.performSegueWithIdentifier("DetailViewSegue", sender: drinks[indexPath.row])
         }
