@@ -59,10 +59,10 @@ class RecipesViewController: UIViewController {
         
         // pull down to refresh
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(RecipesViewController.refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
         collectionView.insertSubview(refreshControl, atIndex: 0)
         
-        let tap = UITapGestureRecognizer(target: self, action: "dismissSearch")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(RecipesViewController.dismissSearch))
         collectionView.backgroundView = UIView()
         collectionView.backgroundView!.addGestureRecognizer(tap)
         
