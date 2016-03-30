@@ -23,6 +23,14 @@ class Drink {
     
     var ingredients = [Ingredient]()
     
+    
+    init(name: String, description: String, customImg: UIImage, ingredients: [Ingredient]) {
+        self.name = name
+        self.description = description
+        self.customImg = customImg
+        self.ingredients = ingredients
+    }
+    
     init(drinkDetails: NSDictionary) {
         id = drinkDetails["id"] as? String
         name = drinkDetails["name"] as? String
@@ -36,7 +44,6 @@ class Drink {
         for ingredient in (drinkDetails["ingredients"] as? [NSDictionary])! {
             ingredients.append(Ingredient(ingredientData: ingredient))
         }
-
         
         for ingredient in ingredients{
             var text = ingredient.text!
@@ -77,12 +84,11 @@ class Drink {
         
         // add details
         drink["photo"] = ApiClient.getPFFileFromImage(newDrink.customImg) // PFFile column type
-        drink["author"] = PFUser.currentUser()
+        //drink["author"] = PFUser.currentUser()
         drink["likes"] = 0
         drink["commentsCount"] = 0
         
         // TODO: Modify to only include neccessary data
-        drink["id"] = newDrink.id
         drink["name"] = newDrink.name
         drink["description"] = newDrink.description
         drink["ingredients"] = newDrink.ingredients

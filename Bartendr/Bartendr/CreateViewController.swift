@@ -31,18 +31,11 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
             return ingredients.count
-        case 1:
-            return 1
-        default:
-            return 0
-        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -63,47 +56,31 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
-//        footerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
-//        
-//        let button = UIButton(frame: CGRect(x: 50, y: 10, width: 200, height: 25))
-//        button.setTitle("Create Drink", forState: UIControlState.Normal)
-//        button.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
-//        button.addTarget(self, action: #selector(CreateViewController.onPushCreate), forControlEvents: UIControlEvents.TouchUpInside)
-//        
-//        footerView.addSubview(button)
-//        
-//        return footerView
-//    }
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableCellWithIdentifier("NameCell")! as UITableViewCell
+        return footerView
+    }
     
     func onPushCreate() {
         
-        var ingredientList = [NSString]()
+        var ingredientList = [Ingredient]()
         for index in 0...checkStates.count {
             if checkStates[index] == true {
-                //ingredientList.append(ingredients[index])
+                ingredientList.append(Ingredient(ingredientData: ["text": ingredients[index]]))
             }
         }
+        
         let name = "Another drink"
         let description = "description"
+        let image = UIImage(named: "defaultDrink")
         
-        let drink = Drink(drinkDetails: ["name": name, "description": description, "ingredientList": ingredientList])
+        let drink = Drink(name: name, description: description, customImg: image!, ingredients: ingredientList)
+        
         
         ApiClient.createDrink(drink) { (success) in
             print("successfully created drink")
         }
         
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Spirits"
-        } else if section == 1 {
-            return "Mixers"
-        } else {
-            return "Fruits"
-        }
     }
     
 //    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
