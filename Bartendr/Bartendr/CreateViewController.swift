@@ -149,7 +149,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableCellWithIdentifier("SectionHeader")
-        let label = headerView?.viewWithTag(123) as! UILabel
+        let label = headerView?.viewWithTag(456) as! UILabel
         if section == 0 {
             label.text = "Spirits"
         } else if section == 1 {
