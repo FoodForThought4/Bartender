@@ -20,7 +20,6 @@
 		BD206E3A1C8649DD001A409A /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E391C8649DD001A409A /* Drink.swift */; };
 		BD206E3C1C864B81001A409A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E3B1C864B81001A409A /* Ingredient.swift */; };
 		BD206E3E1C864C00001A409A /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E3D1C864C00001A409A /* ApiClient.swift */; };
-		E43A62D51CAC73A70080D728 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E43A62D41CAC73A70080D728 /* Keys.plist */; };
 		E45E4D8D1C9A349A000CD7BB /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45E4D8C1C9A349A000CD7BB /* IngredientCell.swift */; };
 		E4A038531C8FCD3200889EE2 /* DrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A038521C8FCD3200889EE2 /* DrinkCell.swift */; };
 		E4A8BA411CA760910018B042 /* DetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4A8BA401CA760910018B042 /* DetailView.storyboard */; };
@@ -48,7 +47,6 @@
 		BD206E3D1C864C00001A409A /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		CB5F929BA0DEFA6140B442BE /* Pods_Bartendr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bartendr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC989D379955EB429FBC15DA /* Pods-Bartendr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartendr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bartendr/Pods-Bartendr.debug.xcconfig"; sourceTree = "<group>"; };
-		E43A62D41CAC73A70080D728 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Keys.plist; path = ../../../../../Downloads/Keys.plist; sourceTree = "<group>"; };
 		E45E4D8C1C9A349A000CD7BB /* IngredientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
 		E4A038521C8FCD3200889EE2 /* DrinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkCell.swift; sourceTree = "<group>"; };
 		E4A8BA401CA760910018B042 /* DetailView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailView.storyboard; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 		BD206E201C863BBC001A409A /* Bartendr */ = {
 			isa = PBXGroup;
 			children = (
-				E43A62D41CAC73A70080D728 /* Keys.plist */,
 				BD206E3D1C864C00001A409A /* ApiClient.swift */,
 				BD206E381C8649B3001A409A /* Controllers */,
 				E4D0D41C1C8F887800F5357C /* Brian */,
@@ -242,7 +239,6 @@
 				BD206E2F1C863BBD001A409A /* LaunchScreen.storyboard in Resources */,
 				E4A8BA411CA760910018B042 /* DetailView.storyboard in Resources */,
 				BD206E2C1C863BBD001A409A /* Assets.xcassets in Resources */,
-				E43A62D51CAC73A70080D728 /* Keys.plist in Resources */,
 				BD206E271C863BBC001A409A /* Main.storyboard in Resources */,
 				E4D0D41B1C8F87F800F5357C /* Recipes.storyboard in Resources */,
 			);

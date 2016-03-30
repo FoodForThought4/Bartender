@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         drinkController.tabBarItem.title = "Drinks"
         drinkController.tabBarItem.image = UIImage(named: "TabBarDrink")
         
-        let createController = UIStoryboard(name: "CreateDrink", bundle: nil).instantiateViewControllerWithIdentifier("Create")
+        let createController = UIStoryboard(name: "CreateDrink", bundle: nil).instantiateViewControllerWithIdentifier("CreateController")
         createController.tabBarItem.title = "Create"
         createController.tabBarItem.image = UIImage(named: "TabBarCreate")
         
