@@ -14,7 +14,6 @@ import Parse
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var storyboard = UIStoryboard(name: "CreateDrink", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -48,8 +47,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        let vc = storyboard.instantiateViewControllerWithIdentifier("Create")
-        window?.rootViewController = vc
+        let drinkController = UIStoryboard(name: "Recipes", bundle: nil).instantiateViewControllerWithIdentifier("DrinksController")
+        drinkController.tabBarItem.title = "Drinks"
+        drinkController.tabBarItem.image = UIImage(named: "TabBarDrink")
+        
+//        let createController = UIStoryboard(name: "CreateDrink", bundle: nil).instantiateViewControllerWithIdentifier("CreateController")
+//        createController.tabBarItem.title = "Create"
+//        createController.tabBarItem.image = UIImage(named: "TabBarCreate")
+        
+        let tabBarController = UITabBarController()
+        
+        tabBarController.viewControllers = [drinkController]
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
         
         return true
     }
