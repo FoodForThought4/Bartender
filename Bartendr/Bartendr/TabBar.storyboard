@@ -27,7 +27,7 @@
         <scene sceneID="d2w-Nf-KAU">
             <objects>
                 <viewControllerPlaceholder storyboardName="Recipes" id="uee-Ub-jMu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="kzl-p4-iik"/>
+                    <tabBarItem key="tabBarItem" title="" id="kzl-p4-iik"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cF-mR-e7m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

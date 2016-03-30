@@ -29,7 +29,9 @@ class Ingredient {
 //    static var vodka = "vodka"
 //    static var whisky = "whisky"
     
-    static var TYPES = ["BaseSpirit", "berries", "brandy", "decoration", "fruits", "gin", "ice", "mixers", "others", "rum", "spices-herbs", "spirits-other", "tequila", "vodka", "whisky"]
+//    static var TYPES = ["BaseSpirit", "berries", "brandy", "decoration", "fruits", "gin", "ice", "mixers", "others", "rum", "spices-herbs", "spirits-other", "tequila", "vodka", "whisky"]
+    
+    static var TYPES = [["BaseSpirit", "spirits-other", "tequila", "vodka", "whisky", "brandy", "rum", "gin"], ["berries", "decoration", "fruits", "mixers"], ["others", "ice", "spices-herbs"]]
     
  
     init(ingredientData: NSDictionary) {

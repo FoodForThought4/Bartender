@@ -154,9 +154,9 @@
 			children = (
 				BD206E231C863BBC001A409A /* ViewController.swift */,
 				E4A8BA421CA7620D0018B042 /* DetailViewController.swift */,
-				E4D0D41D1C8F8FD500F5357C /* RecipesViewController.swift */,
 				E4C2CA331C90FBE700CE0C3C /* CustomSearchController.swift */,
 				751146111CA7701B00993852 /* CreateViewController.swift */,
+				E4D0D41D1C8F8FD500F5357C /* RecipesViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

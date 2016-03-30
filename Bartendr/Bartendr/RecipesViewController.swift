@@ -421,20 +421,51 @@ extension RecipesViewController: UICollectionViewDataSource {
 
 extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return ingredients.count
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ingredients[section].count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
         
-        cell.nameLabel.text = ingredients[indexPath.row]
+        cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
         //cell.isSelected = false
         cell.selectionStyle = .None
         
         return cell
     }
     
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        if section == 0 {
+//            return "Spirits"
+//        } else if section == 1 {
+//            return "Fruits and Mixers"
+//        } else {
+//            return "Other"
+//        }
+//    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableCellWithIdentifier("SectionHeader")
+        let label = headerView?.viewWithTag(123) as! UILabel
+        if section == 0 {
+            label.text = "Spirits"
+        } else if section == 1 {
+            label.text = "Fruits and Mixers"
+        } else {
+            label.text = "Other"
+        }
+        return headerView
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let height = CGFloat(44)
+        return height
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! IngredientCell
