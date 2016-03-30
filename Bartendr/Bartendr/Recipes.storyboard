@@ -58,7 +58,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="316" height="106"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USF-rX-W5n">
-                                                    <rect key="frame" x="84" y="23" width="151.5" height="26"/>
+                                                    <rect key="frame" x="84" y="23" width="152" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="JCI-yC-fYx"/>
                                                     </constraints>
@@ -80,7 +80,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBZ-Qt-OSJ">
-                                                    <rect key="frame" x="84" y="49" width="220" height="20.5"/>
+                                                    <rect key="frame" x="84" y="49" width="220" height="21"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Vodka, Rum, Gin, etc.">
                                                             <attributes>
@@ -156,7 +156,7 @@
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SectionHeader" rowHeight="44" id="dAs-CA-AeN">
-                                        <rect key="frame" x="0.0" y="49.5" width="280" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="280" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dAs-CA-AeN" id="PbZ-2h-vqu">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
@@ -207,7 +207,7 @@
                                         <color key="backgroundColor" red="0.94509803920000002" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" rowHeight="31" id="TAh-BV-Keg" customClass="IngredientCell" customModule="Bartendr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="93.5" width="280" height="31"/>
+                                        <rect key="frame" x="0.0" y="94" width="280" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TAh-BV-Keg" id="JkJ-jd-xct">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="31"/>
