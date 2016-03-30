@@ -49,8 +49,12 @@ class Drink {
             var text = ingredient.text!
             text = text.stringByReplacingOccurrencesOfString("½", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             text = text.stringByReplacingOccurrencesOfString("¾", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("⅓", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("¼", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             text = (text.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet()) as NSArray).componentsJoinedByString("")
             text = text.stringByReplacingOccurrencesOfString("On Cocktail Sticks", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Tablespoons", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            text = text.stringByReplacingOccurrencesOfString("Tablespoon", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             text = text.stringByReplacingOccurrencesOfString("Leaves", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             text = text.stringByReplacingOccurrencesOfString("Leaf", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             text = text.stringByReplacingOccurrencesOfString("Peels", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)

@@ -27,7 +27,6 @@
 		E4A8BA431CA7620D0018B042 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A8BA421CA7620D0018B042 /* DetailViewController.swift */; };
 		E4C2CA341C90FBE700CE0C3C /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C2CA331C90FBE700CE0C3C /* CustomSearchController.swift */; };
 		E4C2CA361C90FC8F00CE0C3C /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C2CA351C90FC8F00CE0C3C /* CustomSearchBar.swift */; };
-		E4D0D4191C8F876800F5357C /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4D0D4181C8F876800F5357C /* TabBar.storyboard */; };
 		E4D0D41B1C8F87F800F5357C /* Recipes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4D0D41A1C8F87F800F5357C /* Recipes.storyboard */; };
 		E4D0D41E1C8F8FD500F5357C /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D0D41D1C8F8FD500F5357C /* RecipesViewController.swift */; };
 /* End PBXBuildFile section */
@@ -56,7 +55,6 @@
 		E4A8BA421CA7620D0018B042 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		E4C2CA331C90FBE700CE0C3C /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		E4C2CA351C90FC8F00CE0C3C /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
-		E4D0D4181C8F876800F5357C /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		E4D0D41A1C8F87F800F5357C /* Recipes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Recipes.storyboard; sourceTree = "<group>"; };
 		E4D0D41D1C8F8FD500F5357C /* RecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		F4D4099DDDD81E5BB3871FE1 /* Pods-Bartendr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartendr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bartendr/Pods-Bartendr.release.xcconfig"; sourceTree = "<group>"; };
@@ -154,9 +152,9 @@
 			children = (
 				BD206E231C863BBC001A409A /* ViewController.swift */,
 				E4A8BA421CA7620D0018B042 /* DetailViewController.swift */,
-				E4D0D41D1C8F8FD500F5357C /* RecipesViewController.swift */,
 				E4C2CA331C90FBE700CE0C3C /* CustomSearchController.swift */,
 				751146111CA7701B00993852 /* CreateViewController.swift */,
+				E4D0D41D1C8F8FD500F5357C /* RecipesViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -172,7 +170,6 @@
 		E4D0D41C1C8F887800F5357C /* Brian */ = {
 			isa = PBXGroup;
 			children = (
-				E4D0D4181C8F876800F5357C /* TabBar.storyboard */,
 				E4D0D41A1C8F87F800F5357C /* Recipes.storyboard */,
 				E4A8BA401CA760910018B042 /* DetailView.storyboard */,
 			);
@@ -248,7 +245,6 @@
 				BD206E271C863BBC001A409A /* Main.storyboard in Resources */,
 				751146181CAAF92900993852 /* Keys.plist in Resources */,
 				E4D0D41B1C8F87F800F5357C /* Recipes.storyboard in Resources */,
-				E4D0D4191C8F876800F5357C /* TabBar.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
