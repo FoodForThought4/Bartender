@@ -251,12 +251,15 @@ extension RecipesViewController: UICollectionViewDelegate {
         let scrollOffsetThreshold = scrollViewContentHeight - scrollView.bounds.size.height
         
         // When the user has scrolled past the threshold, start requesting
-        if(scrollView.contentOffset.y + 20 > scrollOffsetThreshold){
+        if(scrollView.contentOffset.y + 20 > scrollOffsetThreshold) && collectionView.hidden == false{
             atBottomThreshold = true
-        } else if atBottomThreshold == true{
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(1 * Double(NSEC_PER_SEC))),dispatch_get_main_queue(), {
+        } else if atBottomThreshold == true && collectionView.hidden == false{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW,Int64(0.3 * Double(NSEC_PER_SEC))),dispatch_get_main_queue(), {
                 self.atBottomThreshold = false
             })
+            //self.atBottomThreshold = false
+        } else if collectionView.hidden == true {
+            atBottomThreshold = false
         }
         //tracking if user is scrolling down or up
         if scrollView.contentOffset.y > lastContentOffset && scrollView.contentOffset.y > 0 {

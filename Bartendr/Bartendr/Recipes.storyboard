@@ -8,7 +8,7 @@
         <!--Recipes View Controller-->
         <scene sceneID="z9z-VL-1eb">
             <objects>
-                <viewController id="z8F-wB-3uc" customClass="RecipesViewController" customModule="Bartendr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DrinksController" id="z8F-wB-3uc" customClass="RecipesViewController" customModule="Bartendr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MHf-a9-If0"/>
                         <viewControllerLayoutGuide type="bottom" id="IVc-nl-jEl"/>

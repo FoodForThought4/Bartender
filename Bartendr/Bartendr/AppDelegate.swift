@@ -48,8 +48,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        let vc = storyboard.instantiateViewControllerWithIdentifier("TabBar")
-        window?.rootViewController = vc
+        let drinksController = UIStoryboard(name: "Recipes", bundle: nil).instantiateViewControllerWithIdentifier("DrinksController")
+        drinksController.tabBarItem.title = "Drinks"
+        
+//        let createController = storyboard.instantiateViewControllerWithIdentifier("profileController")
+//        createController.tabBarItem.title = "Create"
+        
+        let tabBarController = UITabBarController()
+        
+        tabBarController.viewControllers = [drinksController]
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
         
         return true
     }
