@@ -8,7 +8,7 @@
         <!--Create View Controller-->
         <scene sceneID="HUU-jb-tuD">
             <objects>
-                <viewController storyboardIdentifier="Create" id="0zm-t4-aAH" customClass="CreateViewController" customModule="Bartendr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateController" id="0zm-t4-aAH" customClass="CreateViewController" customModule="Bartendr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kvQ-sK-1Pc"/>
                         <viewControllerLayoutGuide type="bottom" id="pnM-T1-ZE9"/>
