@@ -51,13 +51,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         drinkController.tabBarItem.title = "Drinks"
         drinkController.tabBarItem.image = UIImage(named: "TabBarDrink")
         
-//        let createController = UIStoryboard(name: "CreateDrink", bundle: nil).instantiateViewControllerWithIdentifier("CreateController")
-//        createController.tabBarItem.title = "Create"
-//        createController.tabBarItem.image = UIImage(named: "TabBarCreate")
+        let createController = UIStoryboard(name: "CreateDrink", bundle: nil).instantiateViewControllerWithIdentifier("Create")
+        createController.tabBarItem.title = "Create"
+        createController.tabBarItem.image = UIImage(named: "TabBarCreate")
         
         let tabBarController = UITabBarController()
         
-        tabBarController.viewControllers = [drinkController]
+        tabBarController.viewControllers = [drinkController, createController]
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
