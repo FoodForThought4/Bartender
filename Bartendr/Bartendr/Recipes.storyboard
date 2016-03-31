@@ -209,19 +209,19 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" rowHeight="31" id="TAh-BV-Keg" customClass="IngredientCell" customModule="Bartendr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="94" width="280" height="31"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="TAh-BV-Keg" id="JkJ-jd-xct">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TAh-BV-Keg" id="JkJ-jd-xct">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="31"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="CheckBox" translatesAutoresizingMaskIntoConstraints="NO" id="seh-HK-fpi">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CheckBox" translatesAutoresizingMaskIntoConstraints="NO" id="seh-HK-fpi">
                                                     <rect key="frame" x="41" y="5" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Sq6-qk-T3v"/>
                                                         <constraint firstAttribute="width" constant="20" id="ddA-PP-Pa6"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wm2-UN-aTs">
-                                                    <rect key="frame" x="78" y="4.5" width="36" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wm2-UN-aTs">
+                                                    <rect key="frame" x="78" y="5" width="36" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="9Jx-ot-oeD"/>
                                                     </constraints>

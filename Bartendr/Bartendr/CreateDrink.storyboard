@@ -48,6 +48,9 @@
                                             <state key="normal" title="Create Drink">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="onCreate:" destination="0zm-t4-aAH" eventType="touchUpInside" id="gAN-f6-gcU"/>
+                                            </connections>
                                         </button>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EL9-FJ-4GR">
                                             <rect key="frame" x="0.0" y="92" width="295" height="44"/>
@@ -216,6 +219,7 @@
                         <outlet property="bottomLabel" destination="uyQ-cT-Cxl" id="FaJ-ln-Cbn"/>
                         <outlet property="bottomView" destination="3FG-mN-U5x" id="1a9-a9-l9O"/>
                         <outlet property="createButton" destination="3iy-oT-GOV" id="PWt-xt-zaH"/>
+                        <outlet property="nameField" destination="QMb-rd-lCf" id="Zio-cM-npD"/>
                         <outlet property="photoButtonView" destination="EL9-FJ-4GR" id="2Ia-VZ-PXE"/>
                         <outlet property="tableView" destination="wXL-42-m8Z" id="L4h-i3-khV"/>
                     </connections>
