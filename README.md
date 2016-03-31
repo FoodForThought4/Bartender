@@ -30,9 +30,9 @@
     - [X] drink detail view 
     - [X] drink creation
 
-- [ ] As a user, I would like to be able to create my own drinks and post them (lainie)
-    - [ ] implement design
-    - [ ] link to ApiClient
+- [X] As a user, I would like to be able to create my own drinks and post them (lainie)
+    - [X] implement design
+    - [X] link to ApiClient
 
 - [X] As a user, I would like to be able to be able to share (on app) my own and view other’s drinks (marty)
     - [X] implementation 
@@ -40,6 +40,21 @@
 - [X] As a user, I would like to know what drinks I can make given the ingredients I have
     - [X] implementation (brian)
     - [X] API communication (marty)
+
+### Sprint 3 
+- [ ] Backend work (Marty)  
+    - [ ] Search
+    - [ ] Hook up front end aspects with backend
+
+- [ ] Clean up the Drink Creation (Lainie)
+	- [ ] Fix Checkbox view
+	- [ ] Add custom animations
+
+- [ ] Implement Facebook login (Brian)
+- [ ] Add autolayout (Brian and Lainie) 
+- [ ] Make design consistent (Brian)
+- [ ] Add optiont to view ingredient count when making for multiple people (Brian)
+
 
 ### Later Sprint 
 
