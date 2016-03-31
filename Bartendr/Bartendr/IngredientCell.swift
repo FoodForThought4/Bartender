@@ -31,12 +31,14 @@ class IngredientCell: UITableViewCell {
     }
     
     @IBAction func onPlus(sender: AnyObject) {
-        amount += 1
-        amountField.text = "\(amount)"
+        if isSelected == true {
+            amount += 1
+            amountField.text = "\(amount)"
+        }
     }
 
     @IBAction func onMinus(sender: AnyObject) {
-        if amount > 0 {
+        if amount > 0 && isSelected == true {
             amount -= 1
             amountField.text = "\(amount)"
         }

@@ -25,6 +25,52 @@
                                     <constraint firstAttribute="width" constant="295" id="PHo-8B-8P4"/>
                                     <constraint firstAttribute="height" constant="528" id="zmS-eP-tSh"/>
                                 </constraints>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="3FG-mN-U5x">
+                                    <rect key="frame" x="0.0" y="200" width="295" height="209"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You're almost there!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyQ-cT-Cxl">
+                                            <rect key="frame" x="0.0" y="0.0" width="295" height="48"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.3294952552" green="0.3294952552" blue="0.3294952552" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a boozy name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QMb-rd-lCf">
+                                            <rect key="frame" x="0.0" y="47" width="295" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iy-oT-GOV">
+                                            <rect key="frame" x="0.0" y="144" width="295" height="45"/>
+                                            <color key="backgroundColor" red="0.52671042010000002" green="1" blue="0.66679470760000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <state key="normal" title="Create Drink">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EL9-FJ-4GR">
+                                            <rect key="frame" x="0.0" y="92" width="295" height="44"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hlc-5A-qp0">
+                                                    <rect key="frame" x="0.0" y="4" width="295" height="35"/>
+                                                </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="4r3-Qg-yRZ">
+                                                    <rect key="frame" x="22" y="8" width="25" height="25"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add a photo of your creation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAT-ce-wgR">
+                                                    <rect key="frame" x="55" y="10" width="218" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="1" green="0.3698434471010571" blue="0.41529072118702304" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SectionHeader" id="c4t-Gf-8eI">
                                         <rect key="frame" x="0.0" y="50" width="295" height="44"/>
@@ -145,12 +191,13 @@
                                                     <rect key="frame" x="75" y="7" width="25" height="25"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Ingredient" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8S9-hH-qE0">
-                                                    <rect key="frame" x="108" y="9" width="113" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <rect key="frame" x="108" y="9" width="134" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.51886814199999998" green="0.56495042139999996" blue="0.78544257200000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -166,6 +213,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="bottomLabel" destination="uyQ-cT-Cxl" id="FaJ-ln-Cbn"/>
+                        <outlet property="bottomView" destination="3FG-mN-U5x" id="1a9-a9-l9O"/>
+                        <outlet property="createButton" destination="3iy-oT-GOV" id="PWt-xt-zaH"/>
+                        <outlet property="photoButtonView" destination="EL9-FJ-4GR" id="2Ia-VZ-PXE"/>
                         <outlet property="tableView" destination="wXL-42-m8Z" id="L4h-i3-khV"/>
                     </connections>
                 </viewController>
@@ -177,6 +228,7 @@
     <resources>
         <image name="CheckBox" width="16" height="16"/>
         <image name="SectionHeader" width="144" height="49"/>
+        <image name="camera" width="120" height="120"/>
         <image name="minus" width="120" height="120"/>
         <image name="plus" width="120" height="120"/>
         <image name="plus_open" width="120" height="120"/>

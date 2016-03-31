@@ -12,6 +12,11 @@ class CreateViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomLabel: UILabel!
+    @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var photoButtonView: UIView!
+    
 //    let ingredients = [["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth"], ["Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola"], ["Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]]
     
 //    let ingredients = ["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth", "Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola", "Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]
@@ -28,8 +33,16 @@ class CreateViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
         
-        tableView.layer.cornerRadius = 3
-        tableView.clipsToBounds = true
+        bottomView.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
+        
+        bottomLabel.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
+        
+        photoButtonView.layer.cornerRadius = 4
+        photoButtonView.clipsToBounds = true
+        
+        createButton.layer.cornerRadius = 4
+        createButton.clipsToBounds = true
+        
 
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -134,10 +147,8 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
-        
         cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
         cell.selectionStyle = .None
-        
         return cell
     }
     
@@ -153,7 +164,6 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
             label.text = "Other"
         }
         
-        //tableView.addSubview(headerView!)
         return headerView
     }
     
@@ -177,12 +187,14 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         
         if(cell.isSelected == false){
             cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
+            cell.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
             cell.isSelected = true
             if selectedIngredients.indexOf(cell.nameLabel.text!) == nil{
                 selectedIngredients.append(cell.nameLabel.text!)
             }
         } else {
             cell.checkBoxImageView.image = UIImage(named: "CheckBox")
+            cell.backgroundColor = UIColor.whiteColor()
             cell.isSelected = false
             if selectedIngredients.indexOf(cell.nameLabel.text!) != nil{
                 selectedIngredients.removeAtIndex(selectedIngredients.indexOf(cell.nameLabel.text!)!)
