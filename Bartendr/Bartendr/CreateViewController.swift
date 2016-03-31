@@ -25,6 +25,8 @@ class CreateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
 
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -157,6 +159,8 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             label.text = "Other"
         }
+        
+        //tableView.addSubview(headerView!)
         return headerView
     }
     
