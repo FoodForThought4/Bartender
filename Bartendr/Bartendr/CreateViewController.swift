@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateViewController: UIViewController {
+class CreateViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -28,6 +28,8 @@ class CreateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CreateViewController.keyboardShown(_:)), name: "KeyboardShown", object: nil)
+        
         self.view.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
         
         bottomView.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
@@ -43,7 +45,6 @@ class CreateViewController: UIViewController {
 
         tableView.delegate = self;
         tableView.dataSource = self;
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +69,36 @@ class CreateViewController: UIViewController {
         }
     }
 
+    @IBAction func onTap(sender: AnyObject) {
+        nameField.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        // Scroll down to height of text box, animated
+        NSNotificationCenter.defaultCenter().postNotificationName("KeyboardShown", object: nil)
+        print("yo")
+//        UIView.animateWithDuration(0.3, animations: {
+//            <#code#>
+//            }) { (<#Bool#>) in
+//                <#code#>
+//        }
+        
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        // Restore
+    }
+    
+    func keyboardShown(notification: NSNotification) {
+        let info  = notification.userInfo!
+        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
+        
+        let rawFrame = value.CGRectValue
+        let keyboardFrame = view.convertRect(rawFrame, fromView: nil)
+        
+        print("keyboardFrame: \(keyboardFrame)")
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -117,7 +148,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        let height = CGFloat(44)
+        let height = CGFloat(24)
         return height
     }
     
@@ -150,3 +181,4 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.reloadData()
     }
 }
+
