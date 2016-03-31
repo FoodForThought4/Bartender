@@ -133,21 +133,10 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
         
         cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
-        //cell.isSelected = false
         cell.selectionStyle = .None
         
         return cell
     }
-    
-    //    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    //        if section == 0 {
-    //            return "Spirits"
-    //        } else if section == 1 {
-    //            return "Fruits and Mixers"
-    //        } else {
-    //            return "Other"
-    //        }
-    //    }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableCellWithIdentifier("SectionHeader")

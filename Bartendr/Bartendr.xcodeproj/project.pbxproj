@@ -10,7 +10,6 @@
 		581EA9D3020CFA5B230F18A2 /* Pods_Bartendr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB5F929BA0DEFA6140B442BE /* Pods_Bartendr.framework */; };
 		751146101CA76F9000993852 /* CreateDrink.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7511460F1CA76F9000993852 /* CreateDrink.storyboard */; };
 		751146121CA7701B00993852 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751146111CA7701B00993852 /* CreateViewController.swift */; };
-		751146141CA78CEA00993852 /* CreateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751146131CA78CE900993852 /* CreateCell.swift */; };
 		75BD30731CAC783D009F3E9A /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75BD30721CAC783D009F3E9A /* Keys.plist */; };
 		BD206E221C863BBC001A409A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E211C863BBC001A409A /* AppDelegate.swift */; };
 		BD206E241C863BBC001A409A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD206E231C863BBC001A409A /* ViewController.swift */; };
@@ -34,7 +33,6 @@
 /* Begin PBXFileReference section */
 		7511460F1CA76F9000993852 /* CreateDrink.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateDrink.storyboard; sourceTree = "<group>"; };
 		751146111CA7701B00993852 /* CreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
-		751146131CA78CE900993852 /* CreateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCell.swift; sourceTree = "<group>"; };
 		75BD30721CAC783D009F3E9A /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Keys.plist; path = ../../../../Downloads/Keys.plist; sourceTree = "<group>"; };
 		BD206E1E1C863BBC001A409A /* Bartendr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bartendr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD206E211C863BBC001A409A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 				E4C2CA351C90FC8F00CE0C3C /* CustomSearchBar.swift */,
 				E45E4D8C1C9A349A000CD7BB /* IngredientCell.swift */,
 				7511460F1CA76F9000993852 /* CreateDrink.storyboard */,
-				751146131CA78CE900993852 /* CreateCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -314,7 +311,6 @@
 				BD206E3A1C8649DD001A409A /* Drink.swift in Sources */,
 				751146121CA7701B00993852 /* CreateViewController.swift in Sources */,
 				E4C2CA341C90FBE700CE0C3C /* CustomSearchController.swift in Sources */,
-				751146141CA78CEA00993852 /* CreateCell.swift in Sources */,
 				BD206E221C863BBC001A409A /* AppDelegate.swift in Sources */,
 				BD206E3E1C864C00001A409A /* ApiClient.swift in Sources */,
 			);
