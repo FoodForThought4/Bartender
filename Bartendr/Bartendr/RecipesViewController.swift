@@ -205,6 +205,7 @@ extension RecipesViewController: CustomSearchControllerDelegate{
 extension RecipesViewController: XMSegmentedControlDelegate {
     func xmSegmentedControl(xmSegmentedControl: XMSegmentedControl, selectedSegment:Int){
         if selectedSegment == 0 && currentView != 0{
+            self.searchView.hidden = false
             self.collectionView.hidden = false
             UIView.animateWithDuration(0.3, animations: {
                 self.chooseIngredientsLabel.frame.origin.x = 400
@@ -236,6 +237,7 @@ extension RecipesViewController: XMSegmentedControlDelegate {
                 self.searchView.frame.origin.x = -370
                 },  completion: { finished in
                     if (finished) {
+                        self.searchView.hidden = true
                         self.collectionView.hidden = true
                     }
             })
