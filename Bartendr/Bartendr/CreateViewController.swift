@@ -8,18 +8,38 @@
 
 import UIKit
 
-class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CreateCellDelegate {
+class CreateViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-//    let ingredients = [["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth"], ["Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola"], ["Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]]
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomLabel: UILabel!
+    @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var photoButtonView: UIView!
+    @IBOutlet weak var nameField: UITextField!
+
     
-    let ingredients = ["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth", "Lemon Juice", "Lime Juice", "Cranberry Juice", "Pineapple Juice", "Orange Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola", "Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino", "Pineapple"]
+    let ingredients = Ingredient.TYPES
+    
+    var selectedIngredients: [String] = []
     
     var checkStates = [Int:Bool]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
+        
+        bottomView.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
+        
+        bottomLabel.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
+        
+        photoButtonView.layer.cornerRadius = 4
+        photoButtonView.clipsToBounds = true
+        
+        createButton.layer.cornerRadius = 4
+        createButton.clipsToBounds = true
+        
 
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -29,50 +49,16 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return ingredients.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CreateCell", forIndexPath: indexPath) as! CreateCell
-        
-        cell.nameLabel.text = ingredients[indexPath.row]
-        cell.selectionStyle = .None
-        cell.delegate = self
-        
-        cell.isSelected = checkStates[indexPath.row] ?? false
-        
-        if cell.isSelected == true {
-            cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
-        } else {
-            cell.checkBoxImageView.image = UIImage(named: "CheckBox")
-        }
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = tableView.dequeueReusableCellWithIdentifier("NameCell")! as UITableViewCell
-        return footerView
-    }
-    
-    func onPushCreate() {
-        
-        var ingredientList = [Ingredient]()
-        for index in 0...checkStates.count {
-            if checkStates[index] == true {
-                ingredientList.append(Ingredient(ingredientData: ["text": ingredients[index]]))
-            }
-        }
-        
-        let name = "Another drink"
+
+    @IBAction func onCreate(sender: AnyObject) {
+        let name = nameField.text! as String
         let description = "description"
         let image = UIImage(named: "defaultDrink")
+        
+        var ingredientList = [Ingredient]()
+        for ingredient in selectedIngredients {
+            ingredientList.append(Ingredient(ingredientData: ["text" : ingredient]))
+        }
         
         let drink = Drink(name: name, description: description, customImg: image!, ingredients: ingredientList)
         
@@ -80,25 +66,6 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
         ApiClient.createDrink(drink) { (success) in
             print("successfully created drink")
         }
-        
-    }
-    
-//    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 50
-//    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! CreateCell
-        
-        cell.delegate?.createCell?(cell, didChangeValue: !cell.isSelected!)
-        
-        tableView.reloadData()
-    }
-    
-    func createCell(createCell: CreateCell, didChangeValue value: Bool) {
-        let indexPath = tableView.indexPathForCell(createCell)
-        
-        checkStates[indexPath!.row] = value
     }
 
     /*
@@ -111,4 +78,75 @@ class CreateViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     */
 
+}
+
+extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return ingredients.count
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ingredients[section].count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
+        cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
+        cell.selectionStyle = .None
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableCellWithIdentifier("SectionHeader")
+        headerView!.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
+        let label = headerView?.viewWithTag(456) as! UILabel
+        if section == 0 {
+            label.text = "Spirits"
+        } else if section == 1 {
+            label.text = "Fruits and Mixers"
+        } else {
+            label.text = "Other"
+        }
+        
+        return headerView
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableCellWithIdentifier("AddIngredientCell")
+        return footerView
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let height = CGFloat(44)
+        return height
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let height = CGFloat(44)
+        return height
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! IngredientCell
+        
+        if(cell.isSelected == false){
+            cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
+            cell.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
+            cell.isSelected = true
+            if selectedIngredients.indexOf(cell.nameLabel.text!) == nil{
+                selectedIngredients.append(cell.nameLabel.text!)
+            }
+        } else {
+            cell.checkBoxImageView.image = UIImage(named: "CheckBox")
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.isSelected = false
+            cell.amountField.text = "0"
+            cell.amount = 0
+            if selectedIngredients.indexOf(cell.nameLabel.text!) != nil{
+                selectedIngredients.removeAtIndex(selectedIngredients.indexOf(cell.nameLabel.text!)!)
+            }
+        }
+        
+        tableView.reloadData()
+    }
 }

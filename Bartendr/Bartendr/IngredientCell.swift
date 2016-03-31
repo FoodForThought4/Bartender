@@ -12,6 +12,9 @@ class IngredientCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var checkBoxImageView: UIImageView!
+    @IBOutlet weak var amountField: UITextField!
+    
+    var amount = 0
     
     var isSelected: Bool?
 
@@ -26,5 +29,19 @@ class IngredientCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    @IBAction func onPlus(sender: AnyObject) {
+        if isSelected == true {
+            amount += 1
+            amountField.text = "\(amount)"
+        }
+    }
 
+    @IBAction func onMinus(sender: AnyObject) {
+        if amount > 0 && isSelected == true {
+            amount -= 1
+            amountField.text = "\(amount)"
+        }
+    }
+    
 }
