@@ -27,6 +27,9 @@ class CreateViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
+        
+        tableView.layer.cornerRadius = 3
+        tableView.clipsToBounds = true
 
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -140,6 +143,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableCellWithIdentifier("SectionHeader")
+        headerView!.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
         let label = headerView?.viewWithTag(456) as! UILabel
         if section == 0 {
             label.text = "Spirits"
@@ -151,6 +155,16 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         
         //tableView.addSubview(headerView!)
         return headerView
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableCellWithIdentifier("AddIngredientCell")
+        return footerView
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let height = CGFloat(44)
+        return height
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
