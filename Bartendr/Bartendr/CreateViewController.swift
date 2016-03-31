@@ -140,6 +140,8 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
             cell.checkBoxImageView.image = UIImage(named: "CheckBox")
             cell.backgroundColor = UIColor.whiteColor()
             cell.isSelected = false
+            cell.amountField.text = "0"
+            cell.amount = 0
             if selectedIngredients.indexOf(cell.nameLabel.text!) != nil{
                 selectedIngredients.removeAtIndex(selectedIngredients.indexOf(cell.nameLabel.text!)!)
             }
