@@ -122,6 +122,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
+  
         cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
         cell.selectionStyle = .None
         return cell
@@ -141,6 +142,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         
         return headerView
     }
+
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = tableView.dequeueReusableCellWithIdentifier("AddIngredientCell")
@@ -148,7 +150,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        let height = CGFloat(24)
+        let height = CGFloat(44)
         return height
     }
     
@@ -159,6 +161,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! IngredientCell
+
         
         if(cell.isSelected == false){
             cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
