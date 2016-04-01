@@ -14,7 +14,6 @@ import Parse
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var storyboard = UIStoryboard(name: "TabBar", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -61,19 +60,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-//        ApiClient.likeDrink(testDrink)
+        let drinkController = UIStoryboard(name: "Recipes", bundle: nil).instantiateViewControllerWithIdentifier("DrinksController")
+        drinkController.tabBarItem.title = "Drinks"
+        drinkController.tabBarItem.image = UIImage(named: "TabBarDrink")
         
-//        ApiClient.getDrinksADDB(["lemon-juice", "ice-cube"], nextPage: false) { (drinkData, error) in
-//            if error == nil {
-//                
-//            }
-//            else {
-//                
-//            }
-//        }
+        let createController = UIStoryboard(name: "CreateDrink", bundle: nil).instantiateViewControllerWithIdentifier("CreateController")
+        createController.tabBarItem.title = "Create"
+        createController.tabBarItem.image = UIImage(named: "TabBarCreate")
         
-        let vc = storyboard.instantiateViewControllerWithIdentifier("TabBar")
-        window?.rootViewController = vc
+        let tabBarController = UITabBarController()
+        
+        tabBarController.viewControllers = [drinkController, createController]
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
         
         return true
     }
@@ -164,6 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
 
 }
 
