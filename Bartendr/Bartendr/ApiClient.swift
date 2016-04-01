@@ -26,7 +26,7 @@ class ApiClient {
             url = nextPageURL
         } else {
             
-            url = apiURL + "/drinks" 
+            url = apiURL + "/drinks" //?apiKey=\(addbApiKey)"
             
             // add ingredients if specified
             for i in 0 ..< ingredients.count {
@@ -35,7 +35,7 @@ class ApiClient {
             url += "?apiKey=\(addbApiKey)"
 
         }
-        
+                
         http.GET(url, parameters: [], progress: { (progress: NSProgress) -> Void in
             }, success: { (dataTask: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 
@@ -118,16 +118,47 @@ class ApiClient {
     
     
     // add a like to a user created drink
-    class func likeDrink(drinkID: String, rating: Double) {
+    class func likeDrink(drink: Drink) {
         let query = PFQuery(className: "Drink")
-        query.whereKey("id", containsString: drinkID)
+        query.whereKey("id", containsString: drink.id)
         
-        query.getFirstObjectInBackgroundWithBlock { (drink: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                drink!["likes"] = drink!["likes"] as! Int + 1
-                drink?.saveInBackground()
-            } else {
-                print("error getting drink to like it")
+        query.getFirstObjectInBackgroundWithBlock { (drinkObject: PFObject?, error: NSError?) -> Void in
+            print("happen")
+            if let drinkObject = drinkObject where error != nil {
+                print("drink yet saved")
+
+                if let likes = drinkObject["likes"] as? Int {
+                    drinkObject["likes"] = likes + 1
+                } else {
+                    drinkObject["likes"] = 1
+                }
+                
+                drinkObject.saveInBackgroundWithBlock({ (success, error) in
+                    if error == nil {
+                        print("success liking!")
+                    } else {
+                        print(error)
+                    }
+                })
+
+            }
+            
+            else {
+                print("drink not yet saved")
+                // drink not yet saved in parse (probably only ADDB)
+                drink.likes = 1
+                
+                let newDrinkObject = Drink.convertDrinkToPFObject(drink)
+                newDrinkObject.saveInBackgroundWithBlock({ (success, error) in
+                    print("hhhhhapen1")
+
+                    if error == nil {
+                        print("success liking!")
+                    } else {
+                        print(error)
+                    }
+                    print("hhhhhapen2")
+                })
             }
         }
     }
@@ -153,7 +184,31 @@ class ApiClient {
     }
     
     
-
+    class func generateId() -> String {
+        var newID: String = ""
+        if (newID.isEmpty || idUsed(newID)) {
+            newID = ""
+            for _ in 0 ..< 8 {
+                newID += "\(arc4random_uniform(1))"
+            }
+        }
+        
+        return newID
+    }
+    
+    class func idUsed(id: String) -> Bool {
+        let query = PFQuery(className: "Drink")
+        
+        query.getFirstObjectInBackgroundWithBlock { (drink: PFObject?, error: NSError?) in
+            if error == nil {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        return false
+    }
     
     
     class func getPFFileFromImage(image: UIImage?) -> PFFile? {

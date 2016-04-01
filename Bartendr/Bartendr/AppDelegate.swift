@@ -32,21 +32,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
                     configuration.applicationId = keys["API_ID"] as? String
                     configuration.clientKey = keys["MASTER_KEY"] as? String
-                    configuration.server = "http://yourappname.herokuapp.com/parse"
+                    configuration.server = "http://bar-tendr.herokuapp.com/parse"
                 })
             )
             
             ApiClient.addbApiKey = keys["ADDB_API_Key"] as! String
         }
         
-        ApiClient.getDrinksADDB(["lemon-juice", "ice-cube"], nextPage: false) { (drinkData, error) in
-            if error == nil {
-                
-            }
-            else {
-                
+        let testDrinkDetails = NSMutableDictionary()
+        testDrinkDetails.setObject("1234", forKey: "id")
+        testDrinkDetails.setObject("DrinkName", forKey: "name")
+        testDrinkDetails.setObject("This is my description", forKey: "descriptionPlain")
+        testDrinkDetails.setObject(3, forKey: "likes")
+        
+        let testDrinkIngredient = [NSMutableDictionary]()
+        testDrinkDetails.setObject("321", forKey: "id")
+        testDrinkDetails.setObject("IngredientName", forKey: "textPlain")
+        
+        testDrinkDetails.setObject(testDrinkIngredient, forKey: "ingredients")
+        
+        let testDrink = Drink(drinkDetails: testDrinkDetails)
+
+        ApiClient.createDrink(testDrink) { (success) in
+            if success {
+                print("success creating drink")
+            } else {
+                print("failure creating crink")
             }
         }
+        
+//        ApiClient.likeDrink(testDrink)
+        
+//        ApiClient.getDrinksADDB(["lemon-juice", "ice-cube"], nextPage: false) { (drinkData, error) in
+//            if error == nil {
+//                
+//            }
+//            else {
+//                
+//            }
+//        }
         
         let vc = storyboard.instantiateViewControllerWithIdentifier("TabBar")
         window?.rootViewController = vc
