@@ -198,13 +198,13 @@ class ApiClient {
     class func idUsed(id: String) -> Bool {
         let query = PFQuery(className: "Drink")
         
-        query.getFirstObjectInBackgroundWithBlock { (drink: PFObject?, error: NSError?) in
-            if error == nil {
-                return true
-            } else {
-                return false
-            }
-        }
+//        query.getFirstObjectInBackgroundWithBlock { (drink: PFObject?, error: NSError?) in
+//            if error == nil {
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
         
         return false
     }
