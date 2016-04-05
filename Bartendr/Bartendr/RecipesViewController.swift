@@ -84,6 +84,8 @@ class RecipesViewController: UIViewController {
         tableView.frame.origin.x = 400
         chooseIngredientsLabel.hidden = true
         chooseIngredientsLabel.frame.origin.x = 400
+        
+        tableView.rowHeight = 36
     }
     
 //    func swipeLeft(){
@@ -231,7 +233,7 @@ extension RecipesViewController: XMSegmentedControlDelegate {
             
             UIView.animateWithDuration(0.3, animations: {
                 self.chooseIngredientsLabel.frame.origin.x = 54
-                self.tableView.frame.origin.x = 20
+                self.tableView.frame.origin.x = 40
                 self.collectionView.frame.origin.x = -400
 
                 self.searchView.frame.origin.x = -370
@@ -471,21 +473,25 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
         
         cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
-        //cell.isSelected = false
         cell.selectionStyle = .None
+        
+        if indexPath.row == 0{
+            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 12)
+        } else {
+            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
+        }
         
         return cell
     }
     
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if section == 0 {
-//            return "Spirits"
-//        } else if section == 1 {
-//            return "Fruits and Mixers"
-//        } else {
-//            return "Other"
-//        }
-//    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableCellWithIdentifier("CustomIngredientCell")
+        footerView!.frame.size.width = tableView.frame.width
+        footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 12)
+        return footerView
+    }
+
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableCellWithIdentifier("SectionHeader")
@@ -502,6 +508,11 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let height = CGFloat(44)
+        return height
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let height = CGFloat(38)
         return height
     }
     
