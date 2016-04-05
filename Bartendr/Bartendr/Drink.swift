@@ -88,25 +88,19 @@ class Drink {
         let drink = PFObject(className: "Drink")
         
         // add details
-<<<<<<< HEAD
         if let img = newDrink.customImg {
             drink["photo"] = ApiClient.getPFFileFromImage(img) // PFFile column type
         }
         
         drink["author"] = PFUser.currentUser() ?? "TestUser"
-=======
         drink["photo"] = ApiClient.getPFFileFromImage(newDrink.customImg) // PFFile column type
         //drink["author"] = PFUser.currentUser()
->>>>>>> 56fc247acfb8c85f8216b65fa07f4d95123f1930
         drink["likes"] = 0
         drink["commentsCount"] = 0
         
         // TODO: Modify to only include neccessary data
-<<<<<<< HEAD
         drink["id"] = newDrink.id ?? ApiClient.generateId()
         
-=======
->>>>>>> 56fc247acfb8c85f8216b65fa07f4d95123f1930
         drink["name"] = newDrink.name
         drink["description"] = newDrink.description
         drink["ingredients"] = newDrink.ingredients
