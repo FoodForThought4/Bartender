@@ -17,6 +17,7 @@ class RecipesViewController: UIViewController {
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var chooseIngredientsLabel: UILabel!
+    @IBOutlet weak var sectionHeaderImageView: UIImageView!
     
     var drinks = [Drink]()
     var filteredDrinks = [Drink]()
@@ -84,6 +85,8 @@ class RecipesViewController: UIViewController {
         tableView.frame.origin.x = 400
         chooseIngredientsLabel.hidden = true
         chooseIngredientsLabel.frame.origin.x = 400
+        
+        tableView.rowHeight = 36
     }
     
 //    func swipeLeft(){
@@ -231,7 +234,7 @@ extension RecipesViewController: XMSegmentedControlDelegate {
             
             UIView.animateWithDuration(0.3, animations: {
                 self.chooseIngredientsLabel.frame.origin.x = 54
-                self.tableView.frame.origin.x = 20
+                self.tableView.frame.origin.x = 40
                 self.collectionView.frame.origin.x = -400
 
                 self.searchView.frame.origin.x = -370
@@ -283,10 +286,30 @@ extension RecipesViewController: UICollectionViewDelegate {
             trackContentOffset = scrollView.contentOffset.y
         }
         
-        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 250
-            && ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown)) {
+        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 250 && currentView == 1{
             
-            //search and chooseIngredientLabel movement animation
+            //collection view and table view movement animation
+            if scrollView.contentOffset.y < 0{
+                tableView.frame.origin.y = 125
+                self.chooseIngredientsLabel.frame.origin.y = 85
+                self.chooseIngredientsLabel.alpha = 1
+            } else if scrollView.contentOffset.y > 50 {
+                tableView.frame.origin.y = 76
+                self.chooseIngredientsLabel.frame.origin.y = 36
+                self.chooseIngredientsLabel.alpha = 0
+            } else {
+                tableView.frame.origin.y = 125 - scrollView.contentOffset.y
+                self.chooseIngredientsLabel.frame.origin.y = 85 - (scrollView.contentOffset.y)
+                self.chooseIngredientsLabel.alpha = 1 - (scrollView.contentOffset.y / 25)
+            }
+        }
+
+        
+        if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 250
+            && ((!segmentedControlHidden && scrollingDown) || (segmentedControlHidden && !scrollingDown))
+            && currentView == 0{
+            
+            //search movement animation
             if collectionView.hidden == false {
                 if scrollView.contentOffset.y < 0 {
                     self.searchView.frame.origin.y = 77
@@ -297,28 +320,13 @@ extension RecipesViewController: UICollectionViewDelegate {
                 }
             }
             
-            //collection view and table view movement animation
+            //collection view movement animation
             if scrollView.contentOffset.y < 0{
-                if collectionView.hidden == false {
-                    collectionView.frame.origin.y = 148
-                } else {
-                    tableView.frame.origin.y = 125
-                    self.chooseIngredientsLabel.frame.origin.y = 85
-                }
+                collectionView.frame.origin.y = 148
             } else if scrollView.contentOffset.y > 50 {
-                if collectionView.hidden == false {
-                    collectionView.frame.origin.y = 99
-                } else {
-                    tableView.frame.origin.y = 76
-                    self.chooseIngredientsLabel.frame.origin.y = 36
-                }
+                collectionView.frame.origin.y = 99
             } else {
-                if collectionView.hidden == false {
-                    collectionView.frame.origin.y = 148 - scrollView.contentOffset.y
-                } else {
-                    tableView.frame.origin.y = 125 - scrollView.contentOffset.y
-                    self.chooseIngredientsLabel.frame.origin.y = 85 - (scrollView.contentOffset.y)
-                }
+                collectionView.frame.origin.y = 148 - scrollView.contentOffset.y
             }
             
             //hiding and showing segmentedControl when reaching the top of the scrollView
@@ -334,7 +342,7 @@ extension RecipesViewController: UICollectionViewDelegate {
         }
         
         
-        if middleZone && !scrollingDown && !atBottomThreshold{
+        if middleZone && !scrollingDown && !atBottomThreshold && currentView == 0{
             if (trackContentOffset-scrollView.contentOffset.y) < 100 {
                 self.segmentedControl.frame.origin.y = -80 + (trackContentOffset-scrollView.contentOffset.y)
                 if (trackContentOffset-scrollView.contentOffset.y) < 40 {
@@ -345,12 +353,8 @@ extension RecipesViewController: UICollectionViewDelegate {
                 
                 if (trackContentOffset-scrollView.contentOffset.y) < 50 {
                     collectionView.frame.origin.y = 99 + (trackContentOffset-scrollView.contentOffset.y)
-                    tableView.frame.origin.y = 76 + (trackContentOffset-scrollView.contentOffset.y)
-                    self.chooseIngredientsLabel.frame.origin.y = 36 + (trackContentOffset-scrollView.contentOffset.y)
                 } else {
                     collectionView.frame.origin.y = 148
-                    tableView.frame.origin.y = 125
-                    self.chooseIngredientsLabel.frame.origin.y = 85
                 }
             } else {
                 middleZone = false
@@ -359,7 +363,7 @@ extension RecipesViewController: UICollectionViewDelegate {
             }
         }
         
-        if middleZone && scrollingDown && !atBottomThreshold{
+        if middleZone && scrollingDown && !atBottomThreshold && currentView == 0{
             if (trackContentOffset-scrollView.contentOffset.y) > -100 {
                 self.segmentedControl.frame.origin.y = 20 + (trackContentOffset-scrollView.contentOffset.y)
                 if (trackContentOffset-scrollView.contentOffset.y) > -40 {
@@ -370,12 +374,8 @@ extension RecipesViewController: UICollectionViewDelegate {
                 
                 if (trackContentOffset-scrollView.contentOffset.y) > -50 {
                     collectionView.frame.origin.y = 148 + (trackContentOffset-scrollView.contentOffset.y)
-                    tableView.frame.origin.y = 125 + (trackContentOffset-scrollView.contentOffset.y)
-                    self.chooseIngredientsLabel.frame.origin.y = 85 + (trackContentOffset-scrollView.contentOffset.y)
                 } else {
                     collectionView.frame.origin.y = 99
-                    tableView.frame.origin.y = 76
-                    self.chooseIngredientsLabel.frame.origin.y = 36
                 }
             } else {
                 middleZone = false
@@ -471,21 +471,26 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
         
         cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
-        //cell.isSelected = false
         cell.selectionStyle = .None
+        
+        if indexPath.row == 0{
+            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 12)
+        } else {
+            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
+        }
         
         return cell
     }
     
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if section == 0 {
-//            return "Spirits"
-//        } else if section == 1 {
-//            return "Fruits and Mixers"
-//        } else {
-//            return "Other"
-//        }
-//    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableCellWithIdentifier("CustomIngredientCell")
+        footerView!.frame.size.width = tableView.frame.width
+        footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 12)
+        
+        return footerView
+    }
+
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableCellWithIdentifier("SectionHeader")
@@ -493,7 +498,7 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
         if section == 0 {
             label.text = "Spirits"
         } else if section == 1 {
-            label.text = "Fruits and Mixers"
+            label.text = "Mixers"
         } else {
             label.text = "Other"
         }
@@ -502,6 +507,11 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let height = CGFloat(44)
+        return height
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let height = CGFloat(38)
         return height
     }
     
