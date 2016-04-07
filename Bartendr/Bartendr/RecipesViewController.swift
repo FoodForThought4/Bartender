@@ -474,9 +474,9 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
         cell.selectionStyle = .None
         
         if indexPath.row == 0{
-            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 12)
+            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 12)
         } else {
-            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
+            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
         }
         
         return cell
@@ -486,7 +486,7 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = tableView.dequeueReusableCellWithIdentifier("CustomIngredientCell")
         footerView!.frame.size.width = tableView.frame.width
-        footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 12)
+        //footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 12)
         
         return footerView
     }

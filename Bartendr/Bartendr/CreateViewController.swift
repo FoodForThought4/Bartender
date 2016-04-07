@@ -126,9 +126,9 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .None
 
         if indexPath.row == 0{
-            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 8)
+            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 8)
         } else {
-            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
+            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
         }
 
         return cell
@@ -157,7 +157,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = tableView.dequeueReusableCellWithIdentifier("AddIngredientCell")
         footerView!.frame.size.width = tableView.frame.width
-        footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 8)
+        //footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 8)
         return footerView
     }
 
