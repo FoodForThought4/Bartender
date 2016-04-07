@@ -41,10 +41,9 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
         
         createButton.layer.cornerRadius = 4
         createButton.clipsToBounds = true
-        
 
-        tableView.delegate = self;
-        tableView.dataSource = self;
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -132,6 +131,8 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         let headerView = tableView.dequeueReusableCellWithIdentifier("SectionHeader")
         headerView!.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
         let label = headerView?.viewWithTag(456) as! UILabel
+        let imageView = headerView?.viewWithTag(789) as! UIImageView
+        
         if section == 0 {
             label.text = "Spirits"
         } else if section == 1 {
@@ -139,6 +140,8 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             label.text = "Other"
         }
+        
+        imageView.frame.size.width = label.frame.size.width
         
         return headerView
     }

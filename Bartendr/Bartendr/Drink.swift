@@ -93,7 +93,7 @@ class Drink {
         }
         
         drink["author"] = PFUser.currentUser() ?? "TestUser"
-        drink["photo"] = ApiClient.getPFFileFromImage(newDrink.customImg) // PFFile column type
+        //drink["photo"] = ApiClient.getPFFileFromImage(newDrink.customImg) // PFFile column type
         //drink["author"] = PFUser.currentUser()
         drink["likes"] = 0
         drink["commentsCount"] = 0
