@@ -93,6 +93,12 @@ class Drink {
         }
         
         drink["author"] = PFUser.currentUser() ?? "TestUser"
+        if newDrink.customImg != nil {
+            drink["photo"] = ApiClient.getPFFileFromImage(newDrink.customImg)
+        } else {
+            drink["photo"] = ApiClient.getPFFileFromImage(UIImage(named: "defaultDrink"))
+        }
+        
         //drink["photo"] = ApiClient.getPFFileFromImage(newDrink.customImg) // PFFile column type
         //drink["author"] = PFUser.currentUser()
         drink["likes"] = 0
