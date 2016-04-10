@@ -104,7 +104,7 @@
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SectionHeader" rowHeight="44" id="dAs-CA-AeN">
-                                        <rect key="frame" x="0.0" y="50" width="240" height="44"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dAs-CA-AeN" id="PbZ-2h-vqu">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
@@ -156,7 +156,7 @@
                                         <color key="backgroundColor" red="0.94509803920000002" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" rowHeight="36" id="TAh-BV-Keg" customClass="IngredientCell" customModule="Bartendr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="94" width="240" height="36"/>
+                                        <rect key="frame" x="0.0" y="93.5" width="240" height="36"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TAh-BV-Keg" id="JkJ-jd-xct">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="36"/>
@@ -199,7 +199,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomIngredientCell" rowHeight="38" id="8Vg-rG-3B3">
-                                        <rect key="frame" x="0.0" y="130" width="240" height="38"/>
+                                        <rect key="frame" x="0.0" y="129.5" width="240" height="38"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Vg-rG-3B3" id="Lqh-MU-7xg">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="38"/>

@@ -173,7 +173,7 @@ class RecipesViewController: UIViewController {
 
 extension RecipesViewController: CustomSearchControllerDelegate{
     func configureCustomSearchController() {
-        customSearchController = CustomSearchController(searchResultsController: self, searchBarFrame: CGRectMake(10.0, 5.0, collectionView.frame.size.width - 25, 40.0), searchBarFont: UIFont(name: "Avenir Next Condensed Heavy", size: 16.0)!, searchBarTextColor: UIColor.grayColor(), searchBarTintColor: UIColor.clearColor())
+        customSearchController = CustomSearchController(searchResultsController: self, searchBarFrame: CGRectMake(10.0, 5.0, 300.0, 40.0), searchBarFont: UIFont(name: "Avenir Next Condensed Heavy", size: 16.0)!, searchBarTextColor: UIColor.grayColor(), searchBarTintColor: UIColor.clearColor())
         
         customSearchController.customSearchBar.placeholder = "Search for drinks..."
         customSearchController.customDelegate = self
@@ -495,7 +495,7 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
         if indexPath.row == 0{
             cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 14)
         } else {
-            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
+            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
         }
         
         return cell
