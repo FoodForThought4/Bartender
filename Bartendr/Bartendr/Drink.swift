@@ -103,10 +103,19 @@ class Drink {
         }
         
         drink["author"] = PFUser.currentUser() ?? "TestUser"
+        if newDrink.customImg != nil {
+            drink["photo"] = ApiClient.getPFFileFromImage(newDrink.customImg)
+        } else {
+            drink["photo"] = ApiClient.getPFFileFromImage(UIImage(named: "defaultDrink"))
+        }
+        
+        //drink["photo"] = ApiClient.getPFFileFromImage(newDrink.customImg) // PFFile column type
+        //drink["author"] = PFUser.currentUser()
         drink["likes"] = 0
         
         // TODO: Modify to only include neccessary data
         drink["id"] = newDrink.id ?? ApiClient.generateId()
+        
         drink["name"] = newDrink.name
         drink["description"] = newDrink.description
         

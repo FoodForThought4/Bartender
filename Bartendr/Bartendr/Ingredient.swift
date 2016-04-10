@@ -33,6 +33,9 @@ class Ingredient {
     
     static var TYPES = [["BaseSpirit", "spirits-other", "tequila", "vodka", "whisky", "brandy", "rum", "gin"], ["berries", "decoration", "fruits", "mixers"], ["others", "ice", "spices-herbs"]]
     
+    init(text:String) {
+        self.text = text
+    }
  
     init(ingredientData: NSDictionary) {
         if let id = ingredientData["id"] as? String {
