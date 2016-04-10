@@ -153,9 +153,9 @@ class RecipesViewController: UIViewController {
             }
         }
         
-        ApiClient.getDrinksParse(nil) { (drinkData, error) in
-            <#code#>
-        }
+//        ApiClient.getDrinksParse(nil) { (drinkData, error) in
+//            <#code#>
+//        }
     }
     
     func refreshControlAction(refreshControl: UIRefreshControl) {

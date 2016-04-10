@@ -22,6 +22,10 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
     
     let ingredients = [["Brandy", "Gin", "Rum", "Tequila", "Vodka", "Whisky", "Vermouth"], ["Lemon Juice", "Lime Juice", "Orange Juice", "Cranberry Juice", "Pineapple Juice", "Tonic", "Grenadine", "Ginger Ale", "Cola"], ["Lime", "Lemon", "Orange", "Raspberry", "Strawberry", "Maraschino Berry", "Pineapple"]]
     
+    let types = ["Brandy": "brandy", "Gin": "gin", "Rum": "rum", "Tequila": "tequila", "Vodka": "vodka", "Whisky": "whisky", "Vermouth": "spirits-other", "Lemon Juice": "mixers", "Lime Juice": "mixers", "Orange Juice": "mixers", "Cranberry Juice": "mixers", "Pineapple Juice": "mixers", "Tonic": "mixers", "Grenadine": "mixers", "Ginger Ale": "mixers", "Cola": "mixers", "Lime": "fruits", "Lemon": "fruits", "Orange": "fruits", "Raspberry": "fruits", "Strawberry": "fruits", "Maraschino Berry": "fruits", "Pineapple": "fruits"]
+    
+    var checkStates = [Int: Bool]()
+    
     var selectedIngredients: [String] = []
     
     var editedImage: UIImage!
@@ -91,6 +95,9 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
             }
             self.nameField.text = ""
             self.nameField.placeholder = "Add a boozy name"
+            for (i, _) in self.checkStates {
+                self.checkStates[i] = false
+            }
         }
     }
     
@@ -151,6 +158,12 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
         cell.selectionStyle = .None
 
+        if checkStates[10*indexPath.section + indexPath.row] == true {
+            cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
+        } else {
+            cell.checkBoxImageView.image = UIImage(named: "CheckBox")
+        }
+        
         if indexPath.row == 0{
             //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 8)
         } else {
@@ -199,15 +212,15 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         
         if(cell.isSelected == false){
             cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
-            cell.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
             cell.isSelected = true
+            checkStates[10*indexPath.section + indexPath.row] = true
             if selectedIngredients.indexOf(cell.nameLabel.text!) == nil{
                 selectedIngredients.append(cell.nameLabel.text!)
             }
         } else {
             cell.checkBoxImageView.image = UIImage(named: "CheckBox")
-            cell.backgroundColor = UIColor.whiteColor()
             cell.isSelected = false
+            checkStates[10*indexPath.section + indexPath.row] = false
             cell.amountField.text = "0"
             cell.amount = 0
             if selectedIngredients.indexOf(cell.nameLabel.text!) != nil{

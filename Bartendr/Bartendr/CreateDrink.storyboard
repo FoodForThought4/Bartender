@@ -83,7 +83,9 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="0.3698434471010571" blue="0.41529072118702304" alpha="1" colorSpace="calibratedRGB"/>
-                                            <gestureRecognizers/>
+                                            <accessibility key="accessibilityConfiguration">
+                                                <accessibilityTraits key="traits" button="YES"/>
+                                            </accessibility>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="ARu-LW-TxJ"/>
                                                 <constraint firstItem="yAT-ce-wgR" firstAttribute="centerX" secondItem="EL9-FJ-4GR" secondAttribute="centerX" id="IEc-K9-WZm"/>

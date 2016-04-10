@@ -123,15 +123,19 @@ class Drink {
         drink["id"] = newDrink.id ?? ApiClient.generateId()
         
         drink["name"] = newDrink.name
-        drink["description"] = newDrink.description
+        drink["descriptionPlain"] = newDrink.description
         
-        var ingredientArray = [NSDictionary]()
-        
+        let ingredients = NSMutableArray()
         for ingredient in newDrink.ingredients {
-            ingredientArray.append(["id": ingredient.id!, "text": ingredient.text!])
+            let newIngredient = NSMutableDictionary()
+            newIngredient["id"] = ingredient.id
+            newIngredient["text"] = ingredient.text
+            ingredients.addObject(newIngredient)
+            
         }
+        drink["ingredients"] = ingredients
         
-        drink["ingredients"] = ingredientArray
+        //drink["ingredients"] = ingredientArray
         
         return drink
     }
