@@ -119,22 +119,38 @@ class RecipesViewController: UIViewController {
     }
     
     func getDrinks(nextPage: Bool) {
-        ApiClient.getDrinksADDB(selectedIngredients, nextPage: nextPage) { (drinkData, error) -> () in
-            if error != nil{
-                print("error")
-            } else {
-                if nextPage {
+        
+        ApiClient.getDrinksParse(nil) { (drinkData, error) in
+            
+            if nextPage == false {
+                self.drinks = [Drink]()
+                self.filteredDrinks = [Drink]()
+            }
+                
+            if self.selectedIngredients.count == 0 && self.drinks.count == 0 {
+                if error == nil {
                     self.drinks += drinkData!
                     self.filteredDrinks += drinkData!
+                }
+            }
+        
+            ApiClient.getDrinksADDB(self.selectedIngredients, nextPage: nextPage) { (drinkData, error) -> () in
+                if error != nil{
+                    print("error")
                 } else {
-                    self.drinks = drinkData!
-                    self.filteredDrinks = drinkData!
+                    if nextPage {
+                        self.drinks += drinkData!
+                        self.filteredDrinks += drinkData!
+                    } else {
+                        self.drinks += drinkData!
+                        self.filteredDrinks += drinkData!
+                    }
+                    
                 }
                 
                 self.collectionView.reloadData()
+                self.isMoreDataLoading = false
             }
-            
-            self.isMoreDataLoading = false
         }
     }
     
@@ -187,7 +203,7 @@ extension RecipesViewController: CustomSearchControllerDelegate{
             shouldShowSearchResults = false
         } else {
             
-            let newSearchText = searchText.stringByReplacingOccurrencesOfString(" ", withString: "/")
+            let newSearchText = searchText.stringByReplacingOccurrencesOfString(" ", withString: "%20")
             ApiClient.searchDrinkADDB(newSearchText, nextPage: false, completion: { (drinkData, error) -> () in
                 if error == nil {
                     print("success!")
@@ -429,12 +445,15 @@ extension RecipesViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as! DrinkCell
-            
+        
+//        cell.drinkImageView.image = nil
+        
         if shouldShowSearchResults{
             cell.drink = filteredDrinks[indexPath.row]
         } else{
             cell.drink = drinks[indexPath.row]
         }
+        
         
         return cell
     }
@@ -476,7 +495,7 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
         if indexPath.row == 0{
             cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 14)
         } else {
-            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
+            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
         }
         
         return cell

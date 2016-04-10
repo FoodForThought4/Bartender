@@ -17,6 +17,7 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var photoButtonView: UIView!
     @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
 
     
     let ingredients = Ingredient.TYPES
@@ -28,7 +29,9 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CreateViewController.keyboardShown(_:)), name: "KeyboardShown", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardShown:", name: UIKeyboardWillChangeFrameNotification, object: nil)
+        
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDismissed:", name: UIKeyboardWillChangeFrameNotification, object: nil)
         
         self.view.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
         
@@ -41,10 +44,14 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
         
         createButton.layer.cornerRadius = 4
         createButton.clipsToBounds = true
-        
 
-        tableView.delegate = self;
-        tableView.dataSource = self;
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        nameField.delegate = self
+        
+        let touch = UITapGestureRecognizer(target:self, action: "onPhotoSelect")
+        photoButtonView.addGestureRecognizer(touch)
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,51 +59,59 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func onCreate(sender: AnyObject) {
+        print("clicked")
         let name = nameField.text! as String
         let description = "description"
         let image = UIImage(named: "defaultDrink")
         
         var ingredientList = [Ingredient]()
         for ingredient in selectedIngredients {
-            ingredientList.append(Ingredient(ingredientData: ["text" : ingredient]))
+            ingredientList.append(Ingredient(id: ApiClient.generateId(), text: ingredient))
         }
         
         let drink = Drink(name: name, description: description, customImg: image!, ingredients: ingredientList)
         
-        
         ApiClient.createDrink(drink) { (success) in
-            print("successfully created drink")
+            if success {
+                let barViewControllers = self.tabBarController?.viewControllers
+                let vc = barViewControllers![0] as! RecipesViewController
+                vc.drinks.insert(drink, atIndex: 0)
+                print("successfully created drink")
+            } else {
+                print("error creating drink")
+            }
         }
     }
 
-    @IBAction func onTap(sender: AnyObject) {
-        nameField.resignFirstResponder()
-    }
     
     func textFieldDidBeginEditing(textField: UITextField) {
         // Scroll down to height of text box, animated
         NSNotificationCenter.defaultCenter().postNotificationName("KeyboardShown", object: nil)
-        print("yo")
-//        UIView.animateWithDuration(0.3, animations: {
-//            <#code#>
-//            }) { (<#Bool#>) in
-//                <#code#>
-//        }
-        
     }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        // Restore
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        nameField.resignFirstResponder()
+        return true
     }
     
     func keyboardShown(notification: NSNotification) {
-        let info  = notification.userInfo!
-        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
-        
-        let rawFrame = value.CGRectValue
-        let keyboardFrame = view.convertRect(rawFrame, fromView: nil)
-        
-        print("keyboardFrame: \(keyboardFrame)")
+        if let userInfo = notification.userInfo {
+            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue()
+            let duration:NSTimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.unsignedLongValue ?? UIViewAnimationOptions.CurveEaseInOut.rawValue
+            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+            if endFrame?.origin.y >= UIScreen.mainScreen().bounds.size.height {
+                self.bottomConstraint.constant = 0.0
+            } else {
+                self.bottomConstraint.constant = endFrame?.size.height ?? 0.0
+            }
+            UIView.animateWithDuration(duration,
+                                       delay: NSTimeInterval(0),
+                                       options: animationCurve,
+                                       animations: { self.view.layoutIfNeeded() },
+                                       completion: nil)
+        }
     }
     
     /*
@@ -127,9 +142,9 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .None
 
         if indexPath.row == 0{
-            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 8)
+            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 8)
         } else {
-            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
+            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
         }
 
         return cell
@@ -139,6 +154,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         let headerView = tableView.dequeueReusableCellWithIdentifier("SectionHeader")
         headerView!.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
         let label = headerView?.viewWithTag(456) as! UILabel
+        
         if section == 0 {
             label.text = "Spirits"
         } else if section == 1 {
@@ -154,7 +170,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = tableView.dequeueReusableCellWithIdentifier("AddIngredientCell")
         footerView!.frame.size.width = tableView.frame.width
-        footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 8)
+        //footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 8)
         return footerView
     }
 
@@ -170,7 +186,6 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! IngredientCell
-
         
         if(cell.isSelected == false){
             cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
@@ -192,5 +207,39 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         
         tableView.reloadData()
     }
+    
+    func onPhotoSelect() {
+        print("clicked")
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        //        vc.sourceType = UIImagePickerControllerSourceType.Camera // use for pics from camera
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            vc.sourceType = UIImagePickerControllerSourceType.Camera
+        } else {
+            vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        }
+        
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+}
+
+extension CreateViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        // Get the image captured by the UIImagePickerController
+        //        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        // Do something with the images (based on your use case)
+//        challengeImageView.image = editedImage
+        
+        // Dismiss UIImagePickerController to go back to your original view controller
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+extension CreateViewController: UINavigationControllerDelegate {
+        
 }
 

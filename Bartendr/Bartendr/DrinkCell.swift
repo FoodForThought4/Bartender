@@ -21,9 +21,15 @@ class DrinkCell: UICollectionViewCell {
             descriptionLabel.text = drink.ingredientList
             backgroundImageView.image = UIImage(named: "CellBackground")
             
-            if let url = drink.imgURL {
+            // drink from parse
+            if let img = drink.customImg {
+                drinkImageView.image = img
+            }
+            
+            else if let url = drink.imgURL {
                 let imageRequest = NSURLRequest(URL: NSURL(string: url)!)
                 
+                drinkImageView.image = nil
                 drinkImageView.setImageWithURLRequest(
                     imageRequest,
                     placeholderImage: nil,
@@ -43,6 +49,11 @@ class DrinkCell: UICollectionViewCell {
                     failure: { (imageRequest, imageResponse, error) -> Void in
                         // do something for the failure condition
                 })
+            }
+            
+            // use default image
+            else {
+                drinkImageView.image = UIImage(named: "defaultDrink")
             }
             
         }

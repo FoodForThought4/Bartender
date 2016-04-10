@@ -33,9 +33,28 @@ class Ingredient {
     
     static var TYPES = [["BaseSpirit", "spirits-other", "tequila", "vodka", "whisky", "brandy", "rum", "gin"], ["berries", "decoration", "fruits", "mixers"], ["others", "ice", "spices-herbs"]]
     
+    init(id: String, text: String) {
+        self.text = text
+    }
  
     init(ingredientData: NSDictionary) {
-        id = ingredientData["id"] as? String
-        text = ingredientData["textPlain"] as? String
+        if let id = ingredientData["id"] as? String {
+            self.id = id
+        }
+        
+        if let text = ingredientData["textPlain"] as? String {
+            self.text = text
+        }
+        
+        // deal with parse crap
+        else {
+            let sortedKeys = (ingredientData.allKeys as! [String]).sort(<) // ["a", "b"]
+            id = ingredientData[sortedKeys[0]] as? String
+            if sortedKeys.count > 1 {
+                text = ingredientData[sortedKeys[1]] as? String
+            } else {
+                text = ""
+            }
+        }
     }
 }
