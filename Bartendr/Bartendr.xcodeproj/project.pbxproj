@@ -24,6 +24,7 @@
 		E4A038531C8FCD3200889EE2 /* DrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A038521C8FCD3200889EE2 /* DrinkCell.swift */; };
 		E4A8BA411CA760910018B042 /* DetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4A8BA401CA760910018B042 /* DetailView.storyboard */; };
 		E4A8BA431CA7620D0018B042 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A8BA421CA7620D0018B042 /* DetailViewController.swift */; };
+		E4ABCAE21CBAC942000623AE /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABCAE11CBAC942000623AE /* UIViewExtension.swift */; };
 		E4C2CA341C90FBE700CE0C3C /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C2CA331C90FBE700CE0C3C /* CustomSearchController.swift */; };
 		E4C2CA361C90FC8F00CE0C3C /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C2CA351C90FC8F00CE0C3C /* CustomSearchBar.swift */; };
 		E4D0D41B1C8F87F800F5357C /* Recipes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4D0D41A1C8F87F800F5357C /* Recipes.storyboard */; };
@@ -47,11 +48,11 @@
 		BDB9D7521CBA3ECA004C3E33 /* Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		CB5F929BA0DEFA6140B442BE /* Pods_Bartendr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bartendr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC989D379955EB429FBC15DA /* Pods-Bartendr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartendr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bartendr/Pods-Bartendr.debug.xcconfig"; sourceTree = "<group>"; };
-		E4097E121CB457910061F70F /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		E45E4D8C1C9A349A000CD7BB /* IngredientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
 		E4A038521C8FCD3200889EE2 /* DrinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinkCell.swift; sourceTree = "<group>"; };
 		E4A8BA401CA760910018B042 /* DetailView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailView.storyboard; sourceTree = "<group>"; };
 		E4A8BA421CA7620D0018B042 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		E4ABCAE11CBAC942000623AE /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		E4C2CA331C90FBE700CE0C3C /* CustomSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		E4C2CA351C90FC8F00CE0C3C /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		E4D0D41A1C8F87F800F5357C /* Recipes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Recipes.storyboard; sourceTree = "<group>"; };
@@ -141,7 +142,7 @@
 				E4C2CA351C90FC8F00CE0C3C /* CustomSearchBar.swift */,
 				E45E4D8C1C9A349A000CD7BB /* IngredientCell.swift */,
 				7511460F1CA76F9000993852 /* CreateDrink.storyboard */,
-				E4097E121CB457910061F70F /* UIViewExtension.swift */,
+				E4ABCAE11CBAC942000623AE /* UIViewExtension.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -306,6 +307,7 @@
 				E4D0D41E1C8F8FD500F5357C /* RecipesViewController.swift in Sources */,
 				E4C2CA361C90FC8F00CE0C3C /* CustomSearchBar.swift in Sources */,
 				E4A8BA431CA7620D0018B042 /* DetailViewController.swift in Sources */,
+				E4ABCAE21CBAC942000623AE /* UIViewExtension.swift in Sources */,
 				E4A038531C8FCD3200889EE2 /* DrinkCell.swift in Sources */,
 				BD206E2A1C863BBC001A409A /* Bartendr.xcdatamodeld in Sources */,
 				BD206E3C1C864B81001A409A /* Ingredient.swift in Sources */,
