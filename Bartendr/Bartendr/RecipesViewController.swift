@@ -122,12 +122,16 @@ class RecipesViewController: UIViewController {
         
         ApiClient.getDrinksParse(nil) { (drinkData, error) in
             
-            self.drinks = [Drink]()
-            self.filteredDrinks = [Drink]()
-            
-            if error == nil {
-                self.drinks += drinkData!
-                self.filteredDrinks += drinkData!
+            if nextPage == false {
+                self.drinks = [Drink]()
+                self.filteredDrinks = [Drink]()
+            }
+                
+            if self.selectedIngredients.count == 0 && self.drinks.count == 0 {
+                if error == nil {
+                    self.drinks += drinkData!
+                    self.filteredDrinks += drinkData!
+                }
             }
         
             ApiClient.getDrinksADDB(self.selectedIngredients, nextPage: nextPage) { (drinkData, error) -> () in
@@ -441,12 +445,15 @@ extension RecipesViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as! DrinkCell
-            
+        
+//        cell.drinkImageView.image = nil
+        
         if shouldShowSearchResults{
             cell.drink = filteredDrinks[indexPath.row]
         } else{
             cell.drink = drinks[indexPath.row]
         }
+        
         
         return cell
     }

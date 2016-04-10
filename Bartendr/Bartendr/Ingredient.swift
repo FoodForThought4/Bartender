@@ -33,7 +33,7 @@ class Ingredient {
     
     static var TYPES = [["BaseSpirit", "spirits-other", "tequila", "vodka", "whisky", "brandy", "rum", "gin"], ["berries", "decoration", "fruits", "mixers"], ["others", "ice", "spices-herbs"]]
     
-    init(text:String) {
+    init(id: String, text: String) {
         self.text = text
     }
  
@@ -50,7 +50,11 @@ class Ingredient {
         else {
             let sortedKeys = (ingredientData.allKeys as! [String]).sort(<) // ["a", "b"]
             id = ingredientData[sortedKeys[0]] as? String
-            text = ingredientData[sortedKeys[1]] as? String
+            if sortedKeys.count > 1 {
+                text = ingredientData[sortedKeys[1]] as? String
+            } else {
+                text = ""
+            }
         }
     }
 }

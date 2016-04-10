@@ -210,7 +210,7 @@
 				TargetAttributes = {
 					BD206E1D1C863BBC001A409A = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = JR7KR2K28B;
+						DevelopmentTeam = DMWCPKYXAY;
 					};
 				};
 			};
@@ -430,7 +430,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Bartendr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.martykausas.Bartendr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.martykausas.Bartender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -445,7 +445,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Bartendr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.martykausas.Bartendr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.martykausas.Bartender;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

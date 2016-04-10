@@ -49,6 +49,9 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
         tableView.dataSource = self
         
         nameField.delegate = self
+        
+        let touch = UITapGestureRecognizer(target:self, action: "onPhotoSelect")
+        photoButtonView.addGestureRecognizer(touch)
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,13 +59,14 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func onCreate(sender: AnyObject) {
+        print("clicked")
         let name = nameField.text! as String
         let description = "description"
         let image = UIImage(named: "defaultDrink")
         
         var ingredientList = [Ingredient]()
         for ingredient in selectedIngredients {
-            ingredientList.append(Ingredient(text: ingredient))
+            ingredientList.append(Ingredient(id: ApiClient.generateId(), text: ingredient))
         }
         
         let drink = Drink(name: name, description: description, customImg: image!, ingredients: ingredientList)
@@ -203,5 +207,39 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         
         tableView.reloadData()
     }
+    
+    func onPhotoSelect() {
+        print("clicked")
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        //        vc.sourceType = UIImagePickerControllerSourceType.Camera // use for pics from camera
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            vc.sourceType = UIImagePickerControllerSourceType.Camera
+        } else {
+            vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        }
+        
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+}
+
+extension CreateViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        // Get the image captured by the UIImagePickerController
+        //        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        // Do something with the images (based on your use case)
+//        challengeImageView.image = editedImage
+        
+        // Dismiss UIImagePickerController to go back to your original view controller
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+extension CreateViewController: UINavigationControllerDelegate {
+        
 }
 

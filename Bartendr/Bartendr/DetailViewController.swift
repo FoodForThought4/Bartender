@@ -57,6 +57,10 @@ class DetailViewController: UIViewController {
             })
         }
         
+        else {
+                drinkImageView.image = UIImage(named: "defaultDrink")
+        }
+        
         parseIngredients()
 
 
@@ -125,8 +129,7 @@ class DetailViewController: UIViewController {
     @IBAction func onShare(sender: AnyObject) {
         let messageVC = MFMessageComposeViewController()
         
-        messageVC.body = "Name: \(drink.name)\n Ingredients: \(ingredientList)"
-        messageVC.recipients = [""]
+        messageVC.body = "Name: \(drink.name!)\n Ingredients: \(ingredientList)"
         messageVC.messageComposeDelegate = self
         
         if MFMessageComposeViewController.canSendText() {

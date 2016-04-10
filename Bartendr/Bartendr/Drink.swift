@@ -45,7 +45,16 @@ class Drink {
         name = drinkDetails.objectForKey("name") as? String
         description = drinkDetails.objectForKey("descriptionPlain") as? String
         
-        if let id = id {
+        if let img = drinkDetails.objectForKey("photo") {
+            
+            img.getDataInBackgroundWithBlock({ (data, error) in
+                if error == nil {
+                    self.customImg = UIImage(data: data!)
+                }
+            })
+        }
+            
+        else if let id = id {
             imgURL = "https://assets.absolutdrinks.com/drinks/100x100/\(id).png"
             imgURLBig = "https://assets.absolutdrinks.com/drinks/500x500/\(id).png"
         }
