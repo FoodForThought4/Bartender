@@ -38,19 +38,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ApiClient.addbApiKey = keys["ADDB_API_Key"] as! String
         }
         
+        let ing1 = Ingredient(ingredientData: ["id": 321, "textPlain": "this is some text"])
+        let ing2 = Ingredient(ingredientData: ["id": 542, "textPlain": "other stuff happening"])
+        
         let testDrinkDetails = NSMutableDictionary()
-        testDrinkDetails.setObject("1234", forKey: "id")
-        testDrinkDetails.setObject("DrinkName", forKey: "name")
-        testDrinkDetails.setObject("This is my description", forKey: "descriptionPlain")
-        testDrinkDetails.setObject(3, forKey: "likes")
-        
-        let testDrinkIngredient = [NSMutableDictionary]()
-        testDrinkDetails.setObject("321", forKey: "id")
-        testDrinkDetails.setObject("IngredientName", forKey: "textPlain")
-        
-        testDrinkDetails.setObject(testDrinkIngredient, forKey: "ingredients")
+        testDrinkDetails["id"] = ApiClient.generateId();
+        testDrinkDetails["name"] = "the trump!";
+        testDrinkDetails["descriptionPlain"] = "this is a sample drink description";
         
         let testDrink = Drink(drinkDetails: testDrinkDetails)
+        testDrink.ingredients.append(ing1)
+        testDrink.ingredients.append(ing2)
+        
 
         ApiClient.createDrink(testDrink) { (success) in
             if success {
@@ -59,6 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("failure creating crink")
             }
         }
+        
+//        ApiClient.getDrinksParse(nil) { (drinkData, error) in
+//            if error == nil {
+//                print(drinkData)
+//            }
+//        }
         
         let drinkController = UIStoryboard(name: "Recipes", bundle: nil).instantiateViewControllerWithIdentifier("DrinksController")
         drinkController.tabBarItem.title = "Drinks"

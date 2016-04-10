@@ -184,7 +184,7 @@ extension RecipesViewController: CustomSearchControllerDelegate{
             shouldShowSearchResults = false
         } else {
             
-            let newSearchText = searchText.stringByReplacingOccurrencesOfString(" ", withString: "/")
+            let newSearchText = searchText.stringByReplacingOccurrencesOfString(" ", withString: "%20")
             ApiClient.searchDrinkADDB(newSearchText, nextPage: false, completion: { (drinkData, error) -> () in
                 if error == nil {
                     print("success!")
