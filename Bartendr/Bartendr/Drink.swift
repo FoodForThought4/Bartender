@@ -32,21 +32,29 @@ class Drink {
         self.ingredients = ingredients
     }
     
+    init(drinkDetails: PFObject) {
+        initializeDrink(drinkDetails)
+    }
+    
     init(drinkDetails: NSDictionary) {
-        id = drinkDetails["id"] as? String
-        name = drinkDetails["name"] as? String
-        description = drinkDetails["descriptionPlain"] as? String
-       
+        initializeDrink(drinkDetails)
+    }
+    
+    func initializeDrink(drinkDetails: AnyObject) {
+        id = drinkDetails.objectForKey("id") as? String
+        name = drinkDetails.objectForKey("name") as? String
+        description = drinkDetails.objectForKey("descriptionPlain") as? String
+        
         if let id = id {
             imgURL = "https://assets.absolutdrinks.com/drinks/100x100/\(id).png"
             imgURLBig = "https://assets.absolutdrinks.com/drinks/500x500/\(id).png"
         }
-       
-        if let allIngredients = drinkDetails["ingredients"] as? [NSDictionary] {
+        
+        if let allIngredients = drinkDetails.objectForKey("ingredients") as? [NSDictionary] {
             for ingredient in allIngredients {
                 ingredients.append(Ingredient(ingredientData: ingredient))
             }
-        
+            
             for ingredient in ingredients {
                 var text = ingredient.text!
                 text = text.stringByReplacingOccurrencesOfString("½", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -104,9 +112,9 @@ class Drink {
         
         let ingredients = NSMutableArray()
         for ingredient in newDrink.ingredients {
-            var newIngredient = NSMutableDictionary()
-            newIngredient["id"] = 213
-            newIngredient["text"] = "this is text"
+            let newIngredient = NSMutableDictionary()
+            newIngredient["id"] = ingredient.id
+            newIngredient["text"] = ingredient.text
             ingredients.addObject(newIngredient)
             
         }

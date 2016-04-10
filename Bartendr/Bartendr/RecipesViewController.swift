@@ -116,22 +116,34 @@ class RecipesViewController: UIViewController {
     }
     
     func getDrinks(nextPage: Bool) {
-        ApiClient.getDrinksADDB(selectedIngredients, nextPage: nextPage) { (drinkData, error) -> () in
-            if error != nil{
-                print("error")
-            } else {
-                if nextPage {
-                    self.drinks += drinkData!
-                    self.filteredDrinks += drinkData!
+        
+        ApiClient.getDrinksParse(nil) { (drinkData, error) in
+            
+            self.drinks = [Drink]()
+            self.filteredDrinks = [Drink]()
+            
+            if error == nil {
+                self.drinks += drinkData!
+                self.filteredDrinks += drinkData!
+            }
+        
+            ApiClient.getDrinksADDB(self.selectedIngredients, nextPage: nextPage) { (drinkData, error) -> () in
+                if error != nil{
+                    print("error")
                 } else {
-                    self.drinks = drinkData!
-                    self.filteredDrinks = drinkData!
+                    if nextPage {
+                        self.drinks += drinkData!
+                        self.filteredDrinks += drinkData!
+                    } else {
+                        self.drinks += drinkData!
+                        self.filteredDrinks += drinkData!
+                    }
+                    
                 }
                 
                 self.collectionView.reloadData()
+                self.isMoreDataLoading = false
             }
-            
-            self.isMoreDataLoading = false
         }
     }
     

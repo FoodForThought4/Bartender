@@ -78,7 +78,7 @@ class ApiClient {
         
         query.findObjectsInBackgroundWithBlock { (drinks: [PFObject]?, error: NSError?) -> Void in
             
-            var newDrinks = getDrinkFromResponse(drinks)
+            let newDrinks = getDrinkFromParseResponse(drinks)
             
             if error == nil {
                 completion(drinkData: newDrinks, error: nil)
@@ -156,6 +156,7 @@ class ApiClient {
     class func updateDrink(updatedDrink: Drink) {
         let query = PFQuery(className: "Drink")
         query.whereKey("id", containsString: updatedDrink.id)
+        query.includeKey("ingredients")
         
         query.getFirstObjectInBackgroundWithBlock { (drink: PFObject?, error: NSError?) -> Void in
             if error != nil {
@@ -197,8 +198,12 @@ class ApiClient {
     }
     
     private class func getDrinkFromParseResponse(response: [PFObject]?) -> [Drink] {
-        let drinks = [Drink]()
+        var drinks = [Drink]()
         
+        for drink in response! {
+            print("id = \(drink["id"])")
+            drinks.append(Drink(drinkDetails: drink))
+        }
         
         return drinks
     }

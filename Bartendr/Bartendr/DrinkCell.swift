@@ -37,7 +37,7 @@ class DrinkCell: UICollectionViewCell {
                                 self.drinkImageView.alpha = 1.0
                             })
                         } else {
-                            self.drinkImageView.image = image
+//                            self.drinkImageView.image = image
                         }
                     },
                     failure: { (imageRequest, imageResponse, error) -> Void in

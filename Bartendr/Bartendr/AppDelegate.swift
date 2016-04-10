@@ -38,32 +38,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ApiClient.addbApiKey = keys["ADDB_API_Key"] as! String
         }
         
-        let ing1 = Ingredient(ingredientData: ["id": 321, "textPlain": "this is some text"])
-        let ing2 = Ingredient(ingredientData: ["id": 542, "textPlain": "other stuff happening"])
+        let ing1 = Ingredient(ingredientData: ["id": ApiClient.generateId(), "textPlain": "this is some text"])
+        let ing2 = Ingredient(ingredientData: ["id": ApiClient.generateId(), "textPlain": "other stuff happening"])
         
         let testDrinkDetails = NSMutableDictionary()
         testDrinkDetails["id"] = ApiClient.generateId();
-        testDrinkDetails["name"] = "the trump!";
+        testDrinkDetails["name"] = "the best drink!";
         testDrinkDetails["descriptionPlain"] = "this is a sample drink description";
         
         let testDrink = Drink(drinkDetails: testDrinkDetails)
         testDrink.ingredients.append(ing1)
         testDrink.ingredients.append(ing2)
         
-
-        ApiClient.createDrink(testDrink) { (success) in
-            if success {
-                print("success creating drink")
-            } else {
-                print("failure creating crink")
-            }
-        }
         
-//        ApiClient.getDrinksParse(nil) { (drinkData, error) in
-//            if error == nil {
-//                print(drinkData)
+//        for _ in 0..<4 {
+//            ApiClient.createDrink(testDrink) { (success) in
+//                if success {
+//                    print("success creating drink")
+//                } else {
+//                    print("failure creating crink")
+//                }
 //            }
 //        }
+        
+        ApiClient.getDrinksParse(nil) { (drinkData, error) in
+            if error == nil {
+                print(drinkData)
+            }
+        }
         
         let drinkController = UIStoryboard(name: "Recipes", bundle: nil).instantiateViewControllerWithIdentifier("DrinksController")
         drinkController.tabBarItem.title = "Drinks"
