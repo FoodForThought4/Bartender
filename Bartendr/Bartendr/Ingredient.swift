@@ -34,8 +34,7 @@ class Ingredient {
     
     static var TYPES = [["BaseSpirit", "spirits-other", "tequila", "vodka", "whisky", "brandy", "rum", "gin"], ["berries", "decoration", "fruits", "mixers"], ["others", "ice", "spices-herbs"]]
     
-    init(id: String, text:String, type: String) {
-        self.id = id
+    init(text:String, type: String) {
         self.text = text
         self.type = type
     }
