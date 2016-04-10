@@ -34,15 +34,17 @@ class ApiClient {
             }
             url += "?apiKey=\(addbApiKey)"
         }
-
+        
+        getDrinksFromUrl(url) { (drinkData, error) in
+            completion(drinkData: drinkData, error: error)
+        }
+    }
+    
+    class func getDrinksFromUrl(url: String, completion: (drinkData: [Drink]?, error: NSError?) -> ()) {
         http.GET(url, parameters: [], progress: { (progress: NSProgress) -> Void in
             }, success: { (dataTask: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 
-                var drinks = [Drink]()
-                
-                for drink in response?.valueForKey("result") as! NSArray {
-                    drinks.append(Drink(drinkDetails: drink as! NSDictionary))
-                }
+                let drinks = getDrinkFromResponse(response)
                 
                 if let next = response?.valueForKey("next") as? String {
                     nextPageURL = next
@@ -50,39 +52,22 @@ class ApiClient {
                 
                 completion(drinkData: drinks, error: nil)
                 
-            }) { (dataTask: NSURLSessionDataTask?, error: NSError) -> Void in
-                
-                print("failure retrieving drinks")
-                completion(drinkData: nil, error: error)
+        }) { (dataTask: NSURLSessionDataTask?, error: NSError) -> Void in
+            
+            print("failure retrieving drinks")
+            completion(drinkData: nil, error: error)
         }
     }
     
     class func searchDrinkADDB(drinkSubstring: String, nextPage: Bool, completion: (drinkData: [Drink]?, error: NSError?) -> ()) {
         
-        
-        print("\(apiURL)/quickSearch/drinks/\(drinkSubstring)/?apiKey=\(addbApiKey)")
-        http.GET("\(apiURL)/quickSearch/drinks/\(drinkSubstring)/?apiKey=\(addbApiKey)", parameters: [], progress: { (progress: NSProgress) -> Void in
-            }, success: { (dataTask: NSURLSessionDataTask, response: AnyObject?) -> Void in
-                
-                var drinks = [Drink]()
-                
-                for drink in response?.valueForKey("result") as! NSArray {
-                    drinks.append(Drink(drinkDetails: drink as! NSDictionary))
-                }
-                
-                nextPageURL = response?.valueForKey("next") as? String
-                
-                completion(drinkData: drinks, error: nil)
-                
-            }) { (dataTask: NSURLSessionDataTask?, error: NSError) -> Void in
-                
-                print("failure retrieving drinks")
-                completion(drinkData: nil, error: error)
+        getDrinksFromUrl("\(apiURL)/quickSearch/drinks/\(drinkSubstring)/?apiKey=\(addbApiKey)") { (drinkData, error) in
+            completion(drinkData: drinkData, error: error)
         }
     }
     
     
-    class func getDrinksParse(params: [String: String]?, completion: (drinkData: NSDictionary?, error: NSError?) -> ()) {
+    class func getDrinksParse(params: [String: String]?, completion: (drinkData: [Drink]?, error: NSError?) -> ()) {
         let query = PFQuery(className: "Drink")
         
         if let params = params {
@@ -92,7 +77,17 @@ class ApiClient {
         }
         
         query.findObjectsInBackgroundWithBlock { (drinks: [PFObject]?, error: NSError?) -> Void in
-            print("Drinks = \(drinks)")
+            
+            let newDrinks = getDrinkFromParseResponse(drinks)
+            
+            if error == nil {
+                completion(drinkData: newDrinks, error: nil)
+                print("Drinks = \(drinks)")
+            } else {
+                completion(drinkData: nil, error: error)
+                print("error")
+            }
+            
         }
         
     }
@@ -122,9 +117,7 @@ class ApiClient {
         query.whereKey("id", containsString: drink.id)
         
         query.getFirstObjectInBackgroundWithBlock { (drinkObject: PFObject?, error: NSError?) -> Void in
-            print("happen")
             if let drinkObject = drinkObject where error != nil {
-                print("drink yet saved")
 
                 if let likes = drinkObject["likes"] as? Int {
                     drinkObject["likes"] = likes + 1
@@ -149,14 +142,12 @@ class ApiClient {
                 
                 let newDrinkObject = Drink.convertDrinkToPFObject(drink)
                 newDrinkObject.saveInBackgroundWithBlock({ (success, error) in
-                    print("hhhhhapen1")
 
                     if error == nil {
                         print("success liking!")
                     } else {
                         print(error)
                     }
-                    print("hhhhhapen2")
                 })
             }
         }
@@ -165,6 +156,7 @@ class ApiClient {
     class func updateDrink(updatedDrink: Drink) {
         let query = PFQuery(className: "Drink")
         query.whereKey("id", containsString: updatedDrink.id)
+        query.includeKey("ingredients")
         
         query.getFirstObjectInBackgroundWithBlock { (drink: PFObject?, error: NSError?) -> Void in
             if error != nil {
@@ -193,6 +185,27 @@ class ApiClient {
         }
         
         return newID
+    }
+    
+    private class func getDrinkFromResponse(response: AnyObject?) -> [Drink] {
+        var drinks = [Drink]()
+        
+        for drink in response?.valueForKey("result") as! NSArray {
+            drinks.append(Drink(drinkDetails: drink as! NSDictionary))
+        }
+        
+        return drinks
+    }
+    
+    private class func getDrinkFromParseResponse(response: [PFObject]?) -> [Drink] {
+        var drinks = [Drink]()
+        
+        for drink in response! {
+            print("id = \(drink["id"])")
+            drinks.append(Drink(drinkDetails: drink))
+        }
+        
+        return drinks
     }
     
     class func idUsed(id: String) -> Bool {

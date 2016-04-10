@@ -38,25 +38,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ApiClient.addbApiKey = keys["ADDB_API_Key"] as! String
         }
         
+        let ing1 = Ingredient(ingredientData: ["id": ApiClient.generateId(), "textPlain": "this is some text"])
+        let ing2 = Ingredient(ingredientData: ["id": ApiClient.generateId(), "textPlain": "other stuff happening"])
+        
         let testDrinkDetails = NSMutableDictionary()
-        testDrinkDetails.setObject("1234", forKey: "id")
-        testDrinkDetails.setObject("DrinkName", forKey: "name")
-        testDrinkDetails.setObject("This is my description", forKey: "descriptionPlain")
-        testDrinkDetails.setObject(3, forKey: "likes")
-        
-        let testDrinkIngredient = [NSMutableDictionary]()
-        testDrinkDetails.setObject("321", forKey: "id")
-        testDrinkDetails.setObject("IngredientName", forKey: "textPlain")
-        
-        testDrinkDetails.setObject(testDrinkIngredient, forKey: "ingredients")
+        testDrinkDetails["id"] = ApiClient.generateId();
+        testDrinkDetails["name"] = "the best drink!";
+        testDrinkDetails["descriptionPlain"] = "this is a sample drink description";
         
         let testDrink = Drink(drinkDetails: testDrinkDetails)
-
-        ApiClient.createDrink(testDrink) { (success) in
-            if success {
-                print("success creating drink")
-            } else {
-                print("failure creating crink")
+        testDrink.ingredients.append(ing1)
+        testDrink.ingredients.append(ing2)
+        
+        
+//        for _ in 0..<4 {
+//            ApiClient.createDrink(testDrink) { (success) in
+//                if success {
+//                    print("success creating drink")
+//                } else {
+//                    print("failure creating crink")
+//                }
+//            }
+//        }
+        
+        ApiClient.getDrinksParse(nil) { (drinkData, error) in
+            if error == nil {
+                print(drinkData)
             }
         }
         

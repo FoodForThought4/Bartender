@@ -119,22 +119,38 @@ class RecipesViewController: UIViewController {
     }
     
     func getDrinks(nextPage: Bool) {
-        ApiClient.getDrinksADDB(selectedIngredients, nextPage: nextPage) { (drinkData, error) -> () in
-            if error != nil{
-                print("error")
-            } else {
-                if nextPage {
+        
+        ApiClient.getDrinksParse(nil) { (drinkData, error) in
+            
+            if nextPage == false {
+                self.drinks = [Drink]()
+                self.filteredDrinks = [Drink]()
+            }
+                
+            if self.selectedIngredients.count == 0 && self.drinks.count == 0 {
+                if error == nil {
                     self.drinks += drinkData!
                     self.filteredDrinks += drinkData!
+                }
+            }
+        
+            ApiClient.getDrinksADDB(self.selectedIngredients, nextPage: nextPage) { (drinkData, error) -> () in
+                if error != nil{
+                    print("error")
                 } else {
-                    self.drinks = drinkData!
-                    self.filteredDrinks = drinkData!
+                    if nextPage {
+                        self.drinks += drinkData!
+                        self.filteredDrinks += drinkData!
+                    } else {
+                        self.drinks += drinkData!
+                        self.filteredDrinks += drinkData!
+                    }
+                    
                 }
                 
                 self.collectionView.reloadData()
+                self.isMoreDataLoading = false
             }
-            
-            self.isMoreDataLoading = false
         }
         
         ApiClient.getDrinksParse(nil) { (drinkData, error) in
@@ -161,7 +177,7 @@ class RecipesViewController: UIViewController {
 
 extension RecipesViewController: CustomSearchControllerDelegate{
     func configureCustomSearchController() {
-        customSearchController = CustomSearchController(searchResultsController: self, searchBarFrame: CGRectMake(10.0, 5.0, collectionView.frame.size.width - 25, 40.0), searchBarFont: UIFont(name: "Avenir Next Condensed Heavy", size: 16.0)!, searchBarTextColor: UIColor.grayColor(), searchBarTintColor: UIColor.clearColor())
+        customSearchController = CustomSearchController(searchResultsController: self, searchBarFrame: CGRectMake(10.0, 5.0, 300.0, 40.0), searchBarFont: UIFont(name: "Avenir Next Condensed Heavy", size: 16.0)!, searchBarTextColor: UIColor.grayColor(), searchBarTintColor: UIColor.clearColor())
         
         customSearchController.customSearchBar.placeholder = "Search for drinks..."
         customSearchController.customDelegate = self
@@ -191,7 +207,7 @@ extension RecipesViewController: CustomSearchControllerDelegate{
             shouldShowSearchResults = false
         } else {
             
-            let newSearchText = searchText.stringByReplacingOccurrencesOfString(" ", withString: "/")
+            let newSearchText = searchText.stringByReplacingOccurrencesOfString(" ", withString: "%20")
             ApiClient.searchDrinkADDB(newSearchText, nextPage: false, completion: { (drinkData, error) -> () in
                 if error == nil {
                     print("success!")
@@ -292,7 +308,7 @@ extension RecipesViewController: UICollectionViewDelegate {
         
         if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 250 && currentView == 1{
             
-            //collection view and table view movement animation
+            //table view movement animation and chooseIngredientLabel fade animation
             if scrollView.contentOffset.y < 0{
                 tableView.frame.origin.y = 125
                 self.chooseIngredientsLabel.frame.origin.y = 85
@@ -433,12 +449,15 @@ extension RecipesViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DrinkCell", forIndexPath: indexPath) as! DrinkCell
-            
+        
+//        cell.drinkImageView.image = nil
+        
         if shouldShowSearchResults{
             cell.drink = filteredDrinks[indexPath.row]
         } else{
             cell.drink = drinks[indexPath.row]
         }
+        
         
         return cell
     }
@@ -478,9 +497,9 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .None
         
         if indexPath.row == 0{
-            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 12)
+            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 14)
         } else {
-            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
+            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
         }
         
         return cell
@@ -490,7 +509,7 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = tableView.dequeueReusableCellWithIdentifier("CustomIngredientCell")
         footerView!.frame.size.width = tableView.frame.width
-        //footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 12)
+        footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 14)
         
         return footerView
     }
