@@ -88,9 +88,6 @@ class Drink {
         let drink = PFObject(className: "Drink")
         
         // add details
-        if let img = newDrink.customImg {
-            drink["photo"] = ApiClient.getPFFileFromImage(img) // PFFile column type
-        }
         
         drink["author"] = PFUser.currentUser() ?? "TestUser"
         if newDrink.customImg != nil {
@@ -109,7 +106,14 @@ class Drink {
         
         drink["name"] = newDrink.name
         drink["description"] = newDrink.description
-        drink["ingredients"] = newDrink.ingredients
+        
+        var ingredientArray = [NSDictionary]()
+        
+        for ingredient in newDrink.ingredients {
+            ingredientArray.append(["id": ingredient.id!, "text": ingredient.text!, "type": ingredient.type!])
+        }
+        
+        drink["ingredients"] = ingredientArray
         
         return drink
     }

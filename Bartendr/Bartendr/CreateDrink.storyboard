@@ -83,11 +83,15 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="0.3698434471010571" blue="0.41529072118702304" alpha="1" colorSpace="calibratedRGB"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="ARu-LW-TxJ"/>
                                                 <constraint firstItem="yAT-ce-wgR" firstAttribute="centerX" secondItem="EL9-FJ-4GR" secondAttribute="centerX" id="IEc-K9-WZm"/>
                                                 <constraint firstItem="yAT-ce-wgR" firstAttribute="centerY" secondItem="EL9-FJ-4GR" secondAttribute="centerY" id="bpa-HE-wQr"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="Kyw-Il-RIR" appends="YES" id="Plm-z2-Kk7"/>
+                                            </connections>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -279,6 +283,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lBo-ZY-6WW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Kyw-Il-RIR">
+                    <connections>
+                        <action selector="selectImageFromPhotoLibrary:" destination="0zm-t4-aAH" id="dE5-Px-mut"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="292" y="384"/>
         </scene>

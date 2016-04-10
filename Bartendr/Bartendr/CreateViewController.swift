@@ -19,12 +19,13 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
 
+    var drinkImage: UIImage!
     
-    let ingredients = Ingredient.TYPES
+    let ingredients = [[["name": "Brandy", "id": "brandy", "type": "brandy", "keyword": "Part"], ["name": "Gin", "id":"gin", "type": "gin", "keyword": "Part"], ["name:": "Rum", "id": "rum", "type": "rum", "keyword": "Part"], ["name": "Tequila", "id": "tequila", "type": "tequila", "keyword": "Part"], ["name": "Vodka", "id": "vodka", "type": "vodka", "keyword": "Part"], ["name": "Whisky", "id": "whisky", "type": "whisky", "keyword": "Part"], ["name": "Vermouth", "id": "vodka", "type": "vodka", "keyword": "Part"]], [["name": "Lemon Juice", "id": "lemon-juice", "type": "mixers", "keyword": "Part"], ["name": "Lime Juice", "id": "lime-juice", "type": "mixers", "keyword": "Part"], ["name": "Cranberry Juice", "id": "cranberry-juice", "type": "mixers", "keyword": "Part"], ["name": "Pineapple Juice", "id": "pineapple-juice", "type": "mixers", "keyword": "Part"], ["name": "Orange Juice", "id": "orange-juice", "type": "mixers", "keyword": "Part"], ["name": "Tonic", "id": "tonic", "type": "mixers", "keyword": ""], ["name": "Grenadine", "id": "grenadine", "type": "mixers", "keyword": "Part"], ["name": "Ginger Ale", "id": "ginger-ale", "type": "mixers", "keyword": ""], ["name": "Cola", "id": "cola", "type": "mixers", "keyword": ""]], [["name": "Lime", "id": "lime", "type": "fruits", "keyword": "Twist"], ["name": "Lemon", "id": "lemon", "type": "fruist", "keyword": "Twist"], ["name": "Orange", "id": "orange", "type": "fruits", "keyword": "Peel"], ["name": "Raspberry", "id": "raspberry", "type": "fruits", "keyword": "Whole"], ["name": "Strawberry", "id": "strawberry", "type": "fruits", "keyword": "Whole"], ["name": "Maraschino Berry", "id": "maraschino-berry", "type": "fruits", "keyword": "Whole"]]]
     
-    var selectedIngredients: [String] = []
+    var selectedIngredients: [NSDictonary]!
     
-    var checkStates = [Int:Bool]()
+    var checkStates = [[Bool]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,34 +50,49 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
         tableView.dataSource = self
         
         nameField.delegate = self
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
     @IBAction func onCreate(sender: AnyObject) {
         let name = nameField.text! as String
-        let description = "description"
-        let image = UIImage(named: "defaultDrink")
+        let description = "These are the instructions for making the drink."
+        var image: UIImage
         
-        var ingredientList = [Ingredient]()
-        for ingredient in selectedIngredients {
-            ingredientList.append(Ingredient(text: ingredient))
+        if drinkImage != nil {
+            image = drinkImage
+        } else {
+            image = UIImage(named: "defaultDrink")!
         }
         
-        let drink = Drink(name: name, description: description, customImg: image!, ingredients: ingredientList)
+        var ingredients = [Ingredient]()
+        for ingredient in selectedIngredients {
+            let text = ingredient.keyword + ingredient.name
+            ingredients.append(Ingredient(id: ingredient.id, text: ingredient.text, type: ingredient.type))
+        }
+        
+        let drink = Drink(name: name, description: description, customImg: image, ingredients: ingredients)
         
         ApiClient.createDrink(drink) { (success) in
             if success {
                 let barViewControllers = self.tabBarController?.viewControllers
                 let vc = barViewControllers![0] as! RecipesViewController
                 vc.drinks.insert(drink, atIndex: 0)
+                vc.collectionView.reloadData()
+                self.tabBarController?.selectedIndex = 0
                 print("successfully created drink")
             } else {
                 print("error creating drink")
             }
         }
+        
+        drinkImage = nil
+        nameField.text = ""
+        nameField.placeholder = "Add a boozy name"
+        
     }
 
     
@@ -134,8 +150,10 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
   
-        cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
+        cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]["name"]
         cell.selectionStyle = .None
+        //cell.isSelected = checkStates[indexPath.section][indexPath.row] ?? false
+        ingredients[indexPath.section][indexPath.row]["amount"] = cell.amount
 
         if indexPath.row == 0{
             //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 8)
@@ -187,6 +205,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
             cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
             cell.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
             cell.isSelected = true
+            //checkStates[indexPath.section][indexPath.row] = true
             if selectedIngredients.indexOf(cell.nameLabel.text!) == nil{
                 selectedIngredients.append(cell.nameLabel.text!)
             }
@@ -194,6 +213,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
             cell.checkBoxImageView.image = UIImage(named: "CheckBox")
             cell.backgroundColor = UIColor.whiteColor()
             cell.isSelected = false
+            //checkStates[indexPath.section][indexPath.row] = false
             cell.amountField.text = "0"
             cell.amount = 0
             if selectedIngredients.indexOf(cell.nameLabel.text!) != nil{
@@ -204,4 +224,38 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.reloadData()
     }
 }
+
+extension CreateViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    @IBAction func selectImageFromPhotoLibrary(sender: AnyObject) {
+        nameField.resignFirstResponder()
+        
+        // UIImagePickerController is a view controller that lets a user pick media from their photo library.
+        let imagePickerController = UIImagePickerController()
+        
+        // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .PhotoLibrary
+        
+        // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        
+        presentViewController(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        // Dismiss the picker if the user canceled.
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        drinkImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+
+        // Dismiss the picker.
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+
+
+
 

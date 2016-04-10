@@ -12,6 +12,7 @@ import Foundation
 class Ingredient {
     var id: String?
     var text: String?
+    var type: String?
     
 //    static var BaseSpirit = "BaseSpirit"
 //    static var berries = "berries"
@@ -33,8 +34,10 @@ class Ingredient {
     
     static var TYPES = [["BaseSpirit", "spirits-other", "tequila", "vodka", "whisky", "brandy", "rum", "gin"], ["berries", "decoration", "fruits", "mixers"], ["others", "ice", "spices-herbs"]]
     
-    init(text:String) {
+    init(id: String, text:String, type: String) {
+        self.id = id
         self.text = text
+        self.type = type
     }
  
     init(ingredientData: NSDictionary) {

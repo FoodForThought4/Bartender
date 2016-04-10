@@ -43,6 +43,12 @@ class DrinkCell: UICollectionViewCell {
                     failure: { (imageRequest, imageResponse, error) -> Void in
                         // do something for the failure condition
                 })
+            } else if let customImg = drink.customImg {
+                self.drinkImageView.alpha = 0.0
+                self.drinkImageView.image = customImg
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.drinkImageView.alpha = 1.0
+                })
             }
             
         }
