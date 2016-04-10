@@ -163,14 +163,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CheckBox" translatesAutoresizingMaskIntoConstraints="NO" id="seh-HK-fpi">
-                                                    <rect key="frame" x="31" y="10" width="20" height="20"/>
+                                                    <rect key="frame" x="31" y="9" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Sq6-qk-T3v"/>
                                                         <constraint firstAttribute="width" constant="20" id="ddA-PP-Pa6"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wm2-UN-aTs">
-                                                    <rect key="frame" x="65" y="6" width="40" height="29"/>
+                                                    <rect key="frame" x="65" y="5" width="40" height="29"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="29" id="9Jx-ot-oeD"/>
                                                     </constraints>
@@ -186,13 +186,13 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="seh-HK-fpi" firstAttribute="top" secondItem="JkJ-jd-xct" secondAttribute="top" constant="10" id="Zcy-pZ-G74"/>
+                                                <constraint firstItem="seh-HK-fpi" firstAttribute="top" secondItem="JkJ-jd-xct" secondAttribute="top" constant="9" id="Zcy-pZ-G74"/>
                                                 <constraint firstItem="Wm2-UN-aTs" firstAttribute="leading" secondItem="seh-HK-fpi" secondAttribute="trailing" constant="14" id="cFn-XM-On0"/>
                                                 <constraint firstItem="Wm2-UN-aTs" firstAttribute="centerY" secondItem="seh-HK-fpi" secondAttribute="centerY" id="rWv-yL-m9I"/>
                                                 <constraint firstItem="seh-HK-fpi" firstAttribute="leading" secondItem="JkJ-jd-xct" secondAttribute="leading" constant="31" id="zaf-MH-dCE"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="checkBoxImageView" destination="seh-HK-fpi" id="vnX-Ko-qgk"/>
                                             <outlet property="nameLabel" destination="Wm2-UN-aTs" id="Gfk-jv-64P"/>

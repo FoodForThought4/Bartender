@@ -288,7 +288,7 @@ extension RecipesViewController: UICollectionViewDelegate {
         
         if scrollView.contentOffset.y > -50 && scrollView.contentOffset.y < 250 && currentView == 1{
             
-            //collection view and table view movement animation
+            //table view movement animation and chooseIngredientLabel fade animation
             if scrollView.contentOffset.y < 0{
                 tableView.frame.origin.y = 125
                 self.chooseIngredientsLabel.frame.origin.y = 85
@@ -474,7 +474,7 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
         cell.selectionStyle = .None
         
         if indexPath.row == 0{
-            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 12)
+            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 14)
         } else {
             cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
         }
@@ -486,7 +486,7 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = tableView.dequeueReusableCellWithIdentifier("CustomIngredientCell")
         footerView!.frame.size.width = tableView.frame.width
-        footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 12)
+        footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 14)
         
         return footerView
     }
