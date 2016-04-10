@@ -57,6 +57,14 @@ class DetailViewController: UIViewController {
             })
         }
         
+        if let image = drink.customImg {
+            self.drinkImageView.alpha = 0.0
+            self.drinkImageView.image = image
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.drinkImageView.alpha = 1.0
+            })
+        }
+        
         parseIngredients()
 
 

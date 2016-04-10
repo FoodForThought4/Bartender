@@ -110,7 +110,7 @@ class Drink {
         var ingredientArray = [NSDictionary]()
         
         for ingredient in newDrink.ingredients {
-            ingredientArray.append(["id": ingredient.id!, "text": ingredient.text!, "type": ingredient.type!])
+            ingredientArray.append(["id": ingredient.id!, "text": ingredient.text!])
         }
         
         drink["ingredients"] = ingredientArray

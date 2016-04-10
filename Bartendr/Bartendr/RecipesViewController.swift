@@ -136,6 +136,10 @@ class RecipesViewController: UIViewController {
             
             self.isMoreDataLoading = false
         }
+        
+        ApiClient.getDrinksParse(nil) { (drinkData, error) in
+            <#code#>
+        }
     }
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
@@ -457,7 +461,7 @@ extension RecipesViewController: UICollectionViewDataSource {
     
 }
 
-extension RecipesViewController: UITableViewDataSource, UITableViewDelegate{
+extension RecipesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return ingredients.count

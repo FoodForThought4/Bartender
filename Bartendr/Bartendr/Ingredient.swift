@@ -34,9 +34,9 @@ class Ingredient {
     
     static var TYPES = [["BaseSpirit", "spirits-other", "tequila", "vodka", "whisky", "brandy", "rum", "gin"], ["berries", "decoration", "fruits", "mixers"], ["others", "ice", "spices-herbs"]]
     
-    init(text:String, type: String) {
+    init(id:String, text: String) {
+        self.id = id
         self.text = text
-        self.type = type
     }
  
     init(ingredientData: NSDictionary) {
