@@ -26,6 +26,8 @@ class RecipesViewController: UIViewController {
     
     var selectedIngredients: [String] = []
     
+    var checkStates = [Int: Bool]()
+    
     var currentView = 0
     var isMoreDataLoading = false
     var atBottomThreshold = false
@@ -496,6 +498,12 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate {
         cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
         cell.selectionStyle = .None
         
+        if checkStates[10*indexPath.section + indexPath.row] == true {
+            cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
+        } else {
+            cell.checkBoxImageView.image = UIImage(named: "CheckBox")
+        }
+        
         if indexPath.row == 0{
             cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 14)
         } else {
@@ -544,12 +552,14 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate {
         if(cell.isSelected == false){
             cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
             cell.isSelected = true
+            checkStates[10*indexPath.section + indexPath.row] = true
             if selectedIngredients.indexOf(cell.nameLabel.text!) == nil{
                 selectedIngredients.append(cell.nameLabel.text!)
             }
         } else {
             cell.checkBoxImageView.image = UIImage(named: "CheckBox")
             cell.isSelected = false
+            checkStates[10*indexPath.section + indexPath.row] = false
             if selectedIngredients.indexOf(cell.nameLabel.text!) != nil{
                 selectedIngredients.removeAtIndex(selectedIngredients.indexOf(cell.nameLabel.text!)!)
             }
