@@ -43,10 +43,10 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
         
         bottomLabel.backgroundColor = UIColor(red: 241/255, green: 246/255, blue: 241/255, alpha: 1)
         
-        photoButtonView.layer.cornerRadius = 4
+        photoButtonView.layer.cornerRadius = 10
         photoButtonView.clipsToBounds = true
         
-        createButton.layer.cornerRadius = 4
+        createButton.layer.cornerRadius = 10
         createButton.clipsToBounds = true
         
         tableView.delegate = self
@@ -56,6 +56,8 @@ class CreateViewController: UIViewController, UITextFieldDelegate {
         
         let touch = UITapGestureRecognizer(target:self, action: "onPhotoSelect")
         photoButtonView.addGestureRecognizer(touch)
+        
+        tableView.rowHeight = 36
     }
     
     override func didReceiveMemoryWarning() {
@@ -160,14 +162,17 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
 
         if checkStates[10*indexPath.section + indexPath.row] == true {
             cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
+            cell.amountSelectorView.hidden = false
         } else {
             cell.checkBoxImageView.image = UIImage(named: "CheckBox")
+            cell.amountSelectorView.hidden = true
+            
         }
         
         if indexPath.row == 0{
-            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 8)
+            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 14)
         } else {
-            //cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
+            cell.round([UIRectCorner.TopLeft, UIRectCorner.TopRight], radius: 0)
         }
 
         return cell
@@ -193,7 +198,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = tableView.dequeueReusableCellWithIdentifier("AddIngredientCell")
         footerView!.frame.size.width = tableView.frame.width
-        //footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 8)
+        footerView!.round([UIRectCorner.BottomLeft, UIRectCorner.BottomRight], radius: 14)
         return footerView
     }
 
@@ -213,6 +218,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         if(cell.isSelected == false){
             cell.checkBoxImageView.image = UIImage(named: "CheckBoxSelected")
             cell.isSelected = true
+            cell.amountSelectorView.hidden = false
             checkStates[10*indexPath.section + indexPath.row] = true
             if selectedIngredients.indexOf(cell.nameLabel.text!) == nil{
                 selectedIngredients.append(cell.nameLabel.text!)
@@ -220,6 +226,7 @@ extension CreateViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             cell.checkBoxImageView.image = UIImage(named: "CheckBox")
             cell.isSelected = false
+            cell.amountSelectorView.hidden = true
             checkStates[10*indexPath.section + indexPath.row] = false
             cell.amountField.text = "0"
             cell.amount = 0

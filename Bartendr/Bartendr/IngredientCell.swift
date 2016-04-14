@@ -13,6 +13,7 @@ class IngredientCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var checkBoxImageView: UIImageView!
     @IBOutlet weak var amountField: UITextField!
+    @IBOutlet weak var amountSelectorView: UIView!
     
     var amount = 0
     

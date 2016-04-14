@@ -100,7 +100,7 @@
                                 </cells>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="31" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="y7C-kO-voS">
-                                <rect key="frame" x="40" y="125" width="240" height="423"/>
+                                <rect key="frame" x="404" y="125" width="240" height="423"/>
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SectionHeader" rowHeight="44" id="dAs-CA-AeN">
@@ -288,7 +288,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6H-5f-HRY">
-                                <rect key="frame" x="25" y="85" width="271" height="24"/>
+                                <rect key="frame" x="389" y="85" width="271" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="271" id="iHb-MG-iYJ"/>
                                     <constraint firstAttribute="height" constant="24" id="lrQ-yN-6uG"/>
@@ -307,19 +307,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="y7C-kO-voS" firstAttribute="top" secondItem="Lai-xq-dLA" secondAttribute="bottom" constant="8" id="3K3-pD-97d"/>
-                            <constraint firstAttribute="trailing" secondItem="y7C-kO-voS" secondAttribute="trailing" constant="40" id="3z0-Bp-1DL"/>
+                            <constraint firstAttribute="trailing" secondItem="y7C-kO-voS" secondAttribute="trailing" constant="-324" id="3z0-Bp-1DL"/>
                             <constraint firstAttribute="trailing" secondItem="Zf9-qT-bxB" secondAttribute="trailing" id="9K5-tL-YH8"/>
                             <constraint firstAttribute="bottom" secondItem="y7C-kO-voS" secondAttribute="bottom" constant="20" id="G3B-Mz-bDm"/>
                             <constraint firstItem="Lai-xq-dLA" firstAttribute="leading" secondItem="kQO-wK-B16" secondAttribute="leading" constant="30" id="HOg-qM-Uxb"/>
                             <constraint firstItem="Zf9-qT-bxB" firstAttribute="top" secondItem="ZIt-QU-qBC" secondAttribute="bottom" constant="21" id="J7i-zC-40s"/>
                             <constraint firstItem="uP5-IW-Wfb" firstAttribute="centerX" secondItem="kQO-wK-B16" secondAttribute="centerX" id="JPv-5s-1Lq"/>
                             <constraint firstItem="Zf9-qT-bxB" firstAttribute="leading" secondItem="kQO-wK-B16" secondAttribute="leading" id="MbH-xp-BvK"/>
-                            <constraint firstItem="l6H-5f-HRY" firstAttribute="leading" secondItem="kQO-wK-B16" secondAttribute="leading" constant="25" id="Nm1-gN-o18"/>
+                            <constraint firstItem="l6H-5f-HRY" firstAttribute="leading" secondItem="kQO-wK-B16" secondAttribute="leading" constant="389" id="Nm1-gN-o18"/>
                             <constraint firstItem="Lai-xq-dLA" firstAttribute="top" secondItem="uP5-IW-Wfb" secondAttribute="bottom" constant="13" id="Yes-jS-dl8"/>
                             <constraint firstItem="uP5-IW-Wfb" firstAttribute="top" secondItem="MHf-a9-If0" secondAttribute="bottom" id="k7W-E7-KTn"/>
                             <constraint firstItem="IVc-nl-jEl" firstAttribute="top" secondItem="Zf9-qT-bxB" secondAttribute="bottom" constant="-37" id="l80-bP-Ru8"/>
                             <constraint firstAttribute="trailing" secondItem="Lai-xq-dLA" secondAttribute="trailing" constant="30" id="mb0-LS-uc4"/>
-                            <constraint firstItem="y7C-kO-voS" firstAttribute="leading" secondItem="kQO-wK-B16" secondAttribute="leading" constant="40" id="oTr-nq-Lnz"/>
+                            <constraint firstItem="y7C-kO-voS" firstAttribute="leading" secondItem="kQO-wK-B16" secondAttribute="leading" constant="404" id="oTr-nq-Lnz"/>
                             <constraint firstItem="l6H-5f-HRY" firstAttribute="top" secondItem="uP5-IW-Wfb" secondAttribute="bottom" constant="21" id="uG0-dw-msH"/>
                         </constraints>
                     </view>
