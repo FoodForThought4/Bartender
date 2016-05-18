@@ -14,25 +14,9 @@ class Ingredient {
     var text: String?
     var type: String?
     
-//    static var BaseSpirit = "BaseSpirit"
-//    static var berries = "berries"
-//    static var brandy = "brandy"
-//    static var decoration = "decoration"
-//    static var fruits = "fruits"
-//    static var gin = "gin"
-//    static var ice = "ice"
-//    static var mixers = "mixers"
-//    static var others = "others"
-//    static var rum = "rum"
-//    static var spicesHerbs = "spices-herbs"
-//    static var spiritsOther = "spirits-other"
-//    static var tequila = "tequila"
-//    static var vodka = "vodka"
-//    static var whisky = "whisky"
-    
-//    static var TYPES = ["BaseSpirit", "berries", "brandy", "decoration", "fruits", "gin", "ice", "mixers", "others", "rum", "spices-herbs", "spirits-other", "tequila", "vodka", "whisky"]
-    
     static var TYPES = [["BaseSpirit", "spirits-other", "tequila", "vodka", "whisky", "brandy", "rum", "gin"], ["berries", "decoration", "fruits", "mixers"], ["others", "ice", "spices-herbs"]]
+    
+    static var TYPES_DIC = ["BaseSpirit": "Spirit", "spirits-other": "Other", "tequila": "Tequila", "vodka": "Vodka", "whisky": "Whisky", "brandy": "Brandy", "rum": "Rum", "gin": "Gin", "berries": "Berries", "decoration": "Decoration", "fruits": "Fruits", "mixers": "Mixers", "others": "Others", "ice": "Ice", "spices-herbs": "Spices/Herbs"]
     
     init(id:String, text: String) {
         self.id = id

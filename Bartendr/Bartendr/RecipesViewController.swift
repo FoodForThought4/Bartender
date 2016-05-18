@@ -495,7 +495,7 @@ extension RecipesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
         
-        cell.nameLabel.text = ingredients[indexPath.section][indexPath.row]
+        cell.nameLabel.text = Ingredient.TYPES_DIC[ingredients[indexPath.section][indexPath.row]]
         cell.selectionStyle = .None
         
         if checkStates[10*indexPath.section + indexPath.row] == true {

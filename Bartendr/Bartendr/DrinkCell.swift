@@ -18,7 +18,7 @@ class DrinkCell: UICollectionViewCell {
     var drink: Drink! {
         didSet {
             titleLabel.text = drink.name
-            descriptionLabel.text = drink.ingredientList
+            descriptionLabel.text = drink.ingredientListShort
             backgroundImageView.image = UIImage(named: "CellBackground")
             
             // drink from parse
