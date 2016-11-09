@@ -84,6 +84,7 @@
 Here's a walkthrough of implemented user stories:
 
 Coming soon!
+Click on the image for a video walkthrough.
 
 [![ScreenShot](https://dl.dropboxusercontent.com/u/30186985/Screen%20Shot%202016-11-08%20at%207.31.24%20PM.png)](https://dl.dropboxusercontent.com/u/30186985/Bartender%20Recording.mov)
 
