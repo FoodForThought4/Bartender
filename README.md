@@ -84,7 +84,8 @@
 Here's a walkthrough of implemented user stories:
 
 Coming soon!
-[![ScreenShot](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](http://youtu.be/vt5fpE0bzSY)
+
+[![ScreenShot](https://dl.dropboxusercontent.com/u/30186985/Screen%20Shot%202016-11-08%20at%207.31.24%20PM.png)](https://dl.dropboxusercontent.com/u/30186985/Bartender%20Recording.mov)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/)
 
